@@ -1,10 +1,11 @@
+export const dynamic = "force-dynamic";
+
 import Product from "@/backend/models/Product";
 
 export const GET = async (req, { params }) => {
   try {
-    
     const { productId } = params;
-   
+
     const productDetails = await Product.findById(productId);
     return Response.json(productDetails);
   } catch (error) {
