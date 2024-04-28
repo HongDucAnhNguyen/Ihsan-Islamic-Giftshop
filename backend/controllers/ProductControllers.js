@@ -11,7 +11,6 @@ export const getProducts = async (req) => {
       }
     );
     const data = await response.json();
-    console.log("you received this data", data);
 
     return data.products;
   } catch (error) {

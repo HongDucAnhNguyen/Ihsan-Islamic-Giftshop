@@ -1,16 +1,19 @@
 export const dynamic = "force-dynamic";
 
-import Product from "../../../backend/controllers/ProductControllers";
+import dbConnect from "@/backend/config/ConnectDB";
+import Product from "../../../backend/models/Product";
+import { NextResponse } from "next/server";
 
 export async function GET(req) {
   try {
+    await dbConnect();
     // const { searchParams } = new URL(req.url);
     // const currentPage = searchParams.get("page") || 1;
     // const skipHowMany = 3 * (currentPage - 1);
     const allProducts = await Product.find();
-    return Response.json({ products: allProducts });
+    return NextResponse.json({ products: allProducts });
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json(error);
   }
 }
 

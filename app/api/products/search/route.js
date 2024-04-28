@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 import Product from "@/backend/models/Product";
 
@@ -8,6 +8,8 @@ const helperFuncIsQueryNotNumberValue = (stringVal) => {
 
 export const GET = async (req) => {
   try {
+    await dbConnect();
+
     const { searchParams } = new URL(req.url);
     const keywordFilter = searchParams.get("query");
     if (helperFuncIsQueryNotNumberValue(keywordFilter) == true) {
