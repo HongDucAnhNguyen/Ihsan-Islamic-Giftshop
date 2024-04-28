@@ -1,6 +1,15 @@
-import { getProductDetails } from "../../../backend/controllers/ProductControllers";
 import ProductDetails from "@/components/products/ProductDetails";
 import React from "react";
+
+
+const getProductDetails = async (productId) => {
+  const response = await fetch(
+    `${process.env.BASE_URL}/api/products/${productId}`
+  );
+  const data = await response.json();
+  return data;
+};
+
 
 const page = async ({ params }) => {
   const productDetails = await getProductDetails(params.productId);
