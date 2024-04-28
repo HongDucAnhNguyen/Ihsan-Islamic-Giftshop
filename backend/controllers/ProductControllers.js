@@ -1,6 +1,5 @@
 "use server";
 
-
 export const getProducts = async (req) => {
   try {
     let currentPage = parseInt(req.searchParams.page);
@@ -9,6 +8,8 @@ export const getProducts = async (req) => {
       `${process.env.BASE_URL}/api/products?page=${currentPage}`
     );
     const data = await response.json();
+    console.log("you received this data", data);
+
     return data.products;
   } catch (error) {
     return error;
