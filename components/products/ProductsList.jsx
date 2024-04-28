@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
 import Link from "next/link";
-const ProductsList = ({ data, currentPage, maxPages }) => {
+import { useRouter } from "next/navigation";
+
+const ProductsList = ({ data, currentPage, maxPages, searchQuery }) => {
   const router = useRouter();
   return (
     <section className="py-12">
@@ -20,24 +21,39 @@ const ProductsList = ({ data, currentPage, maxPages }) => {
         </div>
         <div>
           <div className="flex justify-center gap-5">
-            <Link
-              href={`?page=${currentPage > 1 ? currentPage - 1 : currentPage}`}
+            <button
+              onClick={() => {
+                if (parseInt(currentPage) > 1) {
+                  if (searchQuery) {
+                    const page = parseInt(currentPage) - 1;
+                    router.push(`?query=${searchQuery}&page=${page}`);
+                  } else {
+                    const page = parseInt(currentPage) - 1;
+                    router.push(`?page=${page}`);
+                  }
+                }
+              }}
+              className="bg-blue-500 text-white rounded-md p-2"
             >
-              {" "}
-              <button className="bg-blue-500 text-white rounded-md p-2">
-                prev. page
-              </button>
-            </Link>
-            <Link
-              href={`?page=${
-                currentPage < maxPages ? currentPage + 1 : currentPage
-              }`}
+              prev. page
+            </button>
+
+            <button
+              onClick={() => {
+                if (parseInt(currentPage) < parseInt(maxPages)) {
+                  if (searchQuery) {
+                    const page = parseInt(currentPage) + 1;
+                    router.push(`?query=${searchQuery}&page=${page}`);
+                  } else {
+                    const page = parseInt(currentPage) + 1;
+                    router.push(`?page=${page}`);
+                  }
+                }
+              }}
+              className="bg-blue-500 text-white rounded-md p-2"
             >
-              {" "}
-              <button className="bg-blue-500 text-white rounded-md p-2">
-                next page
-              </button>
-            </Link>
+              next page
+            </button>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import ProductsList from "../components/products/ProductsList";
 
 const getProducts = async (searchParams) => {
   try {
-    let currentPage =searchParams.page || "1";
+    const currentPage = searchParams.page || 1;
 
     const response = await fetch(
       `${process.env.BASE_URL}/api/products?page=${currentPage}`,
@@ -14,7 +14,7 @@ const getProducts = async (searchParams) => {
     const data = await response.json();
     return {
       allProducts: data.products,
-      currentPage: data.currentPage,
+      currentPage: currentPage,
       maxPages: data.maxPages,
     };
   } catch (error) {
