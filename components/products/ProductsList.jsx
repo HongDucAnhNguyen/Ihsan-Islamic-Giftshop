@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
+import Link from "next/link";
 const ProductsList = ({ data, currentPage, maxPages }) => {
   const router = useRouter();
   return (
@@ -19,28 +20,24 @@ const ProductsList = ({ data, currentPage, maxPages }) => {
         </div>
         <div>
           <div className="flex justify-center gap-5">
-            <button
-              onClick={() => {
-                if (currentPage > 1) {
-                  const page = currentPage - 1;
-                  router.push(`?page=${page}`);
-                }
-              }}
-              className="bg-blue-500 text-white rounded-md p-2"
+            <Link
+              href={`?page=${currentPage > 1 ? currentPage - 1 : currentPage}`}
             >
-              previous page
-            </button>
-            <button
-              className="bg-blue-500 text-white rounded-md p-2"
-              onClick={() => {
-                if (currentPage < maxPages) {
-                  const page = currentPage + 1;
-                  router.push(`?page=${page}`);
-                }
-              }}
+              {" "}
+              <button className="bg-blue-500 text-white rounded-md p-2">
+                prev. page
+              </button>
+            </Link>
+            <Link
+              href={`?page=${
+                currentPage < maxPages ? currentPage + 1 : currentPage
+              }`}
             >
-              next page
-            </button>
+              {" "}
+              <button className="bg-blue-500 text-white rounded-md p-2">
+                next page
+              </button>
+            </Link>
           </div>
         </div>
       </div>
