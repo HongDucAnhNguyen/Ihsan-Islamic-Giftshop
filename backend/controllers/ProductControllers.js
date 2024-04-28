@@ -5,7 +5,10 @@ export const getProducts = async (req) => {
     let currentPage = parseInt(req.searchParams.page);
 
     const response = await fetch(
-      `${process.env.BASE_URL}/api/products?page=${currentPage}`
+      `${process.env.BASE_URL}/api/products?page=${currentPage}`,
+      {
+        method: "GET",
+      }
     );
     const data = await response.json();
     console.log("you received this data", data);
