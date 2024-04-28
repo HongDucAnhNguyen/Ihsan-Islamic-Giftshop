@@ -32,7 +32,6 @@ const productSchema = new mongoose.Schema({
     },
   },
 
-  
   stock: {
     type: Number,
     required: [true, "please enter valid stock"],
@@ -65,5 +64,5 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.Product ||
-  mongoose.model("Product", productSchema);
+export const Product =
+  mongoose.models.Product || mongoose.model("Product", productSchema);

@@ -1,11 +1,10 @@
 export const dynamic = "force-dynamic";
 
 import dbConnect from "@/backend/config/ConnectDB";
-import Product from "@/backend/models/Product";
-
+import { Product } from "@/backend/models/Product";
 export const GET = async (req, { params }) => {
   try {
-    await dbConnect()
+    await dbConnect();
     const { productId } = params;
 
     const productDetails = await Product.findById(productId);
@@ -17,7 +16,7 @@ export const GET = async (req, { params }) => {
 
 export const PUT = async (req, { params }) => {
   try {
-    await dbConnect()
+    await dbConnect();
 
     const data = await req.json();
 
@@ -35,7 +34,7 @@ export const PUT = async (req, { params }) => {
 };
 export const DELETE = async (req, { params }) => {
   try {
-    await dbConnect()
+    await dbConnect();
 
     const { productId } = params;
     console.log(productId);

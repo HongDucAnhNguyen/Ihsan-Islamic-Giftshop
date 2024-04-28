@@ -1,22 +1,6 @@
 "use server";
 
-export const getProducts = async (req) => {
-  try {
-    let currentPage = parseInt(req.searchParams.page);
 
-    const response = await fetch(
-      `${process.env.BASE_URL}/api/products?page=${currentPage}`,
-      {
-        method: "GET",
-      }
-    );
-    const data = await response.json();
-
-    return data.products;
-  } catch (error) {
-    return error;
-  }
-};
 
 export const getProductDetails = async (productId) => {
   const response = await fetch(

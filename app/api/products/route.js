@@ -1,8 +1,8 @@
 export const dynamic = "force-dynamic";
 
 import dbConnect from "@/backend/config/ConnectDB";
-import Product from "../../../backend/models/Product";
 import { NextResponse } from "next/server";
+import { Product } from "@/backend/models/Product";
 
 export async function GET(req) {
   try {
