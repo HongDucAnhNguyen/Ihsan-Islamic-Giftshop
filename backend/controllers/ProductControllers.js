@@ -1,15 +1,20 @@
 export const getProducts = async (req) => {
-  let currentPage = parseInt(req.searchParams.page);
-  if (req.searchParams.page == undefined) {
-    currentPage = 1;
+  try {
+    let currentPage = parseInt(req.searchParams.page);
+    if (req.searchParams.page == undefined) {
+      currentPage = 1;
+    }
+  
+    const response = await fetch(
+      `${process.env.BASE_URL}/api/products?page=${currentPage}`
+    );
+    const data = await response.json();
+  
+    return data.products;
+  } catch (error) {
+    return error
   }
-
-  const response = await fetch(
-    `${process.env.BASE_URL}/api/products?page=${currentPage}`
-  );
-  const data = await response.json();
-
-  return data.products;
+ 
 };
 
 export const getProductDetails = async (productId) => {
