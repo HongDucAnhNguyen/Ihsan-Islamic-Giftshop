@@ -1,6 +1,8 @@
 export const dynamic = "force-dynamic";
 
+import dbConnect from "@/backend/config/ConnectDB";
 import { Product } from "@/backend/models/Product";
+
 const helperFuncIsQueryNotNumberValue = (stringVal) => {
   return isNaN(stringVal);
 };
