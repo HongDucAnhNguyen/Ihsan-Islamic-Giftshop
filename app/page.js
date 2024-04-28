@@ -22,14 +22,12 @@ export default async function Home(req) {
   return (
     <main>
       <HeroSection></HeroSection>
-      {allProducts ? (
+      {allProducts?.length > 0 && (
         <ProductsList
           data={allProducts}
           // currentPage={currentPage}
           // maxPages={maxPages}
         ></ProductsList>
-      ) : (
-        <h1>BRO</h1>
       )}
     </main>
   );
