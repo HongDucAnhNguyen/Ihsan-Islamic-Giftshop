@@ -1,7 +1,10 @@
+"use client";
 import React from "react";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
-const ProductsList = ({ data }) => {
+import { useRouter } from "next/navigation";
+const ProductsList = ({ data, currentPage, maxPages }) => {
+  const router = useRouter();
   return (
     <section className="py-12">
       <div className="container max-w-screen-xl mx-auto px-4">
@@ -14,6 +17,33 @@ const ProductsList = ({ data }) => {
                 <ProductItem key={product?._id} product={product}></ProductItem>
               ))}
           </main>
+        </div>
+        <div>
+          <div className="flex justify-center gap-5">
+            <button
+              onClick={() => {
+                if (currentPage > 1) {
+                  const page = currentPage - 1;
+                  router.push(`?page=${page}`);
+                }
+              }}
+              className="bg-blue-500 text-white rounded-md p-2"
+            >
+              previous page
+            </button>
+            <button
+              className="bg-blue-500 text-white rounded-md p-2"
+              onClick={() => {
+                if (currentPage < maxPages) {
+                  console.log(maxPages);
+                  const page = currentPage + 1;
+                  router.push(`?page=${page}`);
+                }
+              }}
+            >
+              next page
+            </button>
+          </div>
         </div>
       </div>
     </section>

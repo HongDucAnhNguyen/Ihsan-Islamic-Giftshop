@@ -11,7 +11,7 @@ const ProductDetails = ({ data }) => {
     setImgPreview(imgUrl);
   };
   const breadCrumbs = [
-    { name: "Home", url: "/" },
+    { name: "Home", url: '/' },
     {
       name: `${data?.name?.substring(0, 30)}...`,
       url: `/product/${data?._id}`,
