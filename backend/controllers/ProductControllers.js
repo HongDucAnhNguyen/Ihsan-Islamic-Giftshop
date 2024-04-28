@@ -1,10 +1,8 @@
 "use server";
 
-import dbConnect from "../config/ConnectDB";
 
 export const getProducts = async (req) => {
   try {
-    await dbConnect();
     let currentPage = parseInt(req.searchParams.page);
 
     const response = await fetch(
