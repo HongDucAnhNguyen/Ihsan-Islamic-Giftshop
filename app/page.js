@@ -6,7 +6,10 @@ const getProducts = async (req) => {
     let currentPage = parseInt(req.searchParams.page || "1");
 
     const response = await fetch(
-      `${process.env.BASE_URL}/api/products?page=${currentPage}`
+      `${process.env.BASE_URL}/api/products?page=${currentPage}`,
+      {
+        method: "GET",
+      }
     );
     const data = await response.json();
 

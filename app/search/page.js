@@ -1,10 +1,12 @@
-
 import ProductsList from "@/components/products/ProductsList";
 
 const searchProducts = async (searchParams) => {
   const keywordFilter = searchParams.query;
   const response = await fetch(
-    `${process.env.BASE_URL}/api/products/search?query=${keywordFilter}`
+    `${process.env.BASE_URL}/api/products/search?query=${keywordFilter}`,
+    {
+      method: "GET",
+    }
   );
   const data = await response.json();
   return data.searchResults;
