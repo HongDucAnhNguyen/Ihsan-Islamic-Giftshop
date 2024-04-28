@@ -1,5 +1,4 @@
 import ProductDetails from "@/components/products/ProductDetails";
-import React from "react";
 
 
 const getProductDetails = async (productId) => {
