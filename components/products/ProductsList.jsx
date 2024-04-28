@@ -1,7 +1,7 @@
 import React from "react";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
-const ProductsList = ({ data, currentPage, maxPages }) => {
+const ProductsList = ({ data }) => {
   return (
     <section className="py-12">
       <div className="container max-w-screen-xl mx-auto px-4">

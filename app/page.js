@@ -10,18 +10,14 @@ const getProducts = async (req) => {
     );
     const data = await response.json();
 
-    return {
-      allProducts: data.products,
-      currentPage: currentPage,
-      maxPages: data.maxPages,
-    };
+    return data.products;
   } catch (error) {
     return error;
   }
 };
 
 export default async function Home(req) {
-  const { allProducts, currentPage, maxPages } = await getProducts(req);
+  const allProducts = await getProducts(req);
 
   return (
     <main>
@@ -29,10 +25,12 @@ export default async function Home(req) {
       {allProducts ? (
         <ProductsList
           data={allProducts}
-          currentPage={currentPage}
-          maxPages={maxPages}
+          // currentPage={currentPage}
+          // maxPages={maxPages}
         ></ProductsList>
-      ) : <h1>BRO</h1>}
+      ) : (
+        <h1>BRO</h1>
+      )}
     </main>
   );
 }
