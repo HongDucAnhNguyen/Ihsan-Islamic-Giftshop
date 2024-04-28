@@ -8,13 +8,21 @@ export async function GET(req) {
   try {
     await dbConnect();
     const { searchParams } = new URL(req.url);
+    console.log(
+      "the page im on right now is ",
+      parseInt(searchParams.get("page"))
+    );
     const currentPage = parseInt(searchParams.get("page")) || 1;
     const skipHowMany = 3 * (currentPage - 1);
     const allProducts = await Product.find().skip(skipHowMany).limit(3);
     const totalItems = await Product.countDocuments();
     const maxPages = Math.ceil(totalItems / 3);
 
-    return NextResponse.json({ products: allProducts, maxPages: maxPages });
+    return NextResponse.json({
+      products: allProducts,
+      currentPage: currentPage,
+      maxPages: maxPages,
+    });
   } catch (error) {
     return NextResponse.json(error);
   }

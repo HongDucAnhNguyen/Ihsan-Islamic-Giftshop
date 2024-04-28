@@ -1,12 +1,14 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
-const ProductsList = ({ data }) => {
+const ProductsList = ({ data, currentPage, maxPages }) => {
+  const router = useRouter();
   return (
     <section className="py-12">
       <div className="container max-w-screen-xl mx-auto px-4">
         <div className="flex flex-col md:flex-row -mx-4">
-          {/**add filters component here for easy category and pricing navigation */}
           <Filters></Filters>
           <main className="md:2-2/3 lg:w-3/4 px-3">
             {data?.length >= 1 &&
@@ -16,7 +18,7 @@ const ProductsList = ({ data }) => {
           </main>
         </div>
         <div>
-          {/* <div className="flex justify-center gap-5">
+          <div className="flex justify-center gap-5">
             <button
               onClick={() => {
                 if (currentPage > 1) {
@@ -32,7 +34,6 @@ const ProductsList = ({ data }) => {
               className="bg-blue-500 text-white rounded-md p-2"
               onClick={() => {
                 if (currentPage < maxPages) {
-                  console.log(maxPages);
                   const page = currentPage + 1;
                   router.push(`?page=${page}`);
                 }
@@ -40,7 +41,7 @@ const ProductsList = ({ data }) => {
             >
               next page
             </button>
-          </div> */}
+          </div>
         </div>
       </div>
     </section>
