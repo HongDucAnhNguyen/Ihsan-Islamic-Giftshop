@@ -4,11 +4,8 @@ import dbConnect from "../config/ConnectDB";
 
 export const getProducts = async (req) => {
   try {
-    await dbConnect();
     let currentPage = parseInt(req.searchParams.page);
-    if (req.searchParams.page == undefined) {
-      currentPage = 1;
-    }
+   
 
     const response = await fetch(
       `${process.env.BASE_URL}/api/products?page=${currentPage}`
@@ -22,7 +19,6 @@ export const getProducts = async (req) => {
 };
 
 export const getProductDetails = async (productId) => {
-  await dbConnect();
 
   const response = await fetch(
     `${process.env.BASE_URL}/api/products/${productId}`
@@ -32,7 +28,6 @@ export const getProductDetails = async (productId) => {
 };
 
 export const searchProducts = async (searchParams) => {
-  await dbConnect();
 
   const keywordFilter = searchParams.query;
   const response = await fetch(
