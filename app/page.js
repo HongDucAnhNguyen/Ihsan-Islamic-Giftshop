@@ -3,10 +3,11 @@ import ProductsList from "../components/products/ProductsList";
 
 const getProducts = async (req) => {
   try {
-    let currentPage = parseInt(req.searchParams.page);
+    let currentPage = parseInt(req.searchParams.page || "1");
+    console.log(currentPage);
 
     const response = await fetch(
-      `${process.env.BASE_URL}/api/products?page=${currentPage || 1}`,
+      `${process.env.BASE_URL}/api/products?page=${currentPage}`,
       {
         method: "GET",
       }
