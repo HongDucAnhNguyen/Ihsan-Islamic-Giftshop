@@ -11,8 +11,7 @@ export const getProducts = async (req) => {
     }
 
     const response = await fetch(
-      `https://api.restful-api.dev/objects?page=${currentPage}`
-      // `${process.env.BASE_URL}/api/products?page=${currentPage}`
+      `${process.env.BASE_URL}/api/products?page=${currentPage}`
     );
     const data = await response.json();
 

@@ -7,7 +7,7 @@ const SearchBar = () => {
   const router = useRouter();
   const handleSearchByKeyword = (e) => {
     e.preventDefault();
-    if (searchKeyword) {
+    if (searchKeyword || searchKeyword === "") {
       router.push(`/search?query=${searchKeyword}`);
       setSearchKeyword("");
     } else {

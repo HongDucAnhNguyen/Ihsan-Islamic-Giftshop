@@ -9,7 +9,7 @@ const ProductsList = ({ data }) => {
           {/**add filters component here for easy category and pricing navigation */}
           <Filters></Filters>
           <main className="md:2-2/3 lg:w-3/4 px-3">
-            {data?.length > 1 &&
+            {data?.length >= 1 &&
               data.map((product) => (
                 <ProductItem key={product?._id} product={product}></ProductItem>
               ))}
