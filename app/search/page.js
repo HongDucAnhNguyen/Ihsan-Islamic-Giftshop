@@ -16,7 +16,7 @@ const page = async (req) => {
 
   return (
     <div>
-      {searchResults && searchResults.length > 0 ? (
+      {searchResults.length > 0 ? (
         <div>
           <h1 className="mt-5 text-center">
             {searchResults.length} {"result(s)"} found

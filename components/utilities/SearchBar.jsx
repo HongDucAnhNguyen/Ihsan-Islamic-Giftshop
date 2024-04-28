@@ -26,7 +26,6 @@ const SearchBar = () => {
         value={searchKeyword}
         onChange={(e) => {
           setSearchKeyword(e.target.value);
-          router.push(`/search?query=${e.target.value}`);
         }}
         required
       />

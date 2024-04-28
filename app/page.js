@@ -26,7 +26,7 @@ export default async function Home(req) {
   return (
     <main>
       <HeroSection></HeroSection>
-      {allProducts?.length > 0 && (
+      {allProducts && (
         <ProductsList
           data={allProducts}
           currentPage={currentPage}
