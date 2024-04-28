@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-import Product from "@/backend/models/Product";
+import Product from "../../../backend/controllers/ProductControllers";
 
 export async function GET(req) {
   try {
