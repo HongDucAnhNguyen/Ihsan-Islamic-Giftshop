@@ -1,12 +1,14 @@
 import dbConnect from "@/backend/config/ConnectDB";
-import { getProducts } from "@/backend/controllers/productControllers";
+import { getProducts } from "../backend/controllers/ProductControllers";
+
 import HeroSection from "@/components/Homepage/HeroSection";
 import ProductsList from "@/components/products/ProductsList";
 
 dbConnect();
 
-export default async function Home() {
-  const allProducts = await getProducts();
+export default async function Home(req) {
+  
+  const allProducts = await getProducts(req);
   return (
     <main>
       <HeroSection></HeroSection>

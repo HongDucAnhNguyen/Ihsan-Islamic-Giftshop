@@ -1,4 +1,4 @@
-import { getProductDetails } from "@/backend/controllers/productControllers";
+import { getProductDetails } from "../../../backend/controllers/ProductControllers";
 import ProductDetails from "@/components/products/ProductDetails";
 import React from "react";
 

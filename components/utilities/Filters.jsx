@@ -27,15 +27,17 @@ const Filters = () => {
         Filter by
       </a>
       <div className="hidden md:block px-6 py-4 border border-gray-200 bg-white rounded shadow-sm">
-        <h3 className="font-semibold mb-2">Price ($)</h3>
+        <h3 className="font-semibold mb-2">Price Range ($)</h3>
         <div className="grid md:grid-cols-3 gap-x-2">
           <div className="mb-4">
-            <input
-              name="min"
-              className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
-              type="number"
-              placeholder="Min"
-            />
+            <form>
+              <input
+                name="min"
+                className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
+                type="number"
+                placeholder="Min"
+              />
+            </form>
           </div>
 
           <div className="mb-4">
@@ -49,7 +51,7 @@ const Filters = () => {
 
           <div className="mb-4">
             <button className="px-1 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">
-              Go
+              Find
             </button>
           </div>
         </div>
@@ -107,7 +109,6 @@ const Filters = () => {
               <span className="ml-2 text-gray-500"> Womens Clothing </span>
             </label>
           </li>
-          
         </ul>
 
         <hr className="my-4" />

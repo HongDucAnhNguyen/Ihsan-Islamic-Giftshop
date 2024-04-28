@@ -35,8 +35,9 @@ const ProductDetails = ({ data }) => {
                 />
               </div>
               <div className="space-x-2 overflow-auto text-center whitespace-nowrap">
-                {data?.images?.map((image) => (
+                {data?.images?.map((image, index) => (
                   <a
+                    key={index}
                     className="inline-block border border-gray-200 p-1 rounded-md hover:border-blue-500 cursor-pointer"
                     onClick={() => {
                       handleChangeFocusImg(image.url);

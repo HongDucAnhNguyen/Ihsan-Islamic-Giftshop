@@ -1,12 +1,11 @@
-import { createRouter } from "next-connect";
-import dbConnect from "@/backend/config/ConnectDB";
 import Product from "@/backend/models/Product";
-import { NextResponse } from "next/server";
-import mongoose from "mongoose";
 
 export const GET = async (req) => {
   try {
-    const allProducts = await Product.find();
+    const { searchParams } = new URL(req.url);
+    const currentPage = searchParams.get("page");
+    const skipHowMany = 3 * (currentPage - 1);
+    const allProducts = await Product.find().limit(3).skip(skipHowMany);
     return Response.json({ products: allProducts });
   } catch (error) {
     return Response.json(error);

@@ -1,5 +1,4 @@
 import Product from "@/backend/models/Product";
-import { NextResponse } from "next/server";
 
 export const GET = async (req, { params }) => {
   try {
