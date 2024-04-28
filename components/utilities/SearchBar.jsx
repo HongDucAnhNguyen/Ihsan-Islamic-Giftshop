@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 
 const SearchBar = () => {
   // const [searchKeyword, setSearchKeyword] = useState("");
