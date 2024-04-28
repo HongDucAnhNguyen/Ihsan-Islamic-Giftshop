@@ -1,15 +1,15 @@
 import HeroSection from "@/components/Homepage/HeroSection";
 import ProductsList from "../components/products/ProductsList";
 
-const getProducts = async (req) => {
+const getProducts = async (searchParams) => {
   try {
-    let currentPage = parseInt(req.searchParams.page || "1");
+    let currentPage = parseInt(searchParams.page || "1");
 
     const response = await fetch(
-      `${process.env.BASE_URL}/api/products?page=${currentPage}`
-      // {
-      //   method: "GET",
-      // }
+      `${process.env.BASE_URL}/api/products?page=${currentPage}`,
+      {
+        method: "GET",
+      }
     );
     const data = await response.json();
     return data.products;
@@ -19,7 +19,7 @@ const getProducts = async (req) => {
 };
 
 export default async function Home(req) {
-  const allProducts = await getProducts(req);
+  const allProducts = await getProducts(req.searchParams);
 
   return (
     <main>
