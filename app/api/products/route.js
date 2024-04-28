@@ -5,7 +5,7 @@ export const GET = async (req) => {
     const { searchParams } = new URL(req.url);
     const currentPage = searchParams.get("page") || 1;
     const skipHowMany = 3 * (currentPage - 1);
-    const allProducts = await Product.find().limit(3).skip(skipHowMany);
+    const allProducts = await Product.find();
     return Response.json({ products: allProducts });
   } catch (error) {
     return Response.json(error);
