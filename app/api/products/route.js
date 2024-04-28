@@ -4,7 +4,8 @@ import Product from "@/backend/models/Product";
 
 export const GET = async (req) => {
   try {
-    const { searchParams } = new URL(req.url);
+    const searchParams = req.nextUrl.searchParams;
+
     const currentPage = searchParams.get("page") || 1;
     const skipHowMany = 3 * (currentPage - 1);
     const allProducts = await Product.find();
