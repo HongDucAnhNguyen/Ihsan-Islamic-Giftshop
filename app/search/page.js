@@ -12,14 +12,13 @@ const searchProducts = async (searchParams) => {
   const data = await response.json();
   return {
     searchResults: data.searchResults,
-    maxPages: data.maxPages,
-    currentPage: currentPage,
-    keywordFilter: keywordFilter
+    nextPageLink: data.nextPageLink,
+    prevPageLink: data.prevPageLink,
   };
 };
 
 const page = async (req) => {
-  const { searchResults, maxPages, currentPage, keywordFilter } = await searchProducts(
+  const { searchResults, nextPageLink, prevPageLink } = await searchProducts(
     req.searchParams
   );
 
@@ -32,9 +31,8 @@ const page = async (req) => {
           </h1>
           <ProductsList
             data={searchResults}
-            maxPages={maxPages}
-            currentPage={currentPage}
-            searchQuery={keywordFilter}
+            nextPageLink={nextPageLink}
+            prevPageLink={prevPageLink}
           ></ProductsList>
         </div>
       ) : (

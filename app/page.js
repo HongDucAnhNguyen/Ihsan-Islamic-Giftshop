@@ -14,8 +14,8 @@ const getProducts = async (searchParams) => {
     const data = await response.json();
     return {
       allProducts: data.products,
-      currentPage: currentPage,
-      maxPages: data.maxPages,
+      nextPageLink: data.nextPageLink,
+      prevPageLink: data.prevPageLink,
     };
   } catch (error) {
     return error;
@@ -23,7 +23,7 @@ const getProducts = async (searchParams) => {
 };
 
 export default async function Home(req) {
-  const { allProducts, currentPage, maxPages } = await getProducts(
+  const { allProducts, nextPageLink, prevPageLink } = await getProducts(
     req.searchParams
   );
 
@@ -33,8 +33,8 @@ export default async function Home(req) {
       {allProducts && (
         <ProductsList
           data={allProducts}
-          currentPage={currentPage}
-          maxPages={maxPages}
+          nextPageLink={nextPageLink}
+          prevPageLink={prevPageLink}
         ></ProductsList>
       )}
     </main>

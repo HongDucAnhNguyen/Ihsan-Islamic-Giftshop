@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import dbConnect from "@/backend/config/ConnectDB";
+import { getPaginationUrl } from "@/backend/helpers/getPaginationUrl";
 import { Product } from "@/backend/models/Product";
 
 const helperFuncIsQueryNotNumberValue = (stringVal) => {
@@ -10,12 +11,12 @@ const helperFuncIsQueryNotNumberValue = (stringVal) => {
 export const GET = async (req) => {
   try {
     await dbConnect();
-
+    
     const { searchParams } = new URL(req.url);
     const keywordFilter = searchParams.get("query");
     const currentPage = parseInt(searchParams.get("page")) || 1;
 
-    const skipHowMany = 1 * (currentPage - 1);
+    const skipHowMany = 3 * (currentPage - 1);
 
     if (helperFuncIsQueryNotNumberValue(keywordFilter) == true) {
       const productsSearchResult = await Product.find({
@@ -27,7 +28,7 @@ export const GET = async (req) => {
         ],
       })
         .skip(skipHowMany)
-        .limit(1);
+        .limit(3);
       const totalItems = await Product.find({
         $or: [
           { name: { $regex: keywordFilter, $options: "i" } },
@@ -37,10 +38,18 @@ export const GET = async (req) => {
         ],
       }).countDocuments();
 
-      const maxPages = Math.ceil(totalItems / 1);
+      const maxPages = Math.ceil(totalItems / 3);
+
+      const { nextPageLink, prevPageLink } = getPaginationUrl(
+        currentPage,
+        maxPages,
+        keywordFilter
+      );
+
       return Response.json({
         searchResults: productsSearchResult,
-        maxPages: maxPages,
+        nextPageLink: nextPageLink,
+        prevPageLink: prevPageLink,
       });
     } else {
       // If the query is a number, convert it to a number and perform range query
@@ -65,10 +74,17 @@ export const GET = async (req) => {
         ],
       }).countDocuments();
 
-      const maxPages = Math.ceil(totalItems / 1);
+      const maxPages = Math.ceil(totalItems / 3);
+
+      const { nextPageLink, prevPageLink } = getPaginationUrl(
+        currentPage,
+        maxPages,
+        keywordFilter
+      );
       return Response.json({
         searchResults: productsSearchResult,
-        maxPages: maxPages,
+        nextPageLink: nextPageLink,
+        prevPageLink: prevPageLink,
       });
     }
   } catch (error) {

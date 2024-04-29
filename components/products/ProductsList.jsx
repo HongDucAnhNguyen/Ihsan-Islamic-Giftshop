@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-const ProductsList = ({ data, currentPage, maxPages, searchQuery }) => {
-  const router = useRouter();
+const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
+
   return (
     <section className="py-12">
       <div className="container max-w-screen-xl mx-auto px-4">
@@ -21,39 +21,41 @@ const ProductsList = ({ data, currentPage, maxPages, searchQuery }) => {
         </div>
         <div>
           <div className="flex justify-center gap-5">
-            <button
-              onClick={() => {
-                if (parseInt(currentPage) > 1) {
-                  if (searchQuery) {
-                    const page = parseInt(currentPage) - 1;
-                    router.push(`?query=${searchQuery}&page=${page}`);
-                  } else {
-                    const page = parseInt(currentPage) - 1;
-                    router.push(`?page=${page}`);
-                  }
-                }
-              }}
+            <Link
+              href={prevPageLink || ""}
+              // onClick={() => {
+              //   if (parseInt(currentPage) > 1) {
+              //     if (searchQuery) {
+              //       const page = parseInt(currentPage) - 1;
+              //       router.push(`?query=${searchQuery}&page=${page}`);
+              //     } else {
+              //       const page = parseInt(currentPage) - 1;
+              //       router.push(`?page=${page}`);
+              //     }
+              //   }
+              // }}
               className="bg-blue-500 text-white rounded-md p-2"
             >
               prev. page
-            </button>
+            </Link>
 
-            <button
-              onClick={() => {
-                if (parseInt(currentPage) < parseInt(maxPages)) {
-                  if (searchQuery) {
-                    const page = parseInt(currentPage) + 1;
-                    router.push(`?query=${searchQuery}&page=${page}`);
-                  } else {
-                    const page = parseInt(currentPage) + 1;
-                    router.push(`?page=${page}`);
-                  }
-                }
-              }}
+            <Link
+              href={nextPageLink || ""}
+              // onClick={() => {
+              //   if (parseInt(currentPage) < parseInt(maxPages)) {
+              //     if (searchQuery) {
+              //       const page = parseInt(currentPage) + 1;
+              //       router.push(`?query=${searchQuery}&page=${page}`);
+              //     } else {
+              //       const page = parseInt(currentPage) + 1;
+              //       router.push(`?page=${page}`);
+              //     }
+              //   }
+              // }}
               className="bg-blue-500 text-white rounded-md p-2"
             >
               next page
-            </button>
+            </Link>
           </div>
         </div>
       </div>
