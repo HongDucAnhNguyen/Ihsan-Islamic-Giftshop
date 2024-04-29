@@ -16,7 +16,9 @@ const searchProducts = async (searchParams) => {
       nextPageLink: data.nextPageLink,
       prevPageLink: data.prevPageLink,
     };
-  } catch (error) {}
+  } catch (error) {
+    return error
+  }
 };
 
 const page = async (req) => {
