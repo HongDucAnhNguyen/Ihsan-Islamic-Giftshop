@@ -1,9 +1,7 @@
-"use client";
 import React from "react";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
 import Link from "next/link";
-
 const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
   return (
     <section className="py-12">
@@ -20,14 +18,16 @@ const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
         <div>
           <div className="flex justify-center gap-5">
             <Link
-              href={prevPageLink || "thisisnotworking"}
+              href={prevPageLink}
+              replace
               className="bg-blue-500 text-white rounded-md p-2"
             >
               prev. page
             </Link>
 
             <Link
-              href={nextPageLink || "thisisnotworking"}
+              href={nextPageLink}
+              replace
               className="bg-blue-500 text-white rounded-md p-2"
             >
               next page

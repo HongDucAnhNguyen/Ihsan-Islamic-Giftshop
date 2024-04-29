@@ -2,8 +2,8 @@ import ProductsList from "@/components/products/ProductsList";
 
 const searchProducts = async (searchParams) => {
   try {
-    const keywordFilter = searchParams.query;
-    const currentPage = searchParams.page || 1;
+    const keywordFilter = searchParams?.query;
+    const currentPage = searchParams?.page || 1;
     const response = await fetch(
       `${process.env.BASE_URL}/api/products/search?query=${keywordFilter}&page=${currentPage}`,
       {
@@ -32,7 +32,7 @@ const page = async ({searchParams}) => {
         <div>
           <h1 className="mt-5 text-center">
             {searchResults?.length > 0
-              ? `${searchResults.length} result(s) found`
+              ? `Results Found`
               : "No Results found"}
           </h1>
           <ProductsList

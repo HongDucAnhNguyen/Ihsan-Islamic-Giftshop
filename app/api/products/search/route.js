@@ -65,7 +65,7 @@ export const GET = async (req) => {
       });
     } else {
       // If the query is a number, convert it to a number and perform range query
-      const queryNumber = parseFloat(keywordFilter);
+      const queryNumber = keywordFilter;
 
       //define a search range
       const minPrice = queryNumber;

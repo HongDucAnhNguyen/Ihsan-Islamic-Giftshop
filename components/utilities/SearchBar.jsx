@@ -1,23 +1,27 @@
-// "use client";
-// import { useRouter } from "next/navigation";
-// import React, { useState } from "react";
+// import { useRouter, useSearchParams } from "next/navigation";
+// import { useState } from "react";
 
 const SearchBar = () => {
   // const [searchKeyword, setSearchKeyword] = useState("");
+  // const searchParams = useSearchParams();
   // const router = useRouter();
   // const handleSearchByKeyword = (e) => {
   //   e.preventDefault();
+
+  //   const params = new URLSearchParams(searchParams);
+
   //   if (searchKeyword.trim() != undefined && searchKeyword.trim() != "") {
-  //     router.push(`/search?query=${searchKeyword}`);
+  //     params.set("query", searchKeyword);
   //     setSearchKeyword("");
   //   } else {
-  //     router.push("/");
+  //     params.delete("query");
   //   }
+  //   router.replace(`/search?${params.toString()}`);
   // };
   return (
     <form
-      action="/search"
       // onSubmit={handleSearchByKeyword}
+      action="/search"
       className="flex flex-nowrap items-center w-full order-last md:order-none mt-5 md:mt-0 md:w-2/4 lg:w-2/4"
     >
       <input
