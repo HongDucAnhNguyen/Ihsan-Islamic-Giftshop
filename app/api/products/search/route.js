@@ -4,10 +4,6 @@ import dbConnect from "@/backend/config/ConnectDB";
 import { getPaginationUrl } from "@/backend/helpers/getPaginationUrl";
 import { Product } from "@/backend/models/Product";
 
-const helperFuncIsQueryNotNumberValue = (stringVal) => {
-  parseFloat(stringVal) === NaN ? true : false;
-};
-
 export const GET = async (req) => {
   try {
     await dbConnect();
@@ -15,17 +11,17 @@ export const GET = async (req) => {
     const { searchParams } = new URL(req.url);
     const keywordFilter = searchParams.get("query");
     let currentPage = 1;
-
     if (
-      parseInt(searchParams.get("page")) != NaN &&
+      isNaN(searchParams.get("page")) == false &&
       parseInt(searchParams.get("page")) > 0
     ) {
       currentPage = parseInt(searchParams.get("page"));
     }
 
     const skipHowMany = 3 * (currentPage - 1);
+    const queryIsString = parseFloat(keywordFilter);
 
-    if (helperFuncIsQueryNotNumberValue(keywordFilter) == true) {
+    if (isNaN(queryIsString)) {
       const productsSearchResult = await Product.find({
         $or: [
           { name: { $regex: keywordFilter, $options: "i" } },
@@ -36,6 +32,7 @@ export const GET = async (req) => {
       })
         .skip(skipHowMany)
         .limit(3);
+
       const totalItems = await Product.find({
         $or: [
           { name: { $regex: keywordFilter, $options: "i" } },
@@ -47,16 +44,24 @@ export const GET = async (req) => {
 
       const maxPages = Math.ceil(totalItems / 3);
 
-      const { nextPageLink, prevPageLink } = getPaginationUrl(
-        currentPage,
-        maxPages,
-        keywordFilter
-      );
+      if (totalItems > 1) {
+        const { nextPageLink, prevPageLink } = getPaginationUrl(
+          currentPage,
+          maxPages,
+          keywordFilter
+        );
+
+        return Response.json({
+          searchResults: productsSearchResult,
+          nextPageLink: nextPageLink,
+          prevPageLink: prevPageLink,
+        });
+      }
 
       return Response.json({
         searchResults: productsSearchResult,
-        nextPageLink: nextPageLink,
-        prevPageLink: prevPageLink,
+        nextPageLink: `?query=${keywordFilter}&page=1`,
+        prevPageLink: `?query=${keywordFilter}&page=1`,
       });
     } else {
       // If the query is a number, convert it to a number and perform range query
@@ -83,15 +88,24 @@ export const GET = async (req) => {
 
       const maxPages = Math.ceil(totalItems / 3);
 
-      const { nextPageLink, prevPageLink } = getPaginationUrl(
-        currentPage,
-        maxPages,
-        keywordFilter
-      );
+      if (totalItems > 1) {
+        const { nextPageLink, prevPageLink } = getPaginationUrl(
+          currentPage,
+          maxPages,
+          keywordFilter
+        );
+
+        return Response.json({
+          searchResults: productsSearchResult,
+          nextPageLink: nextPageLink,
+          prevPageLink: prevPageLink,
+        });
+      }
+
       return Response.json({
         searchResults: productsSearchResult,
-        nextPageLink: nextPageLink,
-        prevPageLink: prevPageLink,
+        nextPageLink: `?query=${keywordFilter}&page=1`,
+        prevPageLink: `?query=${keywordFilter}&page=1`,
       });
     }
   } catch (error) {

@@ -21,9 +21,9 @@ const searchProducts = async (searchParams) => {
   }
 };
 
-const page = async (req) => {
+const page = async ({searchParams}) => {
   const { searchResults, nextPageLink, prevPageLink } = await searchProducts(
-    req.searchParams
+    searchParams
   );
 
   return (

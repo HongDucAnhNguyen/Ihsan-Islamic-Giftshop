@@ -13,7 +13,7 @@ export async function GET(req) {
     let currentPage = 1;
 
     if (
-      parseInt(searchParams.get("page")) != NaN &&
+      isNaN(searchParams.get("page")) == false &&
       parseInt(searchParams.get("page")) > 0
     ) {
       currentPage = parseInt(searchParams.get("page"));
@@ -22,18 +22,27 @@ export async function GET(req) {
     const skipHowMany = 3 * (currentPage - 1);
     const allProducts = await Product.find().skip(skipHowMany).limit(3);
     const totalItems = await Product.countDocuments();
+
     const maxPages = Math.ceil(totalItems / 3);
 
-    const { nextPageLink, prevPageLink } = getPaginationUrl(
-      currentPage,
-      maxPages,
-      null
-    );
+    if (totalItems > 1) {
+      const { nextPageLink, prevPageLink } = getPaginationUrl(
+        currentPage,
+        maxPages,
+        null
+      );
+
+      return Response.json({
+        products: allProducts,
+        nextPageLink: nextPageLink,
+        prevPageLink: prevPageLink,
+      });
+    }
 
     return Response.json({
       products: allProducts,
-      nextPageLink: nextPageLink,
-      prevPageLink: prevPageLink,
+      nextPageLink: "?page=1",
+      prevPageLink: "?page=1",
     });
   } catch (error) {
     return Response.json(error);

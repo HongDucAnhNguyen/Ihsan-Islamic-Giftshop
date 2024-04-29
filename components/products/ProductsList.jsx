@@ -20,14 +20,14 @@ const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
         <div>
           <div className="flex justify-center gap-5">
             <Link
-              href={`/${prevPageLink}` || "thisisnotworking"}
+              href={prevPageLink}
               className="bg-blue-500 text-white rounded-md p-2"
             >
               prev. page
             </Link>
 
             <Link
-              href={`/${nextPageLink}` || "thisisnotworking"}
+              href={nextPageLink}
               className="bg-blue-500 text-white rounded-md p-2"
             >
               next page
