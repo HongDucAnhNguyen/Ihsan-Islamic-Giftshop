@@ -26,7 +26,7 @@ export default async function Home(req) {
   const { allProducts, nextPageLink, prevPageLink } = await getProducts(
     req.searchParams
   );
-
+  
   return (
     <main>
       <HeroSection></HeroSection>
