@@ -1,20 +1,22 @@
 import ProductsList from "@/components/products/ProductsList";
 
 const searchProducts = async (searchParams) => {
-  const keywordFilter = searchParams.query;
-  const currentPage = searchParams.page || 1;
-  const response = await fetch(
-    `${process.env.BASE_URL}/api/products/search?query=${keywordFilter}&page=${currentPage}`,
-    {
-      method: "GET",
-    }
-  );
-  const data = await response.json();
-  return {
-    searchResults: data.searchResults,
-    nextPageLink: data.nextPageLink,
-    prevPageLink: data.prevPageLink,
-  };
+  try {
+    const keywordFilter = searchParams.query;
+    const currentPage = searchParams.page || 1;
+    const response = await fetch(
+      `${process.env.BASE_URL}/api/products/search?query=${keywordFilter}&page=${currentPage}`,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    return {
+      searchResults: data.searchResults,
+      nextPageLink: data.nextPageLink,
+      prevPageLink: data.prevPageLink,
+    };
+  } catch (error) {}
 };
 
 const page = async (req) => {
