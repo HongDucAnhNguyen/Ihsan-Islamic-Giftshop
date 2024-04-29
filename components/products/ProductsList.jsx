@@ -2,7 +2,7 @@
 import React from "react";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
   const router = useRouter();
   return (
