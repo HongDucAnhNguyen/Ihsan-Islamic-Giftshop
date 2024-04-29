@@ -5,7 +5,7 @@ import { getPaginationUrl } from "@/backend/helpers/getPaginationUrl";
 import { Product } from "@/backend/models/Product";
 
 const helperFuncIsQueryNotNumberValue = (stringVal) => {
-  return isNaN(stringVal);
+  parseInt(stringVal) == NaN ? true : false;
 };
 
 export const GET = async (req) => {
@@ -17,12 +17,12 @@ export const GET = async (req) => {
     let currentPage = 1;
 
     if (
-      parseInt(searchParams.get("page")) &&
+      parseInt(searchParams.get("page")) != NaN &&
       parseInt(searchParams.get("page")) > 0
     ) {
       currentPage = parseInt(searchParams.get("page"));
     }
-    
+
     const skipHowMany = 3 * (currentPage - 1);
 
     if (helperFuncIsQueryNotNumberValue(keywordFilter) == true) {

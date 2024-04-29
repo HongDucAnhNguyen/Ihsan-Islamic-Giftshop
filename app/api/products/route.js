@@ -14,7 +14,7 @@ export async function GET(req) {
     let currentPage = 1;
 
     if (
-      parseInt(searchParams.get("page")) &&
+      parseInt(searchParams.get("page")) != NaN &&
       parseInt(searchParams.get("page")) > 0
     ) {
       currentPage = parseInt(searchParams.get("page"));
