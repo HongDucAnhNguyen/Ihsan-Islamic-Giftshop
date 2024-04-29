@@ -11,11 +11,18 @@ const helperFuncIsQueryNotNumberValue = (stringVal) => {
 export const GET = async (req) => {
   try {
     await dbConnect();
-    
+
     const { searchParams } = new URL(req.url);
     const keywordFilter = searchParams.get("query");
-    const currentPage = parseInt(searchParams.get("page")) || 1;
+    let currentPage = 1;
 
+    if (
+      parseInt(searchParams.get("page")) &&
+      parseInt(searchParams.get("page")) > 0
+    ) {
+      currentPage = parseInt(searchParams.get("page"));
+    }
+    
     const skipHowMany = 3 * (currentPage - 1);
 
     if (helperFuncIsQueryNotNumberValue(keywordFilter) == true) {

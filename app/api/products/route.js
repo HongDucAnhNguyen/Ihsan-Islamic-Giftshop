@@ -11,7 +11,14 @@ export async function GET(req) {
 
     const { searchParams } = new URL(req.url);
 
-    const currentPage = parseInt(searchParams.get("page")) || 1;
+    let currentPage = 1;
+
+    if (
+      parseInt(searchParams.get("page")) &&
+      parseInt(searchParams.get("page")) > 0
+    ) {
+      currentPage = parseInt(searchParams.get("page"));
+    }
 
     const skipHowMany = 3 * (currentPage - 1);
     const allProducts = await Product.find().skip(skipHowMany).limit(3);

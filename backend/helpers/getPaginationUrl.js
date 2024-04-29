@@ -29,7 +29,7 @@ export const getPaginationUrl = (currentPage, maxPages, searchQuery) => {
     const prevPage = currentPage - 1;
     if (searchQuery) {
       prevPageLink = `?query=${searchQuery}&page=${prevPage}`;
-      nextPageLink = `?page=${currentPage}`;
+      nextPageLink = `?query=${searchQuery}&page=${currentPage}`;
     } else {
       prevPageLink = `?page=${prevPage}`;
       nextPageLink = `?page=${currentPage}`;
