@@ -10,8 +10,7 @@ const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
           <main className="md:2-2/3 lg:w-3/4 px-3">
             {data?.length >= 1 &&
               data.map((product) => (
-                // <ProductItem key={product?._id} product={product}></ProductItem>
-                <h1>{product?.name}</h1>
+                <ProductItem key={product?._id} product={product}></ProductItem>
               ))}
           </main>
         </div>
