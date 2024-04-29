@@ -12,24 +12,23 @@ const getProducts = async (searchParams) => {
       }
     );
     const data = await response.json();
-    return data.products
+    return data
   } catch (error) {
     return error;
   }
 };
 
 export default async function Home({ searchParams }) {
-  const allProducts = await getProducts(
+  const { products, nextPageLink, prevPageLink } = await getProducts(
     searchParams
   );
-
 
   return (
     <main>
       <HeroSection></HeroSection>
-      {allProducts && (
+      {products && (
         <ProductsList
-          data={allProducts}
+          data={products}
           nextPageLink={"nextPageLink"}
           prevPageLink={"prevPageLink"}
         ></ProductsList>
