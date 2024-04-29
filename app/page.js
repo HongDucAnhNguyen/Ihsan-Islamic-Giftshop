@@ -13,8 +13,8 @@ export default async function Home({ searchParams }) {
       {products && (
         <ProductsList
           data={products}
-          nextPageLink={"nextPageLink"}
-          prevPageLink={"prevPageLink"}
+          nextPageLink={nextPageLink}
+          prevPageLink={prevPageLink}
         ></ProductsList>
       )}
     </main>
