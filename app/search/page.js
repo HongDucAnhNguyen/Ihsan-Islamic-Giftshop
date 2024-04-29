@@ -17,7 +17,7 @@ const searchProducts = async (searchParams) => {
       prevPageLink: data.prevPageLink,
     };
   } catch (error) {
-    return error
+    return error;
   }
 };
 
@@ -28,20 +28,19 @@ const page = async (req) => {
 
   return (
     <div>
-      {searchResults ? (
-        <div>
-          <h1 className="mt-5 text-center">
-            {searchResults.length} {"result(s)"} found
-          </h1>
-          <ProductsList
-            data={searchResults}
-            nextPageLink={nextPageLink}
-            prevPageLink={prevPageLink}
-          ></ProductsList>
-        </div>
-      ) : (
-        <h1 className="mt-5 text-center">No results found</h1>
-      )}
+      {searchResults !== undefined ||
+        (searchResults !== null && (
+          <div>
+            <h1 className="mt-5 text-center">
+              {searchResults.length} {"result(s)"} found
+            </h1>
+            <ProductsList
+              data={searchResults}
+              nextPageLink={nextPageLink}
+              prevPageLink={prevPageLink}
+            ></ProductsList>
+          </div>
+        ))}
     </div>
   );
 };

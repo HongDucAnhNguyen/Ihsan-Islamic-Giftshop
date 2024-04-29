@@ -26,17 +26,18 @@ export default async function Home(req) {
   const { allProducts, nextPageLink, prevPageLink } = await getProducts(
     req.searchParams
   );
-  
+
   return (
     <main>
       <HeroSection></HeroSection>
-      {allProducts && (
-        <ProductsList
-          data={allProducts}
-          nextPageLink={nextPageLink}
-          prevPageLink={prevPageLink}
-        ></ProductsList>
-      )}
+      {allProducts !== undefined ||
+        (allProducts !== null && (
+          <ProductsList
+            data={allProducts}
+            nextPageLink={nextPageLink}
+            prevPageLink={prevPageLink}
+          ></ProductsList>
+        ))}
     </main>
   );
 }

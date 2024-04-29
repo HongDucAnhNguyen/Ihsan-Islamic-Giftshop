@@ -1,7 +1,6 @@
 export const dynamic = "force-dynamic";
 
 import dbConnect from "@/backend/config/ConnectDB";
-import { NextResponse } from "next/server";
 import { Product } from "@/backend/models/Product";
 import { getPaginationUrl } from "@/backend/helpers/getPaginationUrl";
 
@@ -31,13 +30,13 @@ export async function GET(req) {
       null
     );
 
-    return NextResponse.json({
+    return Response.json({
       products: allProducts,
       nextPageLink: nextPageLink,
       prevPageLink: prevPageLink,
     });
   } catch (error) {
-    return NextResponse.json(error);
+    return Response.json(error);
   }
 }
 
