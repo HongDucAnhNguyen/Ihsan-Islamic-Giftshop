@@ -30,14 +30,13 @@ export default async function Home(req) {
   return (
     <main>
       <HeroSection></HeroSection>
-      {allProducts !== undefined ||
-        (allProducts !== null && (
-          <ProductsList
-            data={allProducts}
-            nextPageLink={nextPageLink}
-            prevPageLink={prevPageLink}
-          ></ProductsList>
-        ))}
+      {allProducts && (
+        <ProductsList
+          data={allProducts}
+          nextPageLink={nextPageLink}
+          prevPageLink={prevPageLink}
+        ></ProductsList>
+      )}
     </main>
   );
 }

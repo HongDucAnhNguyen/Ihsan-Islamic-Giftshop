@@ -28,19 +28,18 @@ const page = async (req) => {
 
   return (
     <div>
-      {searchResults !== undefined ||
-        (searchResults !== null && (
-          <div>
-            <h1 className="mt-5 text-center">
-              {searchResults.length} {"result(s)"} found
-            </h1>
-            <ProductsList
-              data={searchResults}
-              nextPageLink={nextPageLink}
-              prevPageLink={prevPageLink}
-            ></ProductsList>
-          </div>
-        ))}
+      {searchResults && (
+        <div>
+          <h1 className="mt-5 text-center">
+            {searchResults.length} {"result(s)"} found
+          </h1>
+          <ProductsList
+            data={searchResults}
+            nextPageLink={nextPageLink}
+            prevPageLink={prevPageLink}
+          ></ProductsList>
+        </div>
+      )}
     </div>
   );
 };
