@@ -5,7 +5,7 @@ import { getPaginationUrl } from "@/backend/helpers/getPaginationUrl";
 import { Product } from "@/backend/models/Product";
 
 const helperFuncIsQueryNotNumberValue = (stringVal) => {
-  parseInt(stringVal) == NaN ? true : false;
+  parseFloat(stringVal) == NaN ? true : false;
 };
 
 export const GET = async (req) => {
@@ -60,11 +60,11 @@ export const GET = async (req) => {
       });
     } else {
       // If the query is a number, convert it to a number and perform range query
-      const queryNumber = Number(keywordFilter);
+      const queryNumber = parseFloat(keywordFilter);
 
       //define a search range
       const minPrice = queryNumber;
-      const maxPrice = queryNumber + 99999;
+      const maxPrice = 99999;
 
       const productsSearchResult = await Product.find({
         $or: [

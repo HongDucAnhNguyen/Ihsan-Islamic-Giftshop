@@ -6,7 +6,7 @@ export const getPaginationUrl = (currentPage, maxPages, searchQuery) => {
     const nextPage = currentPage + 1;
     const prevPage = currentPage - 1;
 
-    if (searchQuery) {
+    if (searchQuery !== null) {
       prevPageLink = `?query=${searchQuery}&page=${prevPage}`;
       nextPageLink = `?query=${searchQuery}&page=${nextPage}`;
     } else {
@@ -17,7 +17,7 @@ export const getPaginationUrl = (currentPage, maxPages, searchQuery) => {
   if (currentPage == 1) {
     const nextPage = currentPage + 1;
 
-    if (searchQuery) {
+    if (searchQuery !== null) {
       prevPageLink = `?query=${searchQuery}&page=${currentPage}`;
       nextPageLink = `?query=${searchQuery}&page=${nextPage}`;
     } else {
@@ -27,7 +27,7 @@ export const getPaginationUrl = (currentPage, maxPages, searchQuery) => {
   }
   if (currentPage == maxPages) {
     const prevPage = currentPage - 1;
-    if (searchQuery) {
+    if (searchQuery !== null) {
       prevPageLink = `?query=${searchQuery}&page=${prevPage}`;
       nextPageLink = `?query=${searchQuery}&page=${currentPage}`;
     } else {
