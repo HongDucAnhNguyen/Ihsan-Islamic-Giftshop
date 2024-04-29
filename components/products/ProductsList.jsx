@@ -1,8 +1,6 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
@@ -23,17 +21,7 @@ const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
           <div className="flex justify-center gap-5">
             <Link
               href={prevPageLink || ""}
-              // onClick={() => {
-              //   if (parseInt(currentPage) > 1) {
-              //     if (searchQuery) {
-              //       const page = parseInt(currentPage) - 1;
-              //       router.push(`?query=${searchQuery}&page=${page}`);
-              //     } else {
-              //       const page = parseInt(currentPage) - 1;
-              //       router.push(`?page=${page}`);
-              //     }
-              //   }
-              // }}
+             
               className="bg-blue-500 text-white rounded-md p-2"
             >
               prev. page
@@ -41,17 +29,7 @@ const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
 
             <Link
               href={nextPageLink || ""}
-              // onClick={() => {
-              //   if (parseInt(currentPage) < parseInt(maxPages)) {
-              //     if (searchQuery) {
-              //       const page = parseInt(currentPage) + 1;
-              //       router.push(`?query=${searchQuery}&page=${page}`);
-              //     } else {
-              //       const page = parseInt(currentPage) + 1;
-              //       router.push(`?page=${page}`);
-              //     }
-              //   }
-              // }}
+            
               className="bg-blue-500 text-white rounded-md p-2"
             >
               next page
