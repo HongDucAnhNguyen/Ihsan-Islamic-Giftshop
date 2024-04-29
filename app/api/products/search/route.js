@@ -5,7 +5,7 @@ import { getPaginationUrl } from "@/backend/helpers/getPaginationUrl";
 import { Product } from "@/backend/models/Product";
 
 const helperFuncIsQueryNotNumberValue = (stringVal) => {
-  parseFloat(stringVal) == NaN ? true : false;
+  parseFloat(stringVal) === NaN ? true : false;
 };
 
 export const GET = async (req) => {
@@ -25,75 +25,75 @@ export const GET = async (req) => {
 
     const skipHowMany = 3 * (currentPage - 1);
 
-    if (helperFuncIsQueryNotNumberValue(keywordFilter) == true) {
-      const productsSearchResult = await Product.find({
-        $or: [
-          { name: { $regex: keywordFilter, $options: "i" } },
-          { category: { $regex: keywordFilter, $options: "i" } },
+    // if (helperFuncIsQueryNotNumberValue(keywordFilter) == true) {
+    const productsSearchResult = await Product.find({
+      $or: [
+        { name: { $regex: keywordFilter, $options: "i" } },
+        { category: { $regex: keywordFilter, $options: "i" } },
 
-          { description: { $regex: keywordFilter, $options: "i" } },
-        ],
-      })
-        .skip(skipHowMany)
-        .limit(3);
-      const totalItems = await Product.find({
-        $or: [
-          { name: { $regex: keywordFilter, $options: "i" } },
-          { category: { $regex: keywordFilter, $options: "i" } },
+        { description: { $regex: keywordFilter, $options: "i" } },
+      ],
+    })
+      .skip(skipHowMany)
+      .limit(3);
+    const totalItems = await Product.find({
+      $or: [
+        { name: { $regex: keywordFilter, $options: "i" } },
+        { category: { $regex: keywordFilter, $options: "i" } },
 
-          { description: { $regex: keywordFilter, $options: "i" } },
-        ],
-      }).countDocuments();
+        { description: { $regex: keywordFilter, $options: "i" } },
+      ],
+    }).countDocuments();
 
-      const maxPages = Math.ceil(totalItems / 3);
+    const maxPages = Math.ceil(totalItems / 3);
 
-      const { nextPageLink, prevPageLink } = getPaginationUrl(
-        currentPage,
-        maxPages,
-        keywordFilter
-      );
+    const { nextPageLink, prevPageLink } = getPaginationUrl(
+      currentPage,
+      maxPages,
+      keywordFilter
+    );
 
-      return Response.json({
-        searchResults: productsSearchResult,
-        nextPageLink: nextPageLink,
-        prevPageLink: prevPageLink,
-      });
-    } else {
-      // If the query is a number, convert it to a number and perform range query
-      const queryNumber = parseFloat(keywordFilter);
+    return Response.json({
+      searchResults: productsSearchResult,
+      nextPageLink: nextPageLink,
+      prevPageLink: prevPageLink,
+    });
+    // } else {
+    //   // If the query is a number, convert it to a number and perform range query
+    //   const queryNumber = parseFloat(keywordFilter);
 
-      //define a search range
-      const minPrice = queryNumber;
-      const maxPrice = 99999;
+    //   //define a search range
+    //   const minPrice = queryNumber;
+    //   const maxPrice = 99999;
 
-      const productsSearchResult = await Product.find({
-        $or: [
-          { price: { $gte: minPrice, $lte: maxPrice } },
-          { ratings: queryNumber },
-        ],
-      })
-        .skip(skipHowMany)
-        .limit(3);
-      const totalItems = await Product.find({
-        $or: [
-          { price: { $gte: minPrice, $lte: maxPrice } },
-          { ratings: queryNumber },
-        ],
-      }).countDocuments();
+    //   const productsSearchResult = await Product.find({
+    //     $or: [
+    //       { price: { $gte: minPrice, $lte: maxPrice } },
+    //       { ratings: queryNumber },
+    //     ],
+    //   })
+    //     .skip(skipHowMany)
+    //     .limit(3);
+    //   const totalItems = await Product.find({
+    //     $or: [
+    //       { price: { $gte: minPrice, $lte: maxPrice } },
+    //       { ratings: queryNumber },
+    //     ],
+    //   }).countDocuments();
 
-      const maxPages = Math.ceil(totalItems / 3);
+    //   const maxPages = Math.ceil(totalItems / 3);
 
-      const { nextPageLink, prevPageLink } = getPaginationUrl(
-        currentPage,
-        maxPages,
-        keywordFilter
-      );
-      return Response.json({
-        searchResults: productsSearchResult,
-        nextPageLink: nextPageLink,
-        prevPageLink: prevPageLink,
-      });
-    }
+    //   const { nextPageLink, prevPageLink } = getPaginationUrl(
+    //     currentPage,
+    //     maxPages,
+    //     keywordFilter
+    //   );
+    //   return Response.json({
+    //     searchResults: productsSearchResult,
+    //     nextPageLink: nextPageLink,
+    //     prevPageLink: prevPageLink,
+    //   });
+    // }
   } catch (error) {
     return Response.json(error);
   }

@@ -31,7 +31,9 @@ const page = async (req) => {
       {searchResults && (
         <div>
           <h1 className="mt-5 text-center">
-            {searchResults.length} {"result(s)"} found
+            {searchResults?.length > 0
+              ? `${searchResults.length} result(s) found`
+              : "No Results found"}
           </h1>
           <ProductsList
             data={searchResults}
