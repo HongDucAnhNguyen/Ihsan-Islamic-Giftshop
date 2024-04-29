@@ -26,10 +26,7 @@ const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
             </Link>
 
             <Link
-              href={{
-                pathname: "/",
-                query: { page: 2 },
-              }}
+              href={nextPageLink || "thisisnotworking"}
               className="bg-blue-500 text-white rounded-md p-2"
             >
               next page
