@@ -12,20 +12,17 @@ const getProducts = async (searchParams) => {
       }
     );
     const data = await response.json();
-    return {
-      allProducts: data.products,
-      nextPageLink: data.nextPageLink,
-      prevPageLink: data.prevPageLink,
-    };
+    return data.products
   } catch (error) {
     return error;
   }
 };
 
 export default async function Home({ searchParams }) {
-  const { allProducts, nextPageLink, prevPageLink } = await getProducts(
+  const allProducts = await getProducts(
     searchParams
   );
+
 
   return (
     <main>
@@ -33,8 +30,8 @@ export default async function Home({ searchParams }) {
       {allProducts && (
         <ProductsList
           data={allProducts}
-          nextPageLink={nextPageLink}
-          prevPageLink={prevPageLink}
+          nextPageLink={"nextPageLink"}
+          prevPageLink={"prevPageLink"}
         ></ProductsList>
       )}
     </main>

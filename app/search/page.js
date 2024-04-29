@@ -3,7 +3,7 @@ import ProductsList from "@/components/products/ProductsList";
 const searchProducts = async (searchParams) => {
   try {
     const keywordFilter = searchParams?.query;
-    const currentPage = searchParams?.page || 1;
+    const currentPage = Number(searchParams?.page) || 1;
     const response = await fetch(
       `${process.env.BASE_URL}/api/products/search?query=${keywordFilter}&page=${currentPage}`,
       {
@@ -21,7 +21,7 @@ const searchProducts = async (searchParams) => {
   }
 };
 
-const page = async ({searchParams}) => {
+const page = async ({ searchParams }) => {
   const { searchResults, nextPageLink, prevPageLink } = await searchProducts(
     searchParams
   );
@@ -31,9 +31,7 @@ const page = async ({searchParams}) => {
       {searchResults && (
         <div>
           <h1 className="mt-5 text-center">
-            {searchResults?.length > 0
-              ? `Results Found`
-              : "No Results found"}
+            {searchResults?.length > 0 ? `Results Found` : "No Results found"}
           </h1>
           <ProductsList
             data={searchResults}
