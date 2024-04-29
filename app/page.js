@@ -22,9 +22,9 @@ const getProducts = async (searchParams) => {
   }
 };
 
-export default async function Home(req) {
+export default async function Home({ searchParams }) {
   const { allProducts, nextPageLink, prevPageLink } = await getProducts(
-    req.searchParams
+    searchParams
   );
 
   return (
