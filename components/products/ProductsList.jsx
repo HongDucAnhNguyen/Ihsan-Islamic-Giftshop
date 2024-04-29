@@ -1,12 +1,10 @@
+"use client";
 import React from "react";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
-import Link from "next/link";
-
+import { useRouter } from "next/router";
 const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
-  const prevPage = prevPageLink;
-  const nextPage = nextPageLink;
-
+  const router = useRouter();
   return (
     <section className="py-12">
       <div className="container max-w-screen-xl mx-auto px-4">
@@ -21,19 +19,23 @@ const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
         </div>
         <div>
           <div className="flex justify-center gap-5">
-            <Link
-              href={prevPage}
+            <button
+              onClick={() => {
+                router.push(prevPageLink);
+              }}
               className="bg-blue-500 text-white rounded-md p-2"
             >
               prev. page
-            </Link>
+            </button>
 
-            <Link
-              href={nextPage}
+            <button
+              onClick={() => {
+                router.push(nextPageLink);
+              }}
               className="bg-blue-500 text-white rounded-md p-2"
             >
               next page
-            </Link>
+            </button>
           </div>
         </div>
       </div>
