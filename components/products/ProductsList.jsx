@@ -1,6 +1,7 @@
 import React from "react";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
+import Link from "next/link";
 const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
   return (
     <section className="py-12">
@@ -16,13 +17,19 @@ const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
         </div>
         <div>
           <div className="flex justify-center gap-5">
-            <div className="bg-blue-500 text-white rounded-md p-2">
-              prev. page is {prevPageLink}
-            </div>
+            <Link
+              href={prevPageLink}
+              className="bg-blue-500 text-white rounded-md p-2"
+            >
+              Prev Page
+            </Link>
 
-            <div className="bg-blue-500 text-white rounded-md p-2">
-              next page is {nextPageLink}
-            </div>
+            <Link
+              href={nextPageLink}
+              className="bg-blue-500 text-white rounded-md p-2"
+            >
+              Next Page
+            </Link>
           </div>
         </div>
       </div>
