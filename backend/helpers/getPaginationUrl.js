@@ -7,32 +7,71 @@ export const getPaginationUrl = (currentPage, maxPages, searchQuery) => {
     const prevPage = currentPage - 1;
 
     if (searchQuery) {
-      prevPageLink = `?query=${searchQuery}&page=${prevPage}`;
-      nextPageLink = `/?query=${searchQuery}&page=${nextPage}`;
+      prevPageLink = {
+        pathname: "/",
+        query: { query: searchQuery, page: prevPage },
+      };
+      nextPageLink = {
+        pathname: "/",
+        query: { query: searchQuery, page: nextPage },
+      };
     } else {
-      prevPageLink = `/?page=${prevPage}`;
-      nextPageLink = `/?page=${nextPage}`;
+      prevPageLink = {
+        pathname: "/",
+        query: { page: currentPage },
+      };
+      nextPageLink = {
+        pathname: "/",
+        query: { page: nextPage },
+      };
     }
   }
   if (currentPage == 1) {
     const nextPage = currentPage + 1;
 
     if (searchQuery) {
-      prevPageLink = `/?query=${searchQuery}&page=${currentPage}`;
-      nextPageLink = `?query=${searchQuery}&page=${nextPage}`;
+      prevPageLink = {
+        pathname: "/",
+        query: { query: searchQuery, page: currentPage },
+      };
+      nextPageLink = {
+        pathname: "/",
+        query: { query: searchQuery, page: nextPage },
+      };
     } else {
-      prevPageLink = `/?page=${currentPage}`;
-      nextPageLink = `/?page=${nextPage}`;
+      prevPageLink = {
+        pathname: "/",
+        query: { page: currentPage },
+      };
+      nextPageLink = {
+        pathname: "/",
+        query: { page: nextPage },
+      };
     }
   }
   if (currentPage == maxPages) {
     const prevPage = currentPage - 1;
     if (searchQuery) {
-      prevPageLink = `/?query=${searchQuery}&page=${prevPage}`;
-      nextPageLink = `/?query=${searchQuery}&page=${currentPage}`;
+      prevPageLink = {
+        pathname: "/",
+        query: { query: searchQuery, page: prevPage },
+      };
+      nextPageLink = {
+        pathname: "/",
+        query: { query: searchQuery, page: currentPage },
+      };
+
+      //   prevPageLink = `/?query=${searchQuery}&page=${prevPage}`;
+      //   nextPageLink = `/?query=${searchQuery}&page=${currentPage}`;
     } else {
-      prevPageLink = `/?page=${prevPage}`;
-      nextPageLink = `/?page=${currentPage}`;
+      prevPageLink = {
+        pathname: "/",
+        query: { page: prevPage },
+      };
+      nextPageLink = {
+        pathname: "/",
+        query: { page: currentPage },
+      };
     }
   }
 
