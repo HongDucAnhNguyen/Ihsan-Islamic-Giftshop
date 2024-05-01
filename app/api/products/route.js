@@ -19,16 +19,44 @@ export async function GET(req) {
       currentPage = parseInt(searchParams.get("page"));
     }
 
+    const categoryQuery = searchParams.get("category");
+    const ratingsQuery = searchParams.get("ratings");
+
     const skipHowMany = 3 * (currentPage - 1);
-    const allProducts = await Product.find().skip(skipHowMany).limit(3);
-    const totalItems = await Product.countDocuments();
+    const filters =
+      categoryQuery && ratingsQuery
+        ? {
+            category: categoryQuery,
+            ratings: ratingsQuery,
+          }
+        : categoryQuery
+        ? {
+            category: categoryQuery,
+          }
+        : ratingsQuery
+        ? {
+            ratings: { $gte: ratingsQuery },
+          }
+        : {};
+    const allProducts = await Product.find(filters).skip(skipHowMany).limit(3);
+
+    const totalItems = await Product.find(filters).countDocuments();
 
     const maxPages = Math.ceil(totalItems / 3);
+
+    console.log(
+      "the max pages is",
+      maxPages,
+      "and the total items is",
+      totalItems
+    );
 
     if (totalItems > 1) {
       const { nextPageLink, prevPageLink } = getPaginationUrl(
         currentPage,
         maxPages,
+        categoryQuery,
+        ratingsQuery,
         null
       );
 
@@ -39,10 +67,20 @@ export async function GET(req) {
       });
     }
 
+    const nextPagePath =
+      categoryQuery && ratingsQuery
+        ? `?category=${categoryQuery}&ratings=${ratingsQuery}&page=1`
+        : categoryQuery
+        ? `?category=${categoryQuery}&page=1`
+        : ratingsQuery
+        ? `?ratingsQuery${ratingsQuery}&page=1`
+        : "?page=1";
+    const prevPagePath = nextPagePath;
+
     return Response.json({
       products: allProducts,
-      nextPageLink: "?page=1",
-      prevPageLink: "?page=1",
+      nextPageLink: nextPagePath,
+      prevPageLink: prevPagePath,
     });
   } catch (error) {
     return Response.json(error);

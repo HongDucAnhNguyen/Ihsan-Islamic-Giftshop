@@ -2,21 +2,61 @@
 
 import React from "react";
 import StarRatings from "react-star-ratings";
-
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 const Filters = () => {
   let queryParams;
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
-  function checkHandler(checkBoxType, checkBoxValue) {
-    if (typeof window !== "undefined") {
-      queryParams = new URLSearchParams(window.location.search);
+  const handleCheck = (clickedCheckbox) => {
+    //restrict only one check box to be checked at a time
+
+    queryParams = new URLSearchParams(searchParams.toString());
+    if (searchParams.has("page")) {
+      queryParams.delete("page", searchParams.get("page"));
     }
 
-    if (typeof window !== "undefined") {
-      const value = queryParams.get(checkBoxType);
-      if (checkBoxValue === value) return true;
-      return false;
+    //get all checkbox components by filter name "category"
+    const checkboxes = document.getElementsByName(clickedCheckbox.name);
+
+    // regardless of checked or not, the act of clicking one box will uncheck all of the others
+    checkboxes.forEach((checkbox) => {
+      if (checkbox !== clickedCheckbox) {
+        checkbox.checked = false;
+      }
+    });
+
+    //if checkbox was clicked but to uncheck
+    if (clickedCheckbox.checked == false) {
+      queryParams.delete(clickedCheckbox.name, clickedCheckbox.value);
+      const path = pathname + "?" + queryParams.toString();
+      router.push(path);
+    } else {
+      //if checkbox was checked
+      if (queryParams.has(clickedCheckbox.name)) {
+        queryParams.set(clickedCheckbox.name, clickedCheckbox.value);
+      } else {
+        queryParams.append(clickedCheckbox.name, clickedCheckbox.value);
+      }
+      const path = pathname + "?" + queryParams.toString();
+      router.push(path);
     }
-  }
+  };
+
+  //keep selected checkbox still checked when page reloads
+  const checkHandler = (checkBoxType, checkBoxValue) => {
+    //retrieve category value from params
+    queryParams = new URLSearchParams(searchParams.toString());
+
+    //get value of query "category"
+
+    const value = searchParams.get(checkBoxType);
+    //check state is true if current query matches checkbox value
+    if (checkBoxValue === value) {
+      return true;
+    } else return false;
+  };
 
   return (
     <aside className="md:w-1/3 lg:w-1/4 px-4">
@@ -69,6 +109,7 @@ const Filters = () => {
                 value="Quran"
                 className="h-4 w-4"
                 defaultChecked={checkHandler("category", "Quran")}
+                onClick={(e) => handleCheck(e.target)}
               />
               <span className="ml-2 text-gray-500"> Quran </span>
             </label>
@@ -81,6 +122,7 @@ const Filters = () => {
                 value="Accessories"
                 className="h-4 w-4"
                 defaultChecked={checkHandler("category", "Accessories")}
+                onClick={(e) => handleCheck(e.target)}
               />
               <span className="ml-2 text-gray-500"> Accessories </span>
             </label>
@@ -93,6 +135,7 @@ const Filters = () => {
                 value="Mens Clothing"
                 className="h-4 w-4"
                 defaultChecked={checkHandler("category", "Mens Clothing")}
+                onClick={(e) => handleCheck(e.target)}
               />
               <span className="ml-2 text-gray-500"> Mens Clothing </span>
             </label>
@@ -105,6 +148,7 @@ const Filters = () => {
                 value="Womens Clothing"
                 className="h-4 w-4"
                 defaultChecked={checkHandler("category", "Womens Clothing")}
+                onClick={(e) => handleCheck(e.target)}
               />
               <span className="ml-2 text-gray-500"> Womens Clothing </span>
             </label>
@@ -124,6 +168,7 @@ const Filters = () => {
                   value={rating}
                   className="h-4 w-4"
                   defaultChecked={checkHandler("ratings", `${rating}`)}
+                  onClick={(e) => handleCheck(e.target)}
                 />
                 <span className="ml-2 text-gray-500">
                   {" "}

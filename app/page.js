@@ -1,17 +1,29 @@
 import HeroSection from "@/components/Homepage/HeroSection";
 import ProductsList from "../components/products/ProductsList";
-// import { getProducts } from "./action";
 
 const getProducts = async (searchParams) => {
   try {
+    let fetchURL = `${process.env.BASE_URL}/api/products`;
     const currentPage = Number(searchParams?.page) || 1;
-
-    const response = await fetch(
-      `${process.env.BASE_URL}/api/products?page=${currentPage}`,
-      {
-        method: "GET",
+    const categoryFilter = searchParams?.category;
+    const ratingsGTE = searchParams?.ratings;
+    if (categoryFilter && ratingsGTE) {
+      fetchURL += `?category=${categoryFilter}&ratings=${ratingsGTE}&page=${currentPage}`;
+    } else {
+      if (ratingsGTE) {
+        fetchURL += `?ratings=${ratingsGTE}&page=${currentPage}`;
+      } else {
+        if (categoryFilter) {
+          fetchURL += `?category=${categoryFilter}&page=${currentPage}`;
+        } else {
+          fetchURL += `?page=${currentPage}`;
+        }
       }
-    );
+    }
+
+    const response = await fetch(fetchURL, {
+      method: "GET",
+    });
     const data = await response.json();
     return data;
   } catch (error) {

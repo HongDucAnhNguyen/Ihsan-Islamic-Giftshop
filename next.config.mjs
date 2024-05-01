@@ -3,8 +3,8 @@
 const nextConfig = {
   experimental: {
    
-    esmExternals: "loose", // <-- add this
-    serverComponentsExternalPackages: ["mongoose"], // <-- and this
+    esmExternals: "loose",
+    serverComponentsExternalPackages: ["mongoose"],
   },
 
   images: {

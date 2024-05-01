@@ -92,6 +92,8 @@ export const GET = async (req) => {
         const { nextPageLink, prevPageLink } = getPaginationUrl(
           currentPage,
           maxPages,
+          null,
+          null,
           keywordFilter
         );
 
