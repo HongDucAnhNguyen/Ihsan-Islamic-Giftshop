@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 const Filters = () => {
@@ -8,14 +8,44 @@ const Filters = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-
-  const handleCheck = (clickedCheckbox) => {
-    //restrict only one check box to be checked at a time
-
+  const [minPriceVal, setMinPriceVal] = useState("");
+  const clearPageQuery = () => {
     queryParams = new URLSearchParams(searchParams.toString());
     if (searchParams.has("page")) {
       queryParams.delete("page", searchParams.get("page"));
     }
+  };
+  const handlePriceFilters = (priceField) => {
+    clearPageQuery();
+
+    if (priceField.name === "min") {
+      setMinPriceVal(priceField.value);
+    }
+
+    if (queryParams.has(priceField.name)) {
+      queryParams.set(priceField.name, priceField.value);
+    } else {
+      queryParams.append(priceField.name, priceField.value);
+    }
+    const path = pathname + "?" + queryParams.toString();
+    router.push(path);
+  };
+
+  const defaultPriceHandler = (inputType) => {
+    //retrieve category value from params
+    queryParams = new URLSearchParams(searchParams.toString());
+
+    //get value of query "category"
+
+    const value = searchParams.get(inputType);
+    //check state is true if current query matches checkbox value
+    return value;
+  };
+
+  const handleCheck = (clickedCheckbox) => {
+    //restrict only one check box to be checked at a time
+
+    clearPageQuery();
 
     //get all checkbox components by filter name "category"
     const checkboxes = document.getElementsByName(clickedCheckbox.name);
@@ -53,7 +83,7 @@ const Filters = () => {
 
     const value = searchParams.get(checkBoxType);
     //check state is true if current query matches checkbox value
-    if (checkBoxValue === value) {
+    if (checkBoxValue == value) {
       return true;
     } else return false;
   };
@@ -68,31 +98,41 @@ const Filters = () => {
       </a>
       <div className="hidden md:block px-6 py-4 border border-gray-200 bg-white rounded shadow-sm">
         <h3 className="font-semibold mb-2">Price Range ($)</h3>
-        <div className="grid md:grid-cols-3 gap-x-2">
-          <div className="mb-4">
-            <form>
-              <input
-                name="min"
-                className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
-                type="number"
-                placeholder="Min"
-              />
-            </form>
-          </div>
 
-          <div className="mb-4">
+        <div className="mb-4">
+          <div className="flex space-x-2 mb-4">
+            <input
+              name="min"
+              min={0}
+              max={9999}
+              defaultValue={defaultPriceHandler("min")}
+              className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
+              type="number"
+              placeholder="Min"
+              onChange={(e) => {
+                handlePriceFilters(e.target);
+              }}
+            />
+
             <input
               name="max"
+              min={minPriceVal}
+              max={9999}
+              defaultValue={defaultPriceHandler("max")}
               className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
               type="number"
               placeholder="Max"
+              onChange={(e) => {
+                handlePriceFilters(e.target);
+              }}
             />
-          </div>
 
-          <div className="mb-4">
-            <button className="px-1 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">
-              Find
-            </button>
+            {/* <button
+                type="submit"
+                className=" px-1 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+              >
+                Find
+              </button> */}
           </div>
         </div>
       </div>
@@ -167,13 +207,13 @@ const Filters = () => {
                   type="checkbox"
                   value={rating}
                   className="h-4 w-4"
-                  defaultChecked={checkHandler("ratings", `${rating}`)}
+                  defaultChecked={checkHandler("ratings", rating)}
                   onClick={(e) => handleCheck(e.target)}
                 />
                 <span className="ml-2 text-gray-500">
                   {" "}
                   <StarRatings
-                    rating={5}
+                    rating={rating}
                     starRatedColor="#ffb829"
                     numberOfStars={5}
                     starDimension="20px"

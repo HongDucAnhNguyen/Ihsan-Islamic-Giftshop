@@ -1,13 +1,16 @@
+"use client";
 import React from "react";
 import ProductItem from "./ProductItem";
 import Filters from "../utilities/Filters";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
+  const pathname = usePathname();
   return (
     <section className="py-12">
       <div className="container max-w-screen-xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row -mx-4">
-          <Filters></Filters>
+        <div className="flex justify-center flex-col md:flex-row -mx-4">
+          {pathname !== "/search" && <Filters></Filters>}
           <main className="md:2-2/3 lg:w-3/4 px-3">
             {data?.length >= 1 &&
               data.map((product) => (

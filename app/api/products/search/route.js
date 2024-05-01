@@ -20,27 +20,20 @@ export const GET = async (req) => {
 
     const skipHowMany = 3 * (currentPage - 1);
     const queryIsString = parseFloat(keywordFilter);
+    const filters = {
+      $or: [
+        { name: { $regex: keywordFilter, $options: "i" } },
+        { category: { $regex: keywordFilter, $options: "i" } },
 
+        { description: { $regex: keywordFilter, $options: "i" } },
+      ],
+    };
     if (isNaN(queryIsString)) {
-      const productsSearchResult = await Product.find({
-        $or: [
-          { name: { $regex: keywordFilter, $options: "i" } },
-          { category: { $regex: keywordFilter, $options: "i" } },
-
-          { description: { $regex: keywordFilter, $options: "i" } },
-        ],
-      })
+      const productsSearchResult = await Product.find(filters)
         .skip(skipHowMany)
         .limit(3);
 
-      const totalItems = await Product.find({
-        $or: [
-          { name: { $regex: keywordFilter, $options: "i" } },
-          { category: { $regex: keywordFilter, $options: "i" } },
-
-          { description: { $regex: keywordFilter, $options: "i" } },
-        ],
-      }).countDocuments();
+      const totalItems = await Product.find(filters).countDocuments();
 
       const maxPages = Math.ceil(totalItems / 3);
 
@@ -65,26 +58,17 @@ export const GET = async (req) => {
       });
     } else {
       // If the query is a number, convert it to a number and perform range query
-      const queryNumber = keywordFilter;
 
       //define a search range
-      const minPrice = queryNumber;
-      const maxPrice = 99999;
 
-      const productsSearchResult = await Product.find({
-        $or: [
-          { price: { $gte: minPrice, $lte: maxPrice } },
-          { ratings: queryNumber },
-        ],
-      })
+      const filters = {
+        $or: [{ price: keywordFilter }, { ratings: keywordFilter }],
+      };
+
+      const productsSearchResult = await Product.find(filters)
         .skip(skipHowMany)
         .limit(3);
-      const totalItems = await Product.find({
-        $or: [
-          { price: { $gte: minPrice, $lte: maxPrice } },
-          { ratings: queryNumber },
-        ],
-      }).countDocuments();
+      const totalItems = await Product.find(filters).countDocuments();
 
       const maxPages = Math.ceil(totalItems / 3);
 
@@ -93,7 +77,7 @@ export const GET = async (req) => {
           currentPage,
           maxPages,
           null,
-          null,
+          
           keywordFilter
         );
 

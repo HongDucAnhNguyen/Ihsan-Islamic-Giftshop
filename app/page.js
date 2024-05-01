@@ -3,27 +3,19 @@ import ProductsList from "../components/products/ProductsList";
 
 const getProducts = async (searchParams) => {
   try {
-    let fetchURL = `${process.env.BASE_URL}/api/products`;
+    // let fetchURL = `${process.env.BASE_URL}/api/products`;
     const currentPage = Number(searchParams?.page) || 1;
-    const categoryFilter = searchParams?.category;
-    const ratingsGTE = searchParams?.ratings;
-    if (categoryFilter && ratingsGTE) {
-      fetchURL += `?category=${categoryFilter}&ratings=${ratingsGTE}&page=${currentPage}`;
-    } else {
-      if (ratingsGTE) {
-        fetchURL += `?ratings=${ratingsGTE}&page=${currentPage}`;
-      } else {
-        if (categoryFilter) {
-          fetchURL += `?category=${categoryFilter}&page=${currentPage}`;
-        } else {
-          fetchURL += `?page=${currentPage}`;
-        }
-      }
-    }
+    const categoryFilter = searchParams?.category || "none";
+    const ratingsFilter = searchParams?.ratings || "none";
+    const minPrice = searchParams?.min || "none";
+    const maxPrice = searchParams?.max || "none";
 
-    const response = await fetch(fetchURL, {
-      method: "GET",
-    });
+    const response = await fetch(
+      `${process.env.BASE_URL}/api/products?category=${categoryFilter}&ratings=${ratingsFilter}&min=${minPrice}&max=${maxPrice}&page=${currentPage}`,
+      {
+        method: "GET",
+      }
+    );
     const data = await response.json();
     return data;
   } catch (error) {

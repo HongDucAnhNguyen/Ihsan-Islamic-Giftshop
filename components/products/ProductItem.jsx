@@ -41,17 +41,16 @@ const ProductItem = ({ product }) => {
               {product.name}
             </Link>
             <div className="flex flex-wrap items-center space-x-2 mb-2">
-              <div >
+              <div>
                 <div className="my-1">
-                  {/* <StarRatings
-                  
+                  <StarRatings
                     rating={product?.ratings}
                     starRatedColor="#ffb829"
-                    numberOfStars={5}
+                    numberOfStars={product?.ratings}
                     starDimension="18px"
                     starSpacing="1px"
                     name="rating"
-                  /> */}
+                  />
                 </div>
               </div>
               <b className="text-gray-300">•</b>
