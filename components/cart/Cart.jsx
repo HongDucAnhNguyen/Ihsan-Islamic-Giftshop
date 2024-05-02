@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import { cartContext } from "@/app/cartcontext-provider";
 const Cart = () => {
-  const { handleAddItemToCart, deleteItemFromCart, cart } =
+  const { handleAddItemToCart, handleDeleteItemFromCart, cart } =
     useContext(cartContext);
 
   const increaseQty = (cartItem) => {
@@ -21,7 +21,10 @@ const Cart = () => {
     const newQty = cartItem?.quantity - 1;
     const item = { ...cartItem, quantity: newQty };
 
-    if (newQty <= 0) return;
+    if (newQty <= 0) {
+      handleDeleteItemFromCart(cartItem?.productId);
+      return;
+    }
 
     handleAddItemToCart(item);
   };
@@ -121,10 +124,9 @@ const Cart = () => {
                           <div className="float-right">
                             <a
                               className="px-4 py-2 inline-block text-red-600 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 cursor-pointer"
-                              onClick={
-                                () => {}
-                                //deleteItemFromCart(cartItem?.product)
-                              }
+                              onClick={() => {
+                                handleDeleteItemFromCart(cartItem?.productId);
+                              }}
                             >
                               Remove
                             </a>

@@ -20,6 +20,14 @@ export default function CartContextProvider({ children }) {
     setCartContextData();
   }, []);
 
+  const handleDeleteItemFromCart = (productId) => {
+    const currentCart = cart?.cartItems?.filter(
+      (item) => item.productId !== productId
+    );
+    localStorage.setItem("cart", JSON.stringify({ cartItems: currentCart }));
+    setCartContextData();
+  };
+
   const handleAddItemToCart = async ({
     productId,
     name,
@@ -51,7 +59,9 @@ export default function CartContextProvider({ children }) {
   };
 
   return (
-    <cartContext.Provider value={{ cart, handleAddItemToCart }}>
+    <cartContext.Provider
+      value={{ cart, handleAddItemToCart, handleDeleteItemFromCart }}
+    >
       {children}
     </cartContext.Provider>
   );
