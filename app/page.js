@@ -1,4 +1,3 @@
-import HeroSection from "@/components/Homepage/HeroSection";
 import ProductsList from "../components/products/ProductsList";
 
 const getProducts = async (searchParams) => {
@@ -30,7 +29,7 @@ export default async function Home({ searchParams }) {
 
   return (
     <main>
-      <HeroSection></HeroSection>
+     
       {products && (
         <ProductsList
           data={products}

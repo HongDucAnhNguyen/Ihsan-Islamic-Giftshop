@@ -41,6 +41,7 @@ export const GET = async (req) => {
         const { nextPageLink, prevPageLink } = getPaginationUrl(
           currentPage,
           maxPages,
+          "",
           keywordFilter
         );
 
@@ -48,6 +49,7 @@ export const GET = async (req) => {
           searchResults: productsSearchResult,
           nextPageLink: nextPageLink,
           prevPageLink: prevPageLink,
+          totalItems: totalItems,
         });
       }
 
@@ -55,6 +57,7 @@ export const GET = async (req) => {
         searchResults: productsSearchResult,
         nextPageLink: `?query=${keywordFilter}&page=1`,
         prevPageLink: `?query=${keywordFilter}&page=1`,
+        totalItems: totalItems,
       });
     } else {
       // If the query is a number, convert it to a number and perform range query
@@ -76,8 +79,8 @@ export const GET = async (req) => {
         const { nextPageLink, prevPageLink } = getPaginationUrl(
           currentPage,
           maxPages,
-          null,
-          
+          "",
+
           keywordFilter
         );
 
@@ -85,6 +88,7 @@ export const GET = async (req) => {
           searchResults: productsSearchResult,
           nextPageLink: nextPageLink,
           prevPageLink: prevPageLink,
+          totalItems: totalItems,
         });
       }
 
@@ -92,6 +96,7 @@ export const GET = async (req) => {
         searchResults: productsSearchResult,
         nextPageLink: `?query=${keywordFilter}&page=1`,
         prevPageLink: `?query=${keywordFilter}&page=1`,
+        totalItems: totalItems,
       });
     }
   } catch (error) {

@@ -1,10 +1,22 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import StarRatings from "react-star-ratings";
+import { cartContext } from "@/app/cartcontext-provider";
 // import StarRatings from "react-star-ratings";
 const ProductItem = ({ product }) => {
+  const { handleAddItemToCart } = useContext(cartContext);
+  const handleAddToCart = () => {
+    handleAddItemToCart({
+      productId: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.images[0].url,
+      stock: product.stock,
+    });
+  };
+
   return (
     <article
       className="border border-gray-200 overflow-hidden 
@@ -69,10 +81,13 @@ const ProductItem = ({ product }) => {
 
             <p className="text-green-500">Free Shipping</p>
             <div className="my-3">
-              <a className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 cursor-pointer">
+              <button
+                className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 cursor-pointer"
+                onClick={handleAddToCart}
+              >
                 {" "}
                 Add to Cart{" "}
-              </a>
+              </button>
             </div>
           </div>
         </div>

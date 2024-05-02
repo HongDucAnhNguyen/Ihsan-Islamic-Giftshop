@@ -13,14 +13,14 @@ export const getPaginationUrl = (
     if (searchQuery) {
       prevPageLink = `?query=${searchQuery}&page=${prevPage}`;
       nextPageLink = `?query=${searchQuery}&page=${nextPage}`;
+    } else {
+      prevPageLink = `${
+        queryStr !== "" ? `?${queryStr}&page=${prevPage}` : `?page=${prevPage}`
+      }`;
+      nextPageLink = `${
+        queryStr !== "" ? `?${queryStr}&page=${nextPage}` : `?page=${nextPage}`
+      }`;
     }
-
-    prevPageLink = `${
-      queryStr !== "" ? `?${queryStr}&page=${prevPage}` : `?page=${prevPage}`
-    }`;
-    nextPageLink = `${
-      queryStr !== "" ? `?${queryStr}&page=${nextPage}` : `?page=${nextPage}`
-    }`;
   }
 
   if (currentPage === 1) {
@@ -29,11 +29,12 @@ export const getPaginationUrl = (
     if (searchQuery) {
       prevPageLink = `?query=${searchQuery}&page=1`;
       nextPageLink = `?query=${searchQuery}&page=${nextPage}`;
+    } else {
+      prevPageLink = `${queryStr !== "" ? `?${queryStr}&page=1` : `?page=1`}`;
+      nextPageLink = `${
+        queryStr !== "" ? `?${queryStr}&page=${nextPage}` : `?page=${nextPage}`
+      }`;
     }
-    prevPageLink = `${queryStr !== "" ? `?${queryStr}&page=1` : `?page=1`}`;
-    nextPageLink = `${
-      queryStr !== "" ? `?${queryStr}&page=${nextPage}` : `?page=${nextPage}`
-    }`;
   }
 
   if (currentPage == maxPages) {
@@ -41,15 +42,16 @@ export const getPaginationUrl = (
     if (searchQuery) {
       prevPageLink = `?query=${searchQuery}&page=${prevPage}`;
       nextPageLink = `?query=${searchQuery}&page=${currentPage}`;
+    } else {
+      prevPageLink = `${
+        queryStr !== "" ? `?${queryStr}&page=${prevPage}` : `?page=${prevPage}`
+      }`;
+      nextPageLink = `${
+        queryStr !== ""
+          ? `?${queryStr}&page=${currentPage}`
+          : `?page=${currentPage}`
+      }`;
     }
-    prevPageLink = `${
-      queryStr !== "" ? `?${queryStr}&page=${prevPage}` : `?page=${prevPage}`
-    }`;
-    nextPageLink = `${
-      queryStr !== ""
-        ? `?${queryStr}&page=${currentPage}`
-        : `?page=${currentPage}`
-    }`;
   }
 
   return { prevPageLink, nextPageLink };

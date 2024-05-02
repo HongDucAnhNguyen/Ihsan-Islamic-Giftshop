@@ -15,6 +15,7 @@ const searchProducts = async (searchParams) => {
       searchResults: data.searchResults,
       nextPageLink: data.nextPageLink,
       prevPageLink: data.prevPageLink,
+      totalItemsFound: data.totalItems,
     };
   } catch (error) {
     return error;
@@ -22,24 +23,25 @@ const searchProducts = async (searchParams) => {
 };
 
 const page = async ({ searchParams }) => {
-  const { searchResults, nextPageLink, prevPageLink } = await searchProducts(
-    searchParams
-  );
+  const { searchResults, nextPageLink, prevPageLink, totalItemsFound } =
+    await searchProducts(searchParams);
 
   return (
     <div>
-      {searchResults && (
-        <div>
-          <h1 className="mt-5 text-center">
-            {searchResults?.length > 0 ? `Results Found` : "No Results found"}
-          </h1>
+      <div>
+        <h1 className="mt-5 text-center text-font-large text-pretty">
+          {searchResults?.length > 0
+            ? `${totalItemsFound} Result(s) Found`
+            : "No Results found"}
+        </h1>
+        {searchResults && searchResults?.length > 0 && (
           <ProductsList
             data={searchResults}
             nextPageLink={nextPageLink}
             prevPageLink={prevPageLink}
           ></ProductsList>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
