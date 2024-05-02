@@ -30,7 +30,7 @@ const page = async ({ searchParams }) => {
     <div>
       <div>
         <h1 className="mt-5 text-center text-font-large text-pretty">
-          {searchResults?.length > 0
+          {searchResults?.length > 0 && totalItemsFound > 0
             ? `${totalItemsFound} Result(s) Found`
             : "No Results found"}
         </h1>
