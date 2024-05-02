@@ -29,17 +29,21 @@ const page = async ({ searchParams }) => {
   return (
     <div>
       <div>
-        <h1 className="mt-5 text-center text-font-large text-pretty">
-          {searchResults?.length > 0 && totalItemsFound > 0
-            ? `${totalItemsFound} Result(s) Found`
-            : "No Results found"}
-        </h1>
-        {searchResults && searchResults?.length > 0 && (
-          <ProductsList
-            data={searchResults}
-            nextPageLink={nextPageLink}
-            prevPageLink={prevPageLink}
-          ></ProductsList>
+        {searchResults && searchResults?.length > 0 && totalItemsFound > 0 ? (
+          <>
+            <h1 className="mt-5 text-center text-font-large text-pretty">
+              {`${totalItemsFound} result(s) found`}
+            </h1>
+            <ProductsList
+              data={searchResults}
+              nextPageLink={nextPageLink}
+              prevPageLink={prevPageLink}
+            ></ProductsList>
+          </>
+        ) : (
+          <h1 className="mt-5 text-center text-font-large text-pretty">
+            No Results found
+          </h1>
         )}
       </div>
     </div>
