@@ -3,6 +3,6 @@ export const SessionOptions = {
   cookieName: "ihsan-session",
   cookieOptions: {
     httpOnly: true,
-    secure: false,
+    secure: true,
   },
 };
