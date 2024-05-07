@@ -16,6 +16,7 @@ const ProductItem = ({ product }) => {
       stock: product.stock,
     });
   };
+  const productInStock = product?.stock >= 1;
 
   return (
     <article
@@ -81,13 +82,20 @@ const ProductItem = ({ product }) => {
 
             <p className="text-green-500">Free Shipping</p>
             <div className="my-3">
-              <button
-                className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 cursor-pointer"
-                onClick={handleAddToCart}
-              >
-                {" "}
-                Add to Cart{" "}
-              </button>
+              {productInStock ? (
+                <button
+                  className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 cursor-pointer"
+                  onClick={handleAddToCart}
+                >
+                  {" "}
+                  Add to Cart{" "}
+                </button>
+              ) : (
+                <div className="px-4 py-2 inline-block text-white bg-red-600 border border-transparent rounded-md">
+                  {" "}
+                  SOLD OUT
+                </div>
+              )}
             </div>
           </div>
         </div>

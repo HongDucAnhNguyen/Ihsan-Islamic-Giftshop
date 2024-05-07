@@ -1,12 +1,25 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Link from "next/link";
 import { cartContext } from "@/app/cartcontext-provider";
 const Cart = () => {
   const { handleAddItemToCart, handleDeleteItemFromCart, cart } =
     useContext(cartContext);
+  const [taxAmount, setTaxAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [amountWithoutTax, setAmountWithoutTax] = useState(0);
+  const calculateTotalAmount = () => {
+    //calculate the total price for all items without tax
+    const calculatedAmountWithoutTax = cart?.cartItems?.reduce(
+      (acc, item) => acc + parseFloat((item.quantity * item.price).toFixed(2)),
+      0
+    );
+    setAmountWithoutTax(calculatedAmountWithoutTax);
+    setTaxAmount((amountWithoutTax * 0.15).toFixed(2));
+    setTotalAmount((amountWithoutTax + Number(taxAmount)).toFixed(2));
+  };
 
   const increaseQty = (cartItem) => {
     const newQty = cartItem?.quantity + 1;
@@ -29,14 +42,9 @@ const Cart = () => {
     handleAddItemToCart(item);
   };
 
-  const amountWithoutTax = cart?.cartItems?.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
-
-  const taxAmount = (amountWithoutTax * 0.15).toFixed(2);
-
-  const totalAmount = (Number(amountWithoutTax) + Number(taxAmount)).toFixed(2);
+  useEffect(() => {
+    calculateTotalAmount();
+  });
 
   return (
     <>
@@ -73,10 +81,7 @@ const Cart = () => {
                                   {cartItem.name}
                                 </a>
                               </p>
-                              <p className="mt-1 text-gray-400">
-                                {" "}
-                                Seller: {cartItem.seller}
-                              </p>
+                             
                             </figcaption>
                           </figure>
                         </div>
@@ -112,7 +117,7 @@ const Cart = () => {
                         <div>
                           <div className="leading-5">
                             <p className="font-semibold not-italic">
-                              ${cartItem.price * cartItem.quantity.toFixed(2)}
+                              ${(cartItem.price * cartItem.quantity).toFixed(2)}
                             </p>
                             <small className="text-gray-400">
                               {" "}

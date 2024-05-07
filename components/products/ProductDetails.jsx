@@ -1,9 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import StarRatings from "react-star-ratings";
 import BreadCrumbs from "../utilities/BreadCrumbs";
+import { cartContext } from "@/app/cartcontext-provider";
 
 const ProductDetails = ({ data }) => {
+  const { handleAddItemToCart } = useContext(cartContext);
+  const handleAddToCart = () => {
+    handleAddItemToCart({
+      productId: data._id,
+      name: data.name,
+      price: data.price,
+      image: data.images[0].url,
+      stock: data.stock,
+    });
+  };
+
   const [imgPreview, setImgPreview] = useState(
     data?.images[0].url || "/images/default_product.png"
   );
@@ -11,7 +23,7 @@ const ProductDetails = ({ data }) => {
     setImgPreview(imgUrl);
   };
   const breadCrumbs = [
-    { name: "Home", url: '/' },
+    { name: "Home", url: "/" },
     {
       name: `${data?.name?.substring(0, 30)}...`,
       url: `/product/${data?._id}`,
@@ -86,12 +98,17 @@ const ProductDetails = ({ data }) => {
 
               <p className="mb-4 text-gray-500">{data.description}</p>
 
-              <div className="flex flex-wrap gap-2 mb-5">
-                <button className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">
-                  <i className="fa fa-shopping-cart mr-2"></i>
-                  Add to cart
-                </button>
-              </div>
+              {ProductInStock && (
+                <div className="flex flex-wrap gap-2 mb-5">
+                  <button
+                    className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                    onClick={handleAddToCart}
+                  >
+                    <i className="fa fa-shopping-cart mr-2"></i>
+                    Add to cart
+                  </button>
+                </div>
+              )}
 
               <ul className="mb-5">
                 <li className="mb-1">

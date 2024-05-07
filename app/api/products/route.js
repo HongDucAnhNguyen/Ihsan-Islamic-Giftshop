@@ -124,13 +124,11 @@ export async function GET(req) {
       .split("&")
       .slice(0, -1)
       .join("&")}&page=1`;
-    console.log("nextpage", nextPagePath);
     const prevPagePath = nextPagePath;
-
     return Response.json({
       products: allProducts,
-      nextPageLink: nextPagePath,
-      prevPageLink: prevPagePath,
+      nextPageLink: nextPagePath || "",
+      prevPageLink: prevPagePath || "",
     });
   } catch (error) {
     return Response.json(error);
@@ -139,6 +137,7 @@ export async function GET(req) {
 
 export const POST = async (req) => {
   try {
+    await dbConnect();
     const data = await req.json();
     const newProduct = await Product.create(data);
     return Response.json(newProduct);

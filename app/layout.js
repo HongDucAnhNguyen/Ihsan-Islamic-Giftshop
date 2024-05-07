@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/utilities/Navbar";
 import CartContextProvider from "./cartcontext-provider";
+import AuthContextProvider from "./authcontext-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,11 +14,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CartContextProvider>
+        <AuthContextProvider>
           {" "}
-          <Navbar></Navbar>
-          {children}
-        </CartContextProvider>
+          <CartContextProvider>
+            {" "}
+            <Navbar></Navbar>
+            {children}
+          </CartContextProvider>
+        </AuthContextProvider>
       </body>
     </html>
   );

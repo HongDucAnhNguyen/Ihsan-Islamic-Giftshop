@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export const cartContext = createContext({});
 
 export default function CartContextProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState({ cartItems: [] });
   const router = useRouter();
 
   const setCartContextData = () => {
