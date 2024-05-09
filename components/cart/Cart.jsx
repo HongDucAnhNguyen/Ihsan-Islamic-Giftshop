@@ -6,8 +6,12 @@ import Link from "next/link";
 import { cartContext } from "@/app/cartcontext-provider";
 import { useRouter } from "next/navigation";
 const Cart = () => {
-  const { handleAddItemToCart, handleDeleteItemFromCart, cart } =
-    useContext(cartContext);
+  const {
+    handleAddItemToCart,
+    handleDeleteItemFromCart,
+    cart,
+    setCartContextData,
+  } = useContext(cartContext);
   const [taxAmount, setTaxAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [amountWithoutTax, setAmountWithoutTax] = useState(0);
@@ -44,9 +48,12 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    
-    calculateTotalAmount();
+    setCartContextData();
   }, []);
+
+  useEffect(() => {
+    calculateTotalAmount();
+  });
 
   return (
     <>

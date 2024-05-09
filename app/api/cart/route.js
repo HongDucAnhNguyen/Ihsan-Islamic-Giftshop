@@ -1,9 +1,12 @@
 export const dynamic = "force-dynamic";
 
+import dbConnect from "@/backend/config/ConnectDB";
 import Cart from "@/backend/models/Cart";
 
 export const PUT = async (req) => {
   try {
+    await dbConnect();
+
     const cartData = await req.json();
     const { searchParams } = new URL(req.url);
 
@@ -21,6 +24,7 @@ export const PUT = async (req) => {
 
 export const GET = async (req) => {
   try {
+    await dbConnect();
     const { searchParams } = new URL(req.url);
 
     const userId = searchParams.get("userId");
