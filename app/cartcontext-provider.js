@@ -13,7 +13,6 @@ export default function CartContextProvider({ children }) {
     });
     const { isLoggedIn, userId } = await isUserLoggedInResponse.json();
     if (isLoggedIn) {
-      setCart({ cartItems: [] });
       const response = await fetch(`/api/cart?userId=${userId}`, {
         method: "GET",
       });
@@ -140,7 +139,12 @@ export default function CartContextProvider({ children }) {
 
   return (
     <cartContext.Provider
-      value={{ cart, handleAddItemToCart, handleDeleteItemFromCart }}
+      value={{
+        cart,
+        setCartContextData,
+        handleAddItemToCart,
+        handleDeleteItemFromCart,
+      }}
     >
       {children}
     </cartContext.Provider>

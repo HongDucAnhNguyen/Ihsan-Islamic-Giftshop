@@ -42,7 +42,7 @@ const Cart = ({ handleAddItemToCart, handleDeleteItemFromCart, cart }) => {
 
   useEffect(() => {
     calculateTotalAmount();
-  }, []);
+  });
 
   return (
     <>
