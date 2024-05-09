@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Cart from "@/backend/models/Cart";
 
 export const PUT = async (req) => {
