@@ -24,7 +24,6 @@ export const GET = async (req) => {
     const userId = searchParams.get("userId");
 
     const cartData = await Cart.findOne({ userId: userId });
-    console.log(cartData?.items);
     return Response.json({ items: cartData?.items });
   } catch (error) {
     return Response.json(error.message);

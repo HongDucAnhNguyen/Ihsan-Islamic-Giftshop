@@ -1,10 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Link from "next/link";
-
-const Cart = ({ handleAddItemToCart, handleDeleteItemFromCart, cart }) => {
+import { cartContext } from "@/app/cartcontext-provider";
+import { useRouter } from "next/navigation";
+const Cart = () => {
+  const { handleAddItemToCart, handleDeleteItemFromCart, cart } =
+    useContext(cartContext);
   const [taxAmount, setTaxAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [amountWithoutTax, setAmountWithoutTax] = useState(0);
@@ -41,8 +44,9 @@ const Cart = ({ handleAddItemToCart, handleDeleteItemFromCart, cart }) => {
   };
 
   useEffect(() => {
+    
     calculateTotalAmount();
-  });
+  }, []);
 
   return (
     <>
