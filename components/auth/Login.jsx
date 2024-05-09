@@ -5,18 +5,16 @@ import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "@/app/authcontext-provider";
 //import { toast } from "react-toastify";
 
-const Register = () => {
+const Login = () => {
   const { error, handleLoginUser } = useContext(AuthContext);
 
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    handleLoginUser({ name, email, password });
+    handleLoginUser({ email, password });
   };
 
   return (
@@ -26,18 +24,6 @@ const Register = () => {
     >
       <form onSubmit={submitHandler}>
         <h2 className="mb-5 text-2xl font-semibold">Login</h2>
-
-        <div className="mb-4">
-          <label className="block mb-1"> Full Name </label>
-          <input
-            className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
-            type="text"
-            placeholder="Type your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
 
         <div className="mb-4">
           <label className="block mb-1"> Email </label>
@@ -84,4 +70,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

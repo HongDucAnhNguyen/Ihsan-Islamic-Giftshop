@@ -1,17 +1,20 @@
 import dbConnect from "@/backend/config/ConnectDB";
-import { SessionOptions } from "@/backend/config/sessionOptionsConfig";
+
 import User from "@/backend/models/User";
 import bcrypt from "bcrypt";
-import { getIronSession } from "iron-session";
-import { cookies } from "next/headers";
+
 import {
   validateEmail,
   validatePassword,
 } from "@/backend/helpers/emailAndPasswordValidation";
+import { getCartSessionData } from "@/backend/helpers/getSessionData";
+import Cart from "@/backend/models/Cart";
 export const POST = async (req) => {
   try {
     await dbConnect();
-    // const session = await getIronSession(cookies(), SessionOptions);
+
+    const guestCartSession = await getCartSessionData();
+
     const accountData = await req.json();
 
     if (
@@ -32,16 +35,17 @@ export const POST = async (req) => {
 
     const hashedPassword = await bcrypt.hash(accountData.password, 10);
 
-    await User.create({
+    const newUser = await User.create({
       ...accountData,
       password: hashedPassword,
     });
-    // session.username = newUser.name;
-    // session.userId = newUser._id;
-    // session.userRole = newUser.role;
-    // session.userEmail = newUser.email;
-    // await session.save();
 
+    await Cart.create({
+      userId: newUser._id.toString(),
+      items: guestCartSession.cart,
+    });
+
+    guestCartSession.destroy();
     return Response.json({ authenticated: true });
   } catch (error) {
     return Response.json(error);

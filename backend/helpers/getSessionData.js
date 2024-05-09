@@ -1,9 +1,18 @@
+// "use server";
 import { getIronSession } from "iron-session";
-import { SessionOptions } from "../config/sessionOptionsConfig";
+import {
+  accountSessionOptions,
+  cartSessionOptions,
+} from "../config/sessionOptionsConfig";
 import { cookies } from "next/headers";
 
-export const getSessionData = async () => {
-  const session = await getIronSession(cookies(), SessionOptions);
-  //   console.log(session.name);
+export const getAccountSessionData = async () => {
+  const session = await getIronSession(cookies(), accountSessionOptions);
+  return session;
+};
+
+export const getCartSessionData = async () => {
+  const session = await getIronSession(cookies(), cartSessionOptions);
+
   return session;
 };

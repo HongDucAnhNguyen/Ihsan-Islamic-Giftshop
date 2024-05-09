@@ -5,15 +5,39 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import Image from "next/image";
 
-import { getSessionData } from "@/backend/helpers/getSessionData";
+import {
+  getAccountSessionData,
+  getCartSessionData,
+} from "@/backend/helpers/getSessionData";
 
 // import { cartContext } from "@/app/cartcontext-provider";
 // import { AuthContext } from "@/app/authcontext-provider";
+const getCartLength = async (user) => {
+  try {
+    if (user?.username) {
+      const response = await fetch(
+        `${process.env.BASE_URL}/api/cart?userId=${user?.userId}`,
+        {
+          method: "GET",
+        }
+      );
+      const cartData = await response.json();
+
+      return cartData?.items?.length;
+    } else {
+      const cartData = await getCartSessionData();
+
+      return cartData?.cart?.length;
+    }
+  } catch (error) {}
+};
 
 const Navbar = async () => {
   // const { cart } = useContext(cartContext);
   // const { user, handleLogoutUser } = useContext(AuthContext);
-  const user = await getSessionData();
+  const user = await getAccountSessionData();
+
+  const cartLength = await getCartLength(user);
 
   return (
     <header className="bg-white py-2 border-b">
@@ -38,8 +62,7 @@ const Navbar = async () => {
             >
               <i className="text-gray-400 w-5 fa fa-shopping-cart"></i>
               <span className="hidden lg:inline ml-1">
-                Cart
-                {/* Cart (<b>{cart?.cartItems?.length}</b>) */}
+                Cart (<b>{cartLength > 0 ? cartLength : 0}</b>)
               </span>
             </Link>
             {!user?.username && (

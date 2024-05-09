@@ -1,5 +1,5 @@
 "use client";
-// import { getSessionData } from "@/backend/helpers/getSessionData";
+
 import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 
@@ -8,22 +8,6 @@ export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter();
-
-  // useEffect(() => {
-  //   handleGetSession();
-  // }, []);
-
-  // const handleGetSession = async () => {
-  //   try {
-  //     const response = await fetch("api/auth/session", { method: "GET" });
-  //     const data = await response.json();
-  //     if (data?.sessionData) {
-  //       setUser(data?.sessionData);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const handleLoginUser = async ({ name, email, password }) => {
     try {
@@ -40,8 +24,6 @@ export default function AuthContextProvider({ children }) {
       });
       const data = await response.json();
       if (data?.authenticated == true) {
-        // const sessionData = await getSessionData();
-        //await handleGetSession();
         router.push("/");
         router.refresh();
       }
@@ -53,16 +35,11 @@ export default function AuthContextProvider({ children }) {
   const handleLogoutUser = async () => {
     try {
       //client component does not expose private envs
-      const response = await fetch("/api/auth/logout", {
+      await fetch("/api/auth/logout", {
         method: "GET",
       });
-      const data = await response.json();
-      if (data?.loggedOut == true) {
-        setUser(null);
-        router.push("/");
-      }
     } catch (error) {
-      setError("an error occurred while registering");
+      setError("an error occurred while logging out");
     }
   };
 
@@ -80,11 +57,8 @@ export default function AuthContextProvider({ children }) {
       });
       const data = await response.json();
       if (data?.authenticated == true) {
-        // const sessionData = await getSessionData();
-
-        // handleGetSession();
-
         router.push("/login");
+        router.refresh();
       }
     } catch (error) {
       console.log(error);

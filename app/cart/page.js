@@ -1,8 +1,18 @@
+"use client";
 import Cart from "@/components/cart/Cart";
-import React from "react";
+import { useContext } from "react";
+import { cartContext } from "../cartcontext-provider";
 
 const page = () => {
-  return <Cart></Cart>;
+  const { handleAddItemToCart, handleDeleteItemFromCart, cart } =
+    useContext(cartContext);
+  return (
+    <Cart
+      cart={cart}
+      handleAddItemToCart={handleAddItemToCart}
+      handleDeleteItemFromCart={handleDeleteItemFromCart}
+    ></Cart>
+  );
 };
 
 export default page;

@@ -19,7 +19,7 @@ export async function GET(req) {
     });
     const filteredSearchParams = new URLSearchParams(filteredSearchParamsObj);
     const queryStr = filteredSearchParams.toString();
-    console.log(queryStr);
+ 
     let currentPage = 1;
 
     if (
@@ -29,22 +29,7 @@ export async function GET(req) {
       currentPage = parseInt(searchParams.get("page"));
     }
 
-    // const categoryQuery =
-    //   searchParams.get("category") === "none"
-    //     ? null
-    //     : searchParams.get("category");
-    // const ratingsQuery =
-    //   searchParams.get("ratings") === "none"
-    //     ? null
-    //     : parseInt(searchParams.get("ratings"));
-    // const minPrice =
-    //   searchParams.get("min") === "none"
-    //     ? null
-    //     : parseInt(searchParams.get("max"));
-    // const maxPrice =
-    //   searchParams.get("max") === "none"
-    //     ? null
-    //     : parseInt(searchParams.get("max"));
+    
 
     const skipHowMany = 3 * (currentPage - 1);
     let filters = {};
@@ -76,21 +61,7 @@ export async function GET(req) {
         $lte: filters.price.$lte,
       };
     }
-    // categoryQuery && ratingsQuery && minPrice && maxPrice
-    //   ? {
-    //       category: categoryQuery,
-    //       ratings: ratingsQuery,
-    //       price: { $gte: minPrice, $lte: maxPrice },
-    //     }
-    //   : categoryQuery
-    //   ? {
-    //       category: categoryQuery,
-    //     }
-    //   : ratingsQuery
-    //   ? {
-    //       ratings: ratingsQuery,
-    //     }
-    //   :
+
 
     const allProducts = await Product.find(filters).skip(skipHowMany).limit(3);
 
@@ -98,12 +69,6 @@ export async function GET(req) {
 
     const maxPages = Math.ceil(totalItems / 3);
 
-    // console.log(
-    //   "the max pages is",
-    //   maxPages,
-    //   "and the total items is",
-    //   totalItems
-    // );
 
     if (totalItems > 1) {
       const { nextPageLink, prevPageLink } = getPaginationUrl(

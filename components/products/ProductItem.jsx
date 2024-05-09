@@ -14,6 +14,7 @@ const ProductItem = ({ product }) => {
       price: product.price,
       image: product.images[0].url,
       stock: product.stock,
+      quantity: 1
     });
   };
   const productInStock = product?.stock >= 1;
