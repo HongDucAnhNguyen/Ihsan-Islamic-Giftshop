@@ -13,6 +13,7 @@ const ProductDetails = ({ data }) => {
       price: data.price,
       image: data.images[0].url,
       stock: data.stock,
+      quantity: 1
     });
   };
 
