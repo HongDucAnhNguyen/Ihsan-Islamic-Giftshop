@@ -7,17 +7,22 @@ export const PUT = async (req) => {
   try {
     await dbConnect();
 
-    const cartData = await req.json();
+    const { cartData } = await req.json();
+
     const { searchParams } = new URL(req.url);
 
     const userId = searchParams.get("userId");
 
-    await Cart.findOneAndUpdate({
+    const cartFound = await Cart.findOne({
       userId: userId,
-      items: cartData,
     });
+    await Cart.findByIdAndUpdate(cartFound, { items: cartData });
+
+   
+
     return Response.json({ message: "updated cart" });
   } catch (error) {
+    console.log(error);
     return Response.json(error.message);
   }
 };

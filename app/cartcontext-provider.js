@@ -53,7 +53,7 @@ export default function CartContextProvider({ children }) {
           "Content-Type": "application/json",
         },
 
-        body: JSON.stringify(currentCart),
+        body: JSON.stringify({ cartData: currentCart }),
       });
     } else {
       await fetch("/api/auth/guest-cart-session", {
@@ -87,7 +87,7 @@ export default function CartContextProvider({ children }) {
       stock,
       quantity,
     };
-    console.log("your quantity", quantity);
+    console.log("quantity is ", quantity);
     //check if item already added to cart
     const existingItem = cart?.cartItems?.find(
       (cartItem) => cartItem.productId === item.productId
@@ -117,7 +117,7 @@ export default function CartContextProvider({ children }) {
           "Content-Type": "application/json",
         },
 
-        body: JSON.stringify(currentCart),
+        body: JSON.stringify({ cartData: currentCart }),
       });
     } else {
       await fetch("/api/auth/guest-cart-session", {
