@@ -72,9 +72,9 @@ const Navbar = async () => {
             )}
             {user?.username && (
               <Link href="/profile">
-                <div className="py-3 text-gray-700 bg-white shadow-sm border border-gray-200 rounded-full hover:bg-gray-100 hover:border-gray-300  cursor-pointer">
+                <div className="cursor-pointer">
                   <img
-                    className="w-12 h-6 rounded-full"
+                    className="w-12 h-12 rounded-full"
                     src={user?.userAvatar?.url || "/images/default_avatar.png"}
                   />
                   {/* <div className="space-y-1 font-medium">
