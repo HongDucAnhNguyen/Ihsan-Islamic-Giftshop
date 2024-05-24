@@ -26,7 +26,6 @@ export const PUT = async (req, { params }) => {
     const updatedProduct = await Product.findByIdAndUpdate(productId, data, {
       new: true,
     });
-    console.log(updatedProduct);
     return Response.json({ updatedProduct });
   } catch (error) {
     return Response.json(error);

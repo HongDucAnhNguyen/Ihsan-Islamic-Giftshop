@@ -1,11 +1,13 @@
-import { cartSessionOptions } from "@/backend/config/sessionOptionsConfig";
-import { getIronSession } from "iron-session";
-import { cookies } from "next/headers";
+
+import { getCartSessionData } from "@/backend/helpers/getSessionData";
+
 
 export const GET = async () => {
   try {
-    const session = await getIronSession(cookies(), cartSessionOptions);
-    return Response.json({ sessionData: session });
+    const cartSessionData = await getCartSessionData();
+
+
+    return Response.json({ sessionData: cartSessionData });
   } catch (error) {
     return Response.json(error.message);
   }
@@ -13,12 +15,12 @@ export const GET = async () => {
 
 export const POST = async (req) => {
   try {
-    const session = await getIronSession(cookies(), cartSessionOptions);
+    const cartSessionData = await getCartSessionData();
     const cartData = await req.json();
-    session.cart = cartData;
-    await session.save();
+    cartSessionData.cart = cartData;
+    await cartSessionData.save();
 
-    return Response.json({ sessionData: session });
+    return Response.json({ sessionData: cartSessionData });
   } catch (error) {
     return Response.json(error.message);
   }

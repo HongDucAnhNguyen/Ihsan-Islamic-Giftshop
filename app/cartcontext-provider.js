@@ -78,6 +78,10 @@ export default function CartContextProvider({ children }) {
     stock,
     quantity,
   }) => {
+    if (cart?.cartItems?.length === 5) {
+      console.log("max number of items in cart reached");
+      return;
+    }
     //get item data from params
     const item = {
       productId,
@@ -87,7 +91,7 @@ export default function CartContextProvider({ children }) {
       stock,
       quantity,
     };
-    console.log("quantity is ", quantity);
+
     //check if item already added to cart
     const existingItem = cart?.cartItems?.find(
       (cartItem) => cartItem.productId === item.productId

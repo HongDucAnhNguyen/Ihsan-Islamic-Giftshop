@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/utilities/Navbar";
 import CartContextProvider from "./cartcontext-provider";
 import AuthContextProvider from "./authcontext-provider";
+import AddressContextProvider from "./addresscontext-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,9 +18,11 @@ export default function RootLayout({ children }) {
         <AuthContextProvider>
           {" "}
           <CartContextProvider>
-            {" "}
-            <Navbar></Navbar>
-            {children}
+            <AddressContextProvider>
+              {" "}
+              <Navbar></Navbar>
+              {children}
+            </AddressContextProvider>
           </CartContextProvider>
         </AuthContextProvider>
       </body>

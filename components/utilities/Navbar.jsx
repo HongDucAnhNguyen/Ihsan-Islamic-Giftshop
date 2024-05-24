@@ -33,12 +33,8 @@ const getCartLength = async (user) => {
 };
 
 const Navbar = async () => {
-  // const { cart } = useContext(cartContext);
-  // const { user, handleLogoutUser } = useContext(AuthContext);
   const user = await getAccountSessionData();
-
   const cartLength = await getCartLength(user);
-
   return (
     <header className="bg-white py-2 border-b">
       <div className="container max-w-screen-xl mx-auto px-4">
@@ -76,17 +72,17 @@ const Navbar = async () => {
             )}
             {user?.username && (
               <Link href="/profile">
-                <div className="flex items-center mb-4 space-x-3 mt-4 cursor-pointer">
+                <div className="py-3 text-gray-700 bg-white shadow-sm border border-gray-200 rounded-full hover:bg-gray-100 hover:border-gray-300  cursor-pointer">
                   <img
-                    className="w-10 h-8 rounded-full"
-                    src={"/images/default_avatar.png"}
+                    className="w-12 h-6 rounded-full"
+                    src={user?.userAvatar?.url}
                   />
-                  <div className="space-y-1 font-medium">
+                  {/* <div className="space-y-1 font-medium">
                     <p>
                       {user?.username}
                       <time className="block text-sm text-gray-500 dark:text-gray-400"></time>
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </Link>
             )}

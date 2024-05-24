@@ -48,10 +48,10 @@ export const POST = async (req) => {
 
     accountSessionData.username = userRetrieved.name;
     accountSessionData.userAvatar = userRetrieved.avatar;
+    accountSessionData.userEmail = userRetrieved.email;
     accountSessionData.userJoined = userRetrieved.createdAt;
     accountSessionData.userId = userRetrieved._id;
     accountSessionData.userRole = userRetrieved.role;
-    accountSessionData.userEmail = userRetrieved.email;
     await accountSessionData.save();
 
     return Response.json({ authenticated: true });

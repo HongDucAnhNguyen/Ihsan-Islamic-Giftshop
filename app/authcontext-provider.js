@@ -1,11 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 export default function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter();
 
@@ -60,20 +59,37 @@ export default function AuthContextProvider({ children }) {
         router.push("/login");
         router.refresh();
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
+  };
+
+  const handleUpdateProfile = async (formData) => {
+    try {
+      const response = await fetch("/api/auth/update-profile", {
+        method: "POST",
+
+        // headers: {
+        //   "Content-Type": "multipart/form-data",
+        // },
+
+        body: formData,
+      });
+      const data = await response.json();
+      if (data?.profileUpdated == true) {
+        router.push("/profile");
+        router.refresh();
+      }
+    } catch (error) {}
   };
 
   return (
     <AuthContext.Provider
       value={{
-        user,
         error,
         // setUser,
         handleRegisterUser,
         handleLoginUser,
         handleLogoutUser,
+        handleUpdateProfile,
       }}
     >
       {children}

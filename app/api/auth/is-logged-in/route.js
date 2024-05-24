@@ -1,14 +1,15 @@
-import { accountSessionOptions } from "@/backend/config/sessionOptionsConfig";
-import { getIronSession } from "iron-session";
-import { cookies } from "next/headers";
+import { getAccountSessionData } from "@/backend/helpers/getSessionData";
 
 export const GET = async () => {
   try {
-    const session = await getIronSession(cookies(), accountSessionOptions);
+    const accountSessionData = await getAccountSessionData();
 
     return Response.json({
-      isLoggedIn: session?.username ? true : false,
-      userId: session?.userId,
+      isLoggedIn:
+        accountSessionData?.username && accountSessionData?.userId
+          ? true
+          : false,
+      userId: accountSessionData?.userId,
     });
   } catch (error) {
     return Response.json(error.message);

@@ -16,13 +16,19 @@ export const PUT = async (req) => {
     const cartFound = await Cart.findOne({
       userId: userId,
     });
-    await Cart.findByIdAndUpdate(cartFound, { items: cartData });
+    if (!cartFound) {
+      return Response.json({ message: "Cart not found" });
+    }
+    if (cartFound.items.length == 10) {
+      return Response.json({
+        message: "Cannot have more than 10 items in cart",
+      });
+    }
 
-   
+    await Cart.findByIdAndUpdate(cartFound, { items: cartData });
 
     return Response.json({ message: "updated cart" });
   } catch (error) {
-    console.log(error);
     return Response.json(error.message);
   }
 };
