@@ -3,7 +3,7 @@ export const accountSessionOptions = {
   cookieName: "account-session",
   cookieOptions: {
     httpOnly: true,
-    secure: false,
+    secure: true,
   },
 };
 
@@ -12,6 +12,6 @@ export const cartSessionOptions = {
   cookieName: "cart-session",
   cookieOptions: {
     httpOnly: true,
-    secure: false,
+    secure: true,
   },
 };

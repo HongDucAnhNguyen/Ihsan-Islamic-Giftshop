@@ -11,7 +11,7 @@ const Profile = ({ user, addresses }) => {
         <div className="relative">
           <img
             className="w-26 h-16 rounded-full mr-4"
-            src={user?.userAvatar?.url}
+            src={user?.userAvatar?.url || "/images/default_avatar.png"}
             alt={user?.username}
           />
         </div>
