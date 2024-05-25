@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 // import { toast } from "react-toastify";
 import { AuthContext } from "@/app/authcontext-provider";
 const UpdateProfile = ({ user }) => {

@@ -81,6 +81,28 @@ export default function AuthContextProvider({ children }) {
     } catch (error) {}
   };
 
+  const handleUpdatePassword = async ({ currentPassword, newPassword }) => {
+    try {
+      const response = await fetch(`/api/auth/update-password`, {
+        method: "PUT",
+
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+
+      const data = await response.json();
+      if (data?.passwordUpdated == true) {
+        await fetch("/api/auth/logout");
+        router.push("/login");
+        router.refresh();
+      }
+    } catch (error) {}
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -90,6 +112,7 @@ export default function AuthContextProvider({ children }) {
         handleLoginUser,
         handleLogoutUser,
         handleUpdateProfile,
+        handleUpdatePassword,
       }}
     >
       {children}

@@ -1,13 +1,30 @@
 import { getAccountSessionData } from "@/backend/helpers/getSessionData";
 import { NextResponse } from "next/server";
+// import User from "./backend/models/User";
+// import dbConnect from "./backend/config/ConnectDB";
 
 export const middleware = async (req) => {
+  // await dbConnect();
+
   const accountSession = await getAccountSessionData();
 
-  if (!accountSession?.username && !accountSession?.userId) {
+  if (
+    !accountSession?.username &&
+    !accountSession?.userId &&
+    !accountSession?.userEmail
+  ) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
+  // const userRetrieved = await User.findOne({
+  //   _id: accountSession.userId,
+  //   email: accountSession.userEmail,
+  //   usernames: accountSession.username,
+  // });
+
+  // if (!userRetrieved) {
+  //   return NextResponse.redirect(new URL("/login", req.url));
+  // }
   // if (req.nextUrl.pathname === "/api/auth/update-profile") {
   //   //process any files under field name "image"
   //   multerUpload.array("image");
