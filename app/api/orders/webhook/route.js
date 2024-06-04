@@ -23,10 +23,7 @@ export async function POST(req) {
       );
     } catch (error) {
       console.error("Error constructing event:", error.message); // Error log
-      return NextResponse.json(
-        { error: "Webhook processing failed." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
     // Handle the event
@@ -63,19 +60,13 @@ export async function POST(req) {
         return Response.json({ orderPlaced: true }, { status: 200 });
       } catch (err) {
         console.error("Error fetching line items:", err.message); // Error log
-        return NextResponse.json(
-          { error: "Webhook processing failed." },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: err.message }, { status: 400 });
       }
     }
 
     return NextResponse.json({ received: true });
   } catch (err) {
     console.log("Webhook processing failed.", err.message); // Error log
-    return NextResponse.json(
-      { error: "Webhook processing failed." },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: err.message }, { status: 400 });
   }
 }
