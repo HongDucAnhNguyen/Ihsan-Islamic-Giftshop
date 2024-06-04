@@ -6,7 +6,7 @@ import BreadCrumbs from "../utilities/BreadCrumbs";
 import { cartContext } from "@/app/cartcontext-provider";
 import { useRouter } from "next/navigation";
 const Shipping = ({ addresses, checkoutData }) => {
-  const { cart } = useContext(cartContext);
+  const { cart, handleClearCart } = useContext(cartContext);
   const router = useRouter();
   const [shippingInfo, setShippingInfo] = useState("");
 
@@ -34,6 +34,7 @@ const Shipping = ({ addresses, checkoutData }) => {
       });
       const data = await response.json();
       if (data?.id && data?.url) {
+        handleClearCart();
         router.push(data.url);
       }
     }

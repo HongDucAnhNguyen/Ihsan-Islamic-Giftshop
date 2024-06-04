@@ -16,7 +16,7 @@ export const handleUploadAvatar = async (fileStream, folder) => {
         },
         (error, result) => {
           if (error) {
-            console.error("Error uploading to Cloudinary:", error);
+            // console.error("Error uploading to Cloudinary:", error);
             reject(error);
           } else {
             return resolve({
@@ -27,7 +27,5 @@ export const handleUploadAvatar = async (fileStream, folder) => {
         }
       )
       .end(fileStream);
-
-    //fileStream.stream().pipe(stream);
   });
 };

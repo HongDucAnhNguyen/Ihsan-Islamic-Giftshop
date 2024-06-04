@@ -6,7 +6,6 @@ export const cartContext = createContext({});
 
 export default function CartContextProvider({ children }) {
   const [cart, setCart] = useState({ cartItems: [] });
-  const [checkoutData, setCheckoutData] = useState();
   const router = useRouter();
   const setCartContextData = async () => {
     const isUserLoggedInResponse = await fetch("/api/auth/is-logged-in", {
@@ -30,19 +29,6 @@ export default function CartContextProvider({ children }) {
           : { ...cart, cartItems: [] }
       );
     }
-
-    //setCheckoutContextData();
-  };
-
-  const setCheckoutContextData = async () => {
-    const checkoutSessionDataResponse = await fetch(
-      "/api/auth/checkout-session",
-      {
-        method: "GET",
-      }
-    );
-    const { sessionData } = await checkoutSessionDataResponse.json();
-    setCheckoutData(sessionData);
   };
 
   useEffect(() => {
@@ -155,6 +141,39 @@ export default function CartContextProvider({ children }) {
     router.refresh();
   };
 
+  const handleClearCart = async () => {
+    const currentCart = [];
+
+    const isUserLoggedInResponse = await fetch("/api/auth/is-logged-in", {
+      method: "GET",
+    });
+    const { isLoggedIn, userId } = await isUserLoggedInResponse.json();
+
+    if (isLoggedIn) {
+      await fetch(`/api/cart?userId=${userId}`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({ cartData: currentCart }),
+      });
+    } else {
+      await fetch("/api/auth/guest-cart-session", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(currentCart),
+      });
+    }
+    setCartContextData();
+    router.refresh();
+  };
+
   const saveCheckoutTotal = async ({ amount, tax, totalAmount }) => {
     await fetch("/api/auth/checkout-session", {
       method: "POST",
@@ -176,6 +195,7 @@ export default function CartContextProvider({ children }) {
         handleAddItemToCart,
         handleDeleteItemFromCart,
         saveCheckoutTotal,
+        handleClearCart,
       }}
     >
       {children}

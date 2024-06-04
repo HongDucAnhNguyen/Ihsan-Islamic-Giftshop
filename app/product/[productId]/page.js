@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import ProductDetails from "@/components/products/ProductDetails";
 
 const getProductDetails = async (productId) => {

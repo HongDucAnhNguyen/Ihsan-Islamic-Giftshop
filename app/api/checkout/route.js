@@ -1,9 +1,11 @@
+import { getAccountSessionData } from "@/backend/helpers/getSessionData";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const POST = async (req) => {
   try {
     //get products to checkout
     const { shippingInfo, checkoutItems } = await req.json();
+    const { userEmail, userId } = await getAccountSessionData();
 
     const checkout_line_items = checkoutItems?.map((item) => {
       return {
@@ -27,8 +29,8 @@ export const POST = async (req) => {
       payment_method_types: ["card"],
       success_url: `${process.env.BASE_URL}/profile`,
       cancel_url: `${process.env.BASE_URL}/cart`,
-      customer_email: req?.user?.email,
-      client_reference_id: req?.user?._id,
+      customer_email: userEmail,
+      client_reference_id: userId,
       mode: "payment",
       metadata: { shippingInfo },
       shipping_options: [
