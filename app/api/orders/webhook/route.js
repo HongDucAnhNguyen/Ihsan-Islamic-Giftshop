@@ -1,5 +1,6 @@
 import dbConnect from "@/backend/config/ConnectDB";
 import { extractOrderItems } from "@/backend/helpers/stripeWebhookHelper";
+import Cart from "@/backend/models/Cart";
 import Order from "@/backend/models/Order";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -55,8 +56,10 @@ export async function POST(req) {
           orderItems,
         };
 
-        const newOrder = await Order.create(orderData);
-        console.log(newOrder);
+        await Order.create(orderData);
+
+        await Cart.findOneAndUpdate({ userId: userId }, { items: [] });
+
         return Response.json({ orderPlaced: true }, { status: 200 });
       } catch (err) {
         console.error("Error fetching line items:", err.message); // Error log
