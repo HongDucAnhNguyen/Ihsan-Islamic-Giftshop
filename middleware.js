@@ -44,6 +44,7 @@ export const config = {
     //     //"/((?!api|_next/static|_next/image|favicon.ico).*)",
     "/profile/:path*",
     "/address/:path*",
+    "/shipping",
 
     // "/api/auth/update-profile",
   ],

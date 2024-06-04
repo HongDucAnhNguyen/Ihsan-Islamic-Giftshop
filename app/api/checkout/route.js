@@ -1,4 +1,7 @@
-import { getAccountSessionData } from "@/backend/helpers/getSessionData";
+import {
+  getAccountSessionData,
+  getCartSessionData,
+} from "@/backend/helpers/getSessionData";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const POST = async (req) => {
@@ -6,6 +9,13 @@ export const POST = async (req) => {
     //get products to checkout
     const { shippingInfo, checkoutItems } = await req.json();
     const { userEmail, userId } = await getAccountSessionData();
+
+    if (!userEmail || !userId) {
+      return Response.json(
+        { error: "You have to login to checkout" },
+        { status: 401 }
+      );
+    }
 
     const checkout_line_items = checkoutItems?.map((item) => {
       return {
