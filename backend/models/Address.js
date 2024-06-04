@@ -4,8 +4,10 @@ import mongoose from "mongoose";
 
 const addressSchema = new mongoose.Schema({
   userId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+
     required: [true, "please provide a user id"],
+    ref: "User",
   },
 
   streetAddress: {

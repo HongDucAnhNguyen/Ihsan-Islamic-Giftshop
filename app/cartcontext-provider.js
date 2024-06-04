@@ -6,6 +6,7 @@ export const cartContext = createContext({});
 
 export default function CartContextProvider({ children }) {
   const [cart, setCart] = useState({ cartItems: [] });
+  const [checkoutData, setCheckoutData] = useState();
   const router = useRouter();
   const setCartContextData = async () => {
     const isUserLoggedInResponse = await fetch("/api/auth/is-logged-in", {
@@ -17,7 +18,7 @@ export default function CartContextProvider({ children }) {
         method: "GET",
       });
       const data = await response.json();
-      setCart({ cartItems: data?.items });
+      setCart({ ...cart, cartItems: data?.items });
     } else {
       const response = await fetch("/api/auth/guest-cart-session", {
         method: "GET",
@@ -25,10 +26,23 @@ export default function CartContextProvider({ children }) {
       const { sessionData } = await response.json();
       setCart(
         sessionData?.cart?.length
-          ? { cartItems: sessionData?.cart }
-          : { cartItems: [] }
+          ? { ...cart, cartItems: sessionData?.cart }
+          : { ...cart, cartItems: [] }
       );
     }
+
+    //setCheckoutContextData();
+  };
+
+  const setCheckoutContextData = async () => {
+    const checkoutSessionDataResponse = await fetch(
+      "/api/auth/checkout-session",
+      {
+        method: "GET",
+      }
+    );
+    const { sessionData } = await checkoutSessionDataResponse.json();
+    setCheckoutData(sessionData);
   };
 
   useEffect(() => {
@@ -141,13 +155,27 @@ export default function CartContextProvider({ children }) {
     router.refresh();
   };
 
+  const saveCheckoutTotal = async ({ amount, tax, totalAmount }) => {
+    await fetch("/api/auth/checkout-session", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({ amount, tax, totalAmount }),
+    });
+  };
+
   return (
     <cartContext.Provider
       value={{
         cart,
+
         setCartContextData,
         handleAddItemToCart,
         handleDeleteItemFromCart,
+        saveCheckoutTotal,
       }}
     >
       {children}

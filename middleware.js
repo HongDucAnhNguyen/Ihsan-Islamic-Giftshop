@@ -29,7 +29,6 @@ export const middleware = async (req) => {
   //   //process any files under field name "image"
   //   multerUpload.array("image");
   // }
-
   return NextResponse.next();
 };
 
@@ -44,7 +43,8 @@ export const config = {
     //      */
     //     //"/((?!api|_next/static|_next/image|favicon.ico).*)",
     "/profile/:path*",
-    "/address/new",
+    "/address/:path*",
+
     // "/api/auth/update-profile",
   ],
 };

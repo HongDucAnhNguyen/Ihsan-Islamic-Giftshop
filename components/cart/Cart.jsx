@@ -6,11 +6,13 @@ import Link from "next/link";
 import { cartContext } from "@/app/cartcontext-provider";
 import { useRouter } from "next/navigation";
 const Cart = () => {
+  const router = useRouter();
   const {
     handleAddItemToCart,
     handleDeleteItemFromCart,
     cart,
     setCartContextData,
+    saveCheckoutTotal,
   } = useContext(cartContext);
   const [taxAmount, setTaxAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -22,35 +24,40 @@ const Cart = () => {
       0
     );
     setAmountWithoutTax(calculatedAmountWithoutTax);
-    setTaxAmount((amountWithoutTax * 0.15).toFixed(2));
+    setTaxAmount((amountWithoutTax * 0.03).toFixed(2));
     setTotalAmount((amountWithoutTax + Number(taxAmount)).toFixed(2));
+
+    saveCheckoutTotal({
+      amount: amountWithoutTax,
+      tax: taxAmount,
+      totalAmount: totalAmount,
+    });
   };
 
   const increaseQty = (cartItem) => {
     const newQty = cartItem?.quantity + 1;
-    const item = { ...cartItem, quantity: newQty };
-
     if (newQty > Number(cartItem.stock)) return;
+
+    const item = { ...cartItem, quantity: newQty };
 
     handleAddItemToCart(item);
   };
 
   const decreaseQty = (cartItem) => {
     const newQty = cartItem?.quantity - 1;
-    const item = { ...cartItem, quantity: newQty };
 
     if (newQty <= 0) {
       handleDeleteItemFromCart(cartItem?.productId);
       return;
     }
-
+    const item = { ...cartItem, quantity: newQty };
     handleAddItemToCart(item);
   };
 
   useEffect(() => {
     setCartContextData();
   }, []);
-
+  //run after every render
   useEffect(() => {
     calculateTotalAmount();
   });
@@ -98,7 +105,9 @@ const Cart = () => {
                             <button
                               data-action="decrement"
                               className=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
-                              onClick={() => decreaseQty(cartItem)}
+                              onClick={() => {
+                                decreaseQty(cartItem);
+                              }}
                             >
                               <span className="m-auto text-2xl font-thin">
                                 −
@@ -114,7 +123,9 @@ const Cart = () => {
                             <button
                               data-action="increment"
                               className="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
-                              onClick={() => increaseQty(cartItem)}
+                              onClick={() => {
+                                increaseQty(cartItem);
+                              }}
                             >
                               <span className="m-auto text-2xl font-thin">
                                 +
@@ -179,15 +190,18 @@ const Cart = () => {
                     </li>
                   </ul>
 
-                  <a className="px-4 py-3 mb-2 inline-block text-lg w-full text-center font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 cursor-pointer">
+                  <Link
+                    href="/shipping"
+                    className="px-4 py-3 mb-2 inline-block text-lg w-full text-center font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 cursor-pointer"
+                  >
                     Continue
-                  </a>
+                  </Link>
 
                   <Link
                     href="/"
                     className="px-4 py-3 inline-block text-lg w-full text-center font-medium text-green-600 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100"
                   >
-                    Back to shop
+                    Keep shopping
                   </Link>
                 </article>
               </aside>
