@@ -17,7 +17,7 @@ const Shipping = ({ addresses, checkoutData }) => {
 
   const checkoutHandler = async () => {
     if (!shippingInfo) {
-      return toast.error("Please select your shipping address");
+      return;
     } else {
       // move to stripe checkoutpage
       const response = await fetch("/api/checkout", {
