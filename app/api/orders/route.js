@@ -13,7 +13,7 @@ export const GET = async (req) => {
     const existingUser = await User.findById(userId);
 
     if (!existingUser) {
-      return Response.error({ error: "Invalid user" });
+      return Response.error({ error: "Invalid user" }, { status: 400 });
     }
 
     const ordersFound = await Order.find({ userId: userId });
@@ -56,6 +56,6 @@ export const GET = async (req) => {
       },
     });
   } catch (error) {
-    return Response.error({ error: error.message });
+    return Response.error({ error: error.message }, { status: 400 });
   }
 };
