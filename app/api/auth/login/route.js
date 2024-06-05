@@ -17,6 +17,7 @@ export const POST = async (req) => {
     await dbConnect();
     const accountSessionData = await getAccountSessionData();
     const guestCartSession = await getCartSessionData();
+    
 
     guestCartSession.destroy();
 

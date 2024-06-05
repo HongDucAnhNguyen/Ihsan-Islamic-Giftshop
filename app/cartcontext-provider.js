@@ -82,6 +82,9 @@ export default function CartContextProvider({ children }) {
       console.log("max number of items in cart reached");
       return;
     }
+
+    
+
     //get item data from params
     const item = {
       productId,

@@ -1,11 +1,13 @@
 export const dynamic = "force-dynamic";
 
 import dbConnect from "@/backend/config/ConnectDB";
+import { getCartSessionData } from "@/backend/helpers/getSessionData";
 import Cart from "@/backend/models/Cart";
 
 export const PUT = async (req) => {
   try {
     await dbConnect();
+    const cartSessionData = await getCartSessionData();
 
     const { cartData } = await req.json();
 
@@ -26,6 +28,8 @@ export const PUT = async (req) => {
     }
 
     await Cart.findByIdAndUpdate(cartFound, { items: cartData });
+    cartSessionData.cart = cartData;
+    await cartSessionData.save();
 
     return Response.json({ message: "updated cart" });
   } catch (error) {

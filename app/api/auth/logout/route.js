@@ -1,11 +1,19 @@
-import { accountSessionOptions } from "@/backend/config/sessionOptionsConfig";
-import { getIronSession } from "iron-session";
-import { cookies } from "next/headers";
-// import { redirect } from "next/navigation";
+import {
+  getAccountSessionData,
+  getCartSessionData,
+  getCheckoutSessionData,
+} from "@/backend/helpers/getSessionData";
+
 import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
-  const session = await getIronSession(cookies(), accountSessionOptions);
-  session.destroy();
+  const accountSession = await getAccountSessionData();
+  const cartSession = await getCartSessionData();
+  const checkoutSession = await getCheckoutSessionData();
+
+  accountSession.destroy();
+  cartSession.destroy();
+  checkoutSession.destroy();
+
   return NextResponse.redirect(new URL("/", req.url));
 };

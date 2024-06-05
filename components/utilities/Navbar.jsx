@@ -36,7 +36,7 @@ const Navbar = async () => {
   const user = await getAccountSessionData();
   const cartLength = await getCartLength(user);
   return (
-    <header className="bg-white py-2 border-b">
+    <header className=" py-2 border-b">
       <div className="container max-w-screen-xl mx-auto px-4">
         <div className="flex flex-wrap items-center">
           <div className="flex-shrink-0 mr-5">

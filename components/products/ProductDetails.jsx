@@ -5,15 +5,19 @@ import BreadCrumbs from "../utilities/BreadCrumbs";
 import { cartContext } from "@/app/cartcontext-provider";
 
 const ProductDetails = ({ data }) => {
-  const { handleAddItemToCart } = useContext(cartContext);
+  const { handleAddItemToCart, cart } = useContext(cartContext);
   const handleAddToCart = () => {
+    if (cart?.cartItems?.find((item) => item.productId === data._id)) {
+      console.log("you have already added this item to cart");
+      return;
+    }
     handleAddItemToCart({
       productId: data._id,
       name: data.name,
       price: data.price,
       image: data.images[0].url,
       stock: data.stock,
-      quantity: 1
+      quantity: 1,
     });
   };
 

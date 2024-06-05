@@ -5,6 +5,7 @@ import React, { useContext, useState } from "react";
 import BreadCrumbs from "../utilities/BreadCrumbs";
 import { cartContext } from "@/app/cartcontext-provider";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 const Shipping = ({ addresses, checkoutData }) => {
   const { cart } = useContext(cartContext);
   const router = useRouter();
@@ -16,8 +17,7 @@ const Shipping = ({ addresses, checkoutData }) => {
 
   const checkoutHandler = async () => {
     if (!shippingInfo) {
-      return;
-      //return toast.error("Please select your shipping address");
+      return toast.error("Please select your shipping address");
     } else {
       // move to stripe checkoutpage
       const response = await fetch("/api/checkout", {
@@ -34,7 +34,6 @@ const Shipping = ({ addresses, checkoutData }) => {
       });
       const data = await response.json();
       if (data?.id && data?.url) {
-        
         router.push(data.url);
       }
     }

@@ -6,15 +6,19 @@ import StarRatings from "react-star-ratings";
 import { cartContext } from "@/app/cartcontext-provider";
 // import StarRatings from "react-star-ratings";
 const ProductItem = ({ product }) => {
-  const { handleAddItemToCart } = useContext(cartContext);
-  const handleAddToCart = () => {
+  const { handleAddItemToCart, cart } = useContext(cartContext);
+  const handleAddNewItemToCart = () => {
+    if (cart?.cartItems?.find((item) => item.productId === product._id)) {
+      console.log("you have already added this item to cart");
+      return;
+    }
     handleAddItemToCart({
       productId: product._id,
       name: product.name,
       price: product.price,
       image: product.images[0].url,
       stock: product.stock,
-      quantity: 1
+      quantity: 1,
     });
   };
   const productInStock = product?.stock >= 1;
@@ -86,7 +90,7 @@ const ProductItem = ({ product }) => {
               {productInStock ? (
                 <button
                   className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 cursor-pointer"
-                  onClick={handleAddToCart}
+                  onClick={handleAddNewItemToCart}
                 >
                   {" "}
                   Add to Cart{" "}

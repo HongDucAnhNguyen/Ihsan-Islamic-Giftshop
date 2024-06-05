@@ -72,6 +72,14 @@ const Cart = () => {
         </div>
       </section>
 
+      {cart?.cartItems?.length === 0 && (
+        <div className="text-center">
+          <h1 className=" py-10 text-2xl font-bold">
+            There are no items in your cart.
+          </h1>
+        </div>
+      )}
+
       {cart?.cartItems?.length > 0 && (
         <section className="py-10">
           <div className="container max-w-screen-xl mx-auto px-4">

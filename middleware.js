@@ -1,4 +1,7 @@
-import { getAccountSessionData } from "@/backend/helpers/getSessionData";
+import {
+  getAccountSessionData,
+  getCartSessionData,
+} from "@/backend/helpers/getSessionData";
 import { NextResponse } from "next/server";
 // import User from "./backend/models/User";
 // import dbConnect from "./backend/config/ConnectDB";
@@ -6,12 +9,13 @@ import { NextResponse } from "next/server";
 export const middleware = async (req) => {
   // await dbConnect();
 
-  const accountSession = await getAccountSessionData();
+  const accountSessionData = await getAccountSessionData();
+  const cartSessionData = await getCartSessionData();
 
   if (
-    !accountSession?.username &&
-    !accountSession?.userId &&
-    !accountSession?.userEmail
+    !accountSessionData?.username &&
+    !accountSessionData?.userId &&
+    !accountSessionData?.userEmail
   ) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
@@ -25,10 +29,11 @@ export const middleware = async (req) => {
   // if (!userRetrieved) {
   //   return NextResponse.redirect(new URL("/login", req.url));
   // }
-  // if (req.nextUrl.pathname === "/api/auth/update-profile") {
-  //   //process any files under field name "image"
-  //   multerUpload.array("image");
-  // }
+  if (req.nextUrl.pathname === "/shipping") {
+    if (!cartSessionData?.cart || cartSessionData?.cart?.length === 0) {
+      return NextResponse.redirect(new URL("/cart", req.url));
+    }
+  }
   return NextResponse.next();
 };
 

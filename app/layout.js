@@ -4,6 +4,7 @@ import Navbar from "@/components/utilities/Navbar";
 import CartContextProvider from "./cartcontext-provider";
 import AuthContextProvider from "./authcontext-provider";
 import AddressContextProvider from "./addresscontext-provider";
+import { ToastContainer } from "react-toastify";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ToastContainer/>
         <AuthContextProvider>
           {" "}
           <CartContextProvider>
