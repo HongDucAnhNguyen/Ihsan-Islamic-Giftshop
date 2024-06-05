@@ -33,7 +33,7 @@ export const PUT = async (req) => {
 
     return Response.json({ message: "updated cart" });
   } catch (error) {
-    return Response.error({ error: error.message }, { status: 400 });
+    return { error: error.message }, { status: 400 };
   }
 };
 
@@ -47,6 +47,6 @@ export const GET = async (req) => {
     const cartData = await Cart.findOne({ userId: userId });
     return Response.json({ items: cartData?.items });
   } catch (error) {
-    return Response.error({ error: error.message }, { status: 400 });
+    return Response.json({ error: error.message }, { status: 400 });
   }
 };
