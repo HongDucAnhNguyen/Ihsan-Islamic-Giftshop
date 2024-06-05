@@ -61,9 +61,9 @@ export async function POST(req) {
         await Cart.findOneAndUpdate({ userId: userId }, { items: [] });
 
         return Response.json({ orderPlaced: true }, { status: 200 });
-      } catch (err) {
-        console.error("Error fetching line items:", err.message); // Error log
-        return NextResponse.json({ error: err.message }, { status: 400 });
+      } catch (error) {
+        console.log("Error fetching line items:", error); // Error log
+        return NextResponse.json({ error: error.message }, { status: 400 });
       }
     }
 

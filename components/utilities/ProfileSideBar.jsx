@@ -44,7 +44,7 @@ const ProfileSideBar = ({ isAdmin }) => {
               href="/admin/users"
               className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
             >
-              All Users <span className="text-red-500"></span>
+              All Users <span className="text-red-500">(Admin)</span>
             </Link>
           </li>
 
