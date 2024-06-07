@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/ui-components/shared-components/Navbar";
+import Navbar from "@/components/shared-components/Navbar";
 import CartContextProvider from "./cartcontext-provider";
 import AuthContextProvider from "./authcontext-provider";
 import AddressContextProvider from "./addresscontext-provider";

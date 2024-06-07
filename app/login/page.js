@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "../../ui-components/auth/Login";
+import Login from "../../components/auth/Login";
 
 const page = async () => {
   return (

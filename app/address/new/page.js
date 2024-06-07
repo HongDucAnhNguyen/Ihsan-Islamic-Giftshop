@@ -1,4 +1,4 @@
-import NewAddress from "@/ui-components/address/NewAddress";
+import NewAddress from "@/components/address/NewAddress";
 
 const page = () => {
   return (

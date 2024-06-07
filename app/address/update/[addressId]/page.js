@@ -1,5 +1,5 @@
 export const dynamic = "force-dynamic";
-import UpdateAddress from "@/ui-components/address/UpdateAddress";
+import UpdateAddress from "@/components/address/UpdateAddress";
 
 const getAddressDetails = async (addressId) => {
   try {

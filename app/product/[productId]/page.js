@@ -1,5 +1,5 @@
 export const dynamic = "force-dynamic";
-import ProductDetails from "@/ui-components/products/ProductDetails";
+import ProductDetails from "@/components/products/ProductDetails";
 
 const getProductDetails = async (productId) => {
   const response = await fetch(

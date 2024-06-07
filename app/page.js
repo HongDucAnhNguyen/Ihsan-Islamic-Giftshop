@@ -1,4 +1,4 @@
-import ProductsList from "../ui-components/products/ProductsList";
+import ProductsList from "../components/products/ProductsList";
 
 const getProducts = async (searchParams) => {
   try {

@@ -2,7 +2,7 @@ import {
   getAccountSessionData,
   getCheckoutSessionData,
 } from "@/lib/helpers/getSessionData";
-import Shipping from "@/ui-components/shipping/Shipping";
+import Shipping from "@/components/shipping/Shipping";
 import React from "react";
 
 const getAccountAddresses = async (user) => {

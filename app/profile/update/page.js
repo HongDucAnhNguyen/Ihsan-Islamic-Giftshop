@@ -1,6 +1,6 @@
 import { getAccountSessionData } from "@/lib/helpers/getSessionData";
-import UpdateProfile from "@/ui-components/auth/UpdateProfile";
-import ProfileSideBar from "@/ui-components/shared-components/ProfileSideBar";
+import UpdateProfile from "@/components/auth/UpdateProfile";
+import ProfileSideBar from "@/components/shared-components/ProfileSideBar";
 import React from "react";
 
 const page = async () => {
