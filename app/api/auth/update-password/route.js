@@ -1,5 +1,5 @@
-import { getAccountSessionData } from "@/backend/helpers/getSessionData";
-import User from "@/backend/models/User";
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
+import User from "@/lib/models/User";
 import bcrypt from "bcrypt";
 export const PUT = async (req) => {
   try {

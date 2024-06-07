@@ -1,6 +1,6 @@
-import dbConnect from "@/backend/config/ConnectDB";
-import { getAccountSessionData } from "@/backend/helpers/getSessionData";
-import Address from "@/backend/models/Address";
+import dbConnect from "@/lib/config/ConnectDB";
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
+import Address from "@/lib/models/Address";
 
 export const GET = async (req) => {
   try {

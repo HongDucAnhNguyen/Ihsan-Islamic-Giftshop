@@ -1,6 +1,6 @@
-import { getAccountSessionData } from "@/backend/helpers/getSessionData";
-import Profile from "@/components/auth/Profile";
-import ProfileSideBar from "@/components/utilities/ProfileSideBar";
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
+import Profile from "@/ui-components/auth/Profile";
+import ProfileSideBar from "@/ui-components/shared-components/ProfileSideBar";
 
 const getAccountAddresses = async (user) => {
   try {

@@ -1,4 +1,4 @@
-import { getCheckoutSessionData } from "@/backend/helpers/getSessionData";
+import { getCheckoutSessionData } from "@/lib/helpers/getSessionData";
 
 export const GET = async () => {
   try {

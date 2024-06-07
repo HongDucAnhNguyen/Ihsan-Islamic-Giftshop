@@ -1,10 +1,12 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/utilities/Navbar";
+import Navbar from "@/ui-components/shared-components/Navbar";
 import CartContextProvider from "./cartcontext-provider";
 import AuthContextProvider from "./authcontext-provider";
 import AddressContextProvider from "./addresscontext-provider";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -23,6 +25,7 @@ export default function RootLayout({ children }) {
               {" "}
               <Navbar></Navbar>
               {children}
+              <ToastContainer></ToastContainer>
             </AddressContextProvider>
           </CartContextProvider>
         </AuthContextProvider>

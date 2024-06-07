@@ -1,7 +1,7 @@
 import {
   getAccountSessionData,
   getCartSessionData,
-} from "@/backend/helpers/getSessionData";
+} from "@/lib/helpers/getSessionData";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const POST = async (req) => {

@@ -1,4 +1,4 @@
-import { getCartSessionData } from "@/backend/helpers/getSessionData";
+import { getCartSessionData } from "@/lib/helpers/getSessionData";
 
 export const GET = async () => {
   try {

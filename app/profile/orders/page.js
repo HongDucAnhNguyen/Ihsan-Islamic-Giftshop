@@ -1,5 +1,5 @@
-import { getAccountSessionData } from "@/backend/helpers/getSessionData";
-import OrdersList from "@/components/orders/OrdersList";
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
+import OrdersList from "@/ui-components/orders/OrdersList";
 import React from "react";
 
 const getUserOrders = async () => {

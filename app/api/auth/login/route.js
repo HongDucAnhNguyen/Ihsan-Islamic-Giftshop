@@ -1,23 +1,22 @@
-import dbConnect from "@/backend/config/ConnectDB";
+import dbConnect from "@/lib/config/ConnectDB";
 
 import {
   validateEmail,
   validatePassword,
-} from "@/backend/helpers/emailAndPasswordValidation";
-import User from "@/backend/models/User";
+} from "@/lib/helpers/emailAndPasswordValidation";
+import User from "@/lib/models/User";
 
 import bcrypt from "bcrypt";
 import {
   getAccountSessionData,
   getCartSessionData,
-} from "@/backend/helpers/getSessionData";
+} from "@/lib/helpers/getSessionData";
 
 export const POST = async (req) => {
   try {
     await dbConnect();
     const accountSessionData = await getAccountSessionData();
     const guestCartSession = await getCartSessionData();
-    
 
     guestCartSession.destroy();
 

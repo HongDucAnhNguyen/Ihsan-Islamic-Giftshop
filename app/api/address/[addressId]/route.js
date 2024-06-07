@@ -1,5 +1,5 @@
-import dbConnect from "@/backend/config/ConnectDB";
-import Address from "@/backend/models/Address";
+import dbConnect from "@/lib/config/ConnectDB";
+import Address from "@/lib/models/Address";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 

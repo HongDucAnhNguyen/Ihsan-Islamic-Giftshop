@@ -1,8 +1,8 @@
 export const dynamic = "force-dynamic";
 
-import dbConnect from "@/backend/config/ConnectDB";
-import { Product } from "@/backend/models/Product";
-import { getPaginationUrl } from "@/backend/helpers/getPaginationUrl";
+import dbConnect from "@/lib/config/ConnectDB";
+import { Product } from "@/lib/models/Product";
+import { getPaginationUrl } from "@/lib/helpers/getPaginationUrl";
 
 export async function GET(req) {
   try {
@@ -19,7 +19,7 @@ export async function GET(req) {
     });
     const filteredSearchParams = new URLSearchParams(filteredSearchParamsObj);
     const queryStr = filteredSearchParams.toString();
- 
+
     let currentPage = 1;
 
     if (
@@ -28,8 +28,6 @@ export async function GET(req) {
     ) {
       currentPage = parseInt(searchParams.get("page"));
     }
-
-    
 
     const skipHowMany = 3 * (currentPage - 1);
     let filters = {};
@@ -62,13 +60,11 @@ export async function GET(req) {
       };
     }
 
-
     const allProducts = await Product.find(filters).skip(skipHowMany).limit(3);
 
     const totalItems = await Product.find(filters).countDocuments();
 
     const maxPages = Math.ceil(totalItems / 3);
-
 
     if (totalItems > 1) {
       const { nextPageLink, prevPageLink } = getPaginationUrl(

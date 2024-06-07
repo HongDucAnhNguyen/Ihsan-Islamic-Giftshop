@@ -1,4 +1,4 @@
-import { getAccountSessionData } from "@/backend/helpers/getSessionData";
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
 
 export const GET = async () => {
   try {

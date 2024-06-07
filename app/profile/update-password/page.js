@@ -1,5 +1,5 @@
-import UpdatePassword from "@/components/auth/UpdatePassword";
-import ProfileSideBar from "@/components/utilities/ProfileSideBar";
+import UpdatePassword from "@/ui-components/auth/UpdatePassword";
+import ProfileSideBar from "@/ui-components/shared-components/ProfileSideBar";
 import React from "react";
 
 const page = () => {

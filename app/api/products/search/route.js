@@ -1,8 +1,8 @@
 export const dynamic = "force-dynamic";
 
-import dbConnect from "@/backend/config/ConnectDB";
-import { getPaginationUrl } from "@/backend/helpers/getPaginationUrl";
-import { Product } from "@/backend/models/Product";
+import dbConnect from "@/lib/config/ConnectDB";
+import { getPaginationUrl } from "@/lib/helpers/getPaginationUrl";
+import { Product } from "@/lib/models/Product";
 
 export const GET = async (req) => {
   try {

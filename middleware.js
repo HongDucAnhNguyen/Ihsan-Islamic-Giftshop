@@ -1,7 +1,7 @@
 import {
   getAccountSessionData,
   getCartSessionData,
-} from "@/backend/helpers/getSessionData";
+} from "@/lib/helpers/getSessionData";
 import { NextResponse } from "next/server";
 // import User from "./backend/models/User";
 // import dbConnect from "./backend/config/ConnectDB";

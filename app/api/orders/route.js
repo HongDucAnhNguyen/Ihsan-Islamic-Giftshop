@@ -1,7 +1,7 @@
-import dbConnect from "@/backend/config/ConnectDB";
-import Address from "@/backend/models/Address";
-import Order from "@/backend/models/Order";
-import User from "@/backend/models/User";
+import dbConnect from "@/lib/config/ConnectDB";
+import Address from "@/lib/models/Address";
+import Order from "@/lib/models/Order";
+import User from "@/lib/models/User";
 
 export const GET = async (req) => {
   try {

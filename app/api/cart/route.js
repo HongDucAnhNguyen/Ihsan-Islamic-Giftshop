@@ -1,8 +1,8 @@
 export const dynamic = "force-dynamic";
 
-import dbConnect from "@/backend/config/ConnectDB";
-import { getCartSessionData } from "@/backend/helpers/getSessionData";
-import Cart from "@/backend/models/Cart";
+import dbConnect from "@/lib/config/ConnectDB";
+import { getCartSessionData } from "@/lib/helpers/getSessionData";
+import Cart from "@/lib/models/Cart";
 
 export const PUT = async (req) => {
   try {

@@ -1,14 +1,14 @@
-import dbConnect from "@/backend/config/ConnectDB";
+import dbConnect from "@/lib/config/ConnectDB";
 
-import User from "@/backend/models/User";
+import User from "@/lib/models/User";
 import bcrypt from "bcrypt";
 
 import {
   validateEmail,
   validatePassword,
-} from "@/backend/helpers/emailAndPasswordValidation";
-import { getCartSessionData } from "@/backend/helpers/getSessionData";
-import Cart from "@/backend/models/Cart";
+} from "@/lib/helpers/emailAndPasswordValidation";
+import { getCartSessionData } from "@/lib/helpers/getSessionData";
+import Cart from "@/lib/models/Cart";
 export const POST = async (req) => {
   try {
     await dbConnect();

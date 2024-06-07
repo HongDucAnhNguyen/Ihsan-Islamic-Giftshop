@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
-import dbConnect from "@/backend/config/ConnectDB";
-import { Product } from "@/backend/models/Product";
+import dbConnect from "@/lib/config/ConnectDB";
+import { Product } from "@/lib/models/Product";
 export const GET = async (req, { params }) => {
   try {
     await dbConnect();

@@ -1,7 +1,7 @@
-import dbConnect from "@/backend/config/ConnectDB";
-import { handleUploadAvatar } from "@/backend/helpers/cloudinaryUploadImage";
-import { getAccountSessionData } from "@/backend/helpers/getSessionData";
-import User from "@/backend/models/User";
+import dbConnect from "@/lib/config/ConnectDB";
+import { handleUploadAvatar } from "@/lib/helpers/cloudinaryUploadImage";
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
+import User from "@/lib/models/User";
 import fs from "fs";
 import { revalidatePath } from "next/cache";
 export const POST = async (req) => {

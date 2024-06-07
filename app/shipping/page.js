@@ -1,8 +1,8 @@
 import {
   getAccountSessionData,
   getCheckoutSessionData,
-} from "@/backend/helpers/getSessionData";
-import Shipping from "@/components/shipping/Shipping";
+} from "@/lib/helpers/getSessionData";
+import Shipping from "@/ui-components/shipping/Shipping";
 import React from "react";
 
 const getAccountAddresses = async (user) => {

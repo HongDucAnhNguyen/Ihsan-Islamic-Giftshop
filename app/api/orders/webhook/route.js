@@ -1,7 +1,7 @@
-import dbConnect from "@/backend/config/ConnectDB";
-import { extractOrderItems } from "@/backend/helpers/stripeWebhookHelper";
-import Cart from "@/backend/models/Cart";
-import Order from "@/backend/models/Order";
+import dbConnect from "@/lib/config/ConnectDB";
+import { extractOrderItems } from "@/lib/helpers/stripeWebhookHelper";
+import Cart from "@/lib/models/Cart";
+import Order from "@/lib/models/Order";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 

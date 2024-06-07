@@ -2,7 +2,7 @@ import {
   getAccountSessionData,
   getCartSessionData,
   getCheckoutSessionData,
-} from "@/backend/helpers/getSessionData";
+} from "@/lib/helpers/getSessionData";
 
 import { NextResponse } from "next/server";
 
