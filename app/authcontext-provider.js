@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createContext, useState } from "react";
+import { createContext } from "react";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 export default function AuthContextProvider({ children }) {
-  const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleLoginUser = async ({ name, email, password }) => {
@@ -22,12 +22,16 @@ export default function AuthContextProvider({ children }) {
         body: JSON.stringify({ name, email, password }),
       });
       const data = await response.json();
+
       if (data?.authenticated == true) {
         router.push("/");
         router.refresh();
+        toast.success(data?.message);
+      } else {
+        toast.warning(data.message);
       }
     } catch (error) {
-      setError("an error occurred while registering");
+      toast.error(error.message);
     }
   };
 
@@ -38,7 +42,7 @@ export default function AuthContextProvider({ children }) {
         method: "GET",
       });
     } catch (error) {
-      setError("an error occurred while logging out");
+      toast.error("Error logging you out");
     }
   };
 
@@ -59,17 +63,15 @@ export default function AuthContextProvider({ children }) {
         router.push("/login");
         router.refresh();
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error("an error occurred while registering");
+    }
   };
 
   const handleUpdateProfile = async (formData) => {
     try {
       const response = await fetch("/api/auth/update-profile", {
         method: "POST",
-
-        // headers: {
-        //   "Content-Type": "multipart/form-data",
-        // },
 
         body: formData,
       });
@@ -78,7 +80,9 @@ export default function AuthContextProvider({ children }) {
         router.push("/profile");
         router.refresh();
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Error updating your profile");
+    }
   };
 
   const handleUpdatePassword = async ({ currentPassword, newPassword }) => {
@@ -100,14 +104,14 @@ export default function AuthContextProvider({ children }) {
         router.push("/login");
         router.refresh();
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Error updating password");
+    }
   };
 
   return (
     <AuthContext.Provider
       value={{
-        error,
-        // setUser,
         handleRegisterUser,
         handleLoginUser,
         handleLogoutUser,

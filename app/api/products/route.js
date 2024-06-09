@@ -8,6 +8,9 @@ export async function GET(req) {
   try {
     await dbConnect();
 
+
+
+
     const { searchParams } = new URL(req.url);
 
     const filteredSearchParamsObj = {};

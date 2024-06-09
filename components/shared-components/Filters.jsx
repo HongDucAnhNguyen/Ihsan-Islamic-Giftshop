@@ -3,12 +3,14 @@
 import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import Link from "next/link";
 const Filters = () => {
   let queryParams;
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const [minPriceVal, setMinPriceVal] = useState("");
+  const [minPriceVal, setMinPriceVal] = useState(0);
+
   const clearPageQuery = () => {
     queryParams = new URLSearchParams(searchParams.toString());
     if (searchParams.has("page")) {
@@ -116,7 +118,7 @@ const Filters = () => {
 
             <input
               name="max"
-              min={minPriceVal}
+              min={minPriceVal || 0}
               max={9999}
               defaultValue={defaultPriceHandler("max")}
               className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
@@ -126,8 +128,6 @@ const Filters = () => {
                 handlePriceFilters(e.target);
               }}
             />
-
-      
           </div>
         </div>
       </div>
@@ -220,6 +220,10 @@ const Filters = () => {
             ))}
           </li>
         </ul>
+        <hr className="my-4" />
+        <a href="/" className="bg-blue-500 text-white rounded-md p-2">
+          Clear Filters
+        </a>
       </div>
     </aside>
   );

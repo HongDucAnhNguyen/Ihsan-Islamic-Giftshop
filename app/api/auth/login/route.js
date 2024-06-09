@@ -26,7 +26,10 @@ export const POST = async (req) => {
       !validateEmail(loginData.email) ||
       !validatePassword(loginData.password)
     ) {
-      return Response.json({ error: "invalid credentials" }, { status: 400 });
+      return Response.json(
+        { authenticated: false, message: "invalid credentials" },
+        { status: 400 }
+      );
     }
 
     const userRetrieved = await User.findOne({
@@ -34,7 +37,13 @@ export const POST = async (req) => {
     });
 
     if (!userRetrieved) {
-      return Response.json({ error: "invalid credentials" }, { status: 400 });
+      return Response.json(
+        {
+          authenticated: false,
+          message: "cannot find a user with this email, please try again",
+        },
+        { status: 400 }
+      );
     }
 
     const validPassword = await bcrypt.compare(
@@ -43,7 +52,10 @@ export const POST = async (req) => {
     );
 
     if (!validPassword) {
-      return Response.json({ error: "invalid password" }, { status: 400 });
+      return Response.json(
+        { authenticated: false, message: "invalid password" },
+        { status: 400 }
+      );
     }
 
     accountSessionData.username = userRetrieved.name;
@@ -54,8 +66,14 @@ export const POST = async (req) => {
     accountSessionData.userRole = userRetrieved.role;
     await accountSessionData.save();
 
-    return Response.json({ authenticated: true });
+    return Response.json({
+      authenticated: true,
+      message: "logged in successfully",
+    });
   } catch (error) {
-    return Response.json(error);
+    return Response.json({
+      authenticated: false,
+      message: "An error occurred while logging you in, please try again later",
+    });
   }
 };

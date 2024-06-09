@@ -1,27 +1,29 @@
-import { getAccountSessionData } from "@/lib/helpers/getSessionData";
-import Profile from "@/components/auth/Profile";
+import AdminProductsList from "@/components/products/AdminProductsList";
 import ProfileSideBar from "@/components/shared-components/ProfileSideBar";
 import { verifyAsAdmin } from "@/lib/helpers/adminRoutesHelper";
+import { headers } from "next/headers";
+import React from "react";
 
-const getAccountAddresses = async (user) => {
+const getAllProductsForAdmin = async (isAdmin) => {
   try {
-    if (user?.username && user?.userId) {
+    if (isAdmin) {
       const response = await fetch(
-        `${process.env.BASE_URL}/api/address?userId=${user?.userId}`,
-        {
-          method: "GET",
-        }
+        `${process.env.BASE_URL}/api/admin/products`,
+        { headers: headers() }
       );
+
       const data = await response.json();
+
       return data;
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const page = async () => {
-  const user = await getAccountSessionData();
   const isAdmin = verifyAsAdmin();
-  const addresses = await getAccountAddresses(user);
+  const { products } = await getAllProductsForAdmin(isAdmin);
 
   return (
     <div>
@@ -37,7 +39,9 @@ const page = async () => {
             <ProfileSideBar isAdmin={isAdmin}></ProfileSideBar>
             <main className="md:w-2/3 lg:w-3/4 px-4">
               <article className="border border-gray-200 bg-white shadow-sm rounded mb-5 p-3 lg:p-5">
-                <Profile user={{ ...user }} addresses={addresses}></Profile>
+                {products && (
+                  <AdminProductsList data={products}></AdminProductsList>
+                )}
               </article>
             </main>
           </div>
