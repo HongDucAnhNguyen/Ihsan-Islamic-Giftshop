@@ -1,30 +1,31 @@
 import AdminProductsList from "@/components/products/AdminProductsList";
 import ProfileSideBar from "@/components/shared-components/ProfileSideBar";
 import { verifyAsAdmin } from "@/lib/helpers/adminRoutesHelper";
-import { headers } from "next/headers";
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
+import { redirect } from "next/navigation";
+
 import React from "react";
 
 const getAllProductsForAdmin = async (isAdmin) => {
   try {
     if (isAdmin) {
+      const { userId } = await getAccountSessionData();
       const response = await fetch(
-        `${process.env.BASE_URL}/api/admin/products`
+        `${process.env.BASE_URL}/api/admin/products?userId=${userId}`
       );
-
       const data = await response.json();
-
       return data;
-    } else return { products: [] };
+    } else redirect("/profile");
   } catch (error) {
-    console.log(error);
+    console.log("Error fetching admin products:", error.message);
     return { products: [] };
   }
 };
 
 const page = async () => {
   const isAdmin = verifyAsAdmin();
-  const { products } = await getAllProductsForAdmin(isAdmin);
 
+  const { products } = await getAllProductsForAdmin(isAdmin);
   return (
     <div>
       <section className="py-5 sm:py-7 bg-blue-100">

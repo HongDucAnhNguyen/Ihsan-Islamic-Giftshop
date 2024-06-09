@@ -3,13 +3,8 @@ import {
   getCartSessionData,
 } from "@/lib/helpers/getSessionData";
 import { NextResponse } from "next/server";
-import { verifyAsAdmin } from "./lib/helpers/adminRoutesHelper";
-// import User from "./backend/models/User";
-// import dbConnect from "./backend/config/ConnectDB";
 
 export const middleware = async (req) => {
-  // await dbConnect();
-
   const accountSessionData = await getAccountSessionData();
   const cartSessionData = await getCartSessionData();
   let response = NextResponse.next();
@@ -24,7 +19,7 @@ export const middleware = async (req) => {
   }
 
   if (accountSessionData?.userRole === process.env.ADMIN_ROLE) {
-    requestHeaders.set("x-is-admin", true);
+    requestHeaders.set("x-is-admin", "true");
 
     response = NextResponse.next({
       request: {
@@ -40,11 +35,9 @@ export const middleware = async (req) => {
     }
   }
 
-  if (
-    req.nextUrl.pathname.startsWith("/admin") ||
-    req.nextUrl.pathname.startsWith("/api/admin")
-  ) {
-    const isAdmin = requestHeaders.get("x-is-admin");
+  if (req.nextUrl.pathname.startsWith("/admin")) {
+    const isAdmin = requestHeaders.get("x-is-admin") === "true";
+
     if (!isAdmin) {
       return NextResponse.redirect(new URL("/profile", req.url));
     }
@@ -54,21 +47,5 @@ export const middleware = async (req) => {
 };
 
 export const config = {
-  matcher: [
-    //     /*
-    //      * Match all request paths except for the ones starting with:
-    //      * - api (API routes)
-    //      * - _next/static (static files)
-    //      * - _next/image (image optimization files)
-    //      * - favicon.ico (favicon file)
-    //      */
-    //     //"/((?!api|_next/static|_next/image|favicon.ico).*)",
-    "/profile/:path*",
-    "/address/:path*",
-    "/shipping",
-    "/admin/:path*",
-    "/api/admin/:path*",
-
-    // "/api/auth/update-profile",
-  ],
+  matcher: ["/profile/:path*", "/address/:path*", "/shipping", "/admin/:path*"],
 };
