@@ -15,9 +15,10 @@ const getAllProductsForAdmin = async (isAdmin) => {
       const data = await response.json();
 
       return data;
-    }
+    } else return { products: [] };
   } catch (error) {
     console.log(error);
+    return { products: [] };
   }
 };
 

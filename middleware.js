@@ -12,7 +12,8 @@ export const middleware = async (req) => {
 
   const accountSessionData = await getAccountSessionData();
   const cartSessionData = await getCartSessionData();
-
+  let response = NextResponse.next();
+  let requestHeaders = new Headers(req.headers);
   if (
     !accountSessionData?.username &&
     !accountSessionData?.userId &&
@@ -20,18 +21,17 @@ export const middleware = async (req) => {
     !accountSessionData?.userRole
   ) {
     return NextResponse.redirect(new URL("/login", req.url));
-  } else {
-    if (accountSessionData?.userRole === process.env.ADMIN_ROLE) {
-      const requestHeaders = new Headers(req.headers);
-      requestHeaders.set("x-is-admin", true);
+  }
 
-      return NextResponse.next({
-        request: {
-          // New request headers
-          headers: requestHeaders,
-        },
-      });
-    }
+  if (accountSessionData?.userRole === process.env.ADMIN_ROLE) {
+    requestHeaders.set("x-is-admin", true);
+
+    response = NextResponse.next({
+      request: {
+        // New request headers
+        headers: requestHeaders,
+      },
+    });
   }
 
   if (req.nextUrl.pathname === "/shipping") {
@@ -44,14 +44,13 @@ export const middleware = async (req) => {
     req.nextUrl.pathname.startsWith("/admin") ||
     req.nextUrl.pathname.startsWith("/api/admin")
   ) {
-    const isAdmin = verifyAsAdmin();
-
+    const isAdmin = requestHeaders.get("x-is-admin");
     if (!isAdmin) {
       return NextResponse.redirect(new URL("/profile", req.url));
     }
   }
 
-  return NextResponse.next();
+  return response;
 };
 
 export const config = {
