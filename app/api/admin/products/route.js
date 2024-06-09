@@ -15,10 +15,10 @@ export const GET = async (req) => {
 
     const userFound = await User.findById(userId);
     if (!userFound) {
-      return NextResponse.redirect(new URL("/profile", req.url));
+      return Response.json({ error: "Unauthorized request" }, { status: 401 });
     }
     if (userFound?.role !== process.env.ADMIN_ROLE) {
-      return NextResponse.redirect(new URL("/profile", req.url));
+      return Response.json({ error: "Unauthorized request" }, { status: 401 });
     }
 
     const allProducts = await Product.find();
