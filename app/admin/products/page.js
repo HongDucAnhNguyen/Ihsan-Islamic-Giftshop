@@ -8,8 +8,7 @@ const getAllProductsForAdmin = async (isAdmin) => {
   try {
     if (isAdmin) {
       const response = await fetch(
-        `${process.env.BASE_URL}/api/admin/products`,
-        { headers: headers() }
+        `${process.env.BASE_URL}/api/admin/products`
       );
 
       const data = await response.json();
