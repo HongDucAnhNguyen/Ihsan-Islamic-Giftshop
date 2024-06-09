@@ -12,7 +12,7 @@ const ProfileSideBar = ({ isAdmin }) => {
             <li>
               {" "}
               <Link
-                href="/admin/products/new"
+                href="/admin/products"
                 className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
               >
                 New Product <span className="text-red-500">(Admin)</span>
@@ -32,7 +32,7 @@ const ProfileSideBar = ({ isAdmin }) => {
             <li>
               {" "}
               <Link
-                href="/admin/orders"
+                href="/admin/products"
                 className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
               >
                 All Orders <span className="text-red-500">(Admin)</span>
@@ -42,7 +42,7 @@ const ProfileSideBar = ({ isAdmin }) => {
             <li>
               {" "}
               <Link
-                href="/admin/users"
+                href="/admin/products"
                 className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
               >
                 All Users <span className="text-red-500">(Admin)</span>
