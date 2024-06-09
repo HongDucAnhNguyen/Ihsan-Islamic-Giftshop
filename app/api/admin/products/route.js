@@ -1,9 +1,9 @@
+export const dynamic = "force-dynamic";
+
 import dbConnect from "@/lib/config/ConnectDB";
-import { getAccountSessionData } from "@/lib/helpers/getSessionData";
 
 import { Product } from "@/lib/models/Product";
 import User from "@/lib/models/User";
-import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
   try {
