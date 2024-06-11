@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 import UpdateAddress from "@/components/address/UpdateAddress";
+import { verifyAsAdmin } from "@/lib/helpers/adminRoutesHelper";
 
 const getAddressDetails = async (addressId) => {
   try {
@@ -17,9 +18,10 @@ const getAddressDetails = async (addressId) => {
 
 const page = async ({ params }) => {
   const addressDetails = await getAddressDetails(params.addressId);
+  const isAdmin = verifyAsAdmin();
   return (
     <div>
-      <UpdateAddress address={addressDetails}></UpdateAddress>
+      <UpdateAddress isAdmin={isAdmin} address={addressDetails}></UpdateAddress>
     </div>
   );
 };

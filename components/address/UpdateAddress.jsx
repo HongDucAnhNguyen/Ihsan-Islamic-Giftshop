@@ -6,7 +6,7 @@ import ProfileSideBar from "../shared-components/ProfileSideBar";
 import { countries } from "countries-list";
 import { AddressContext } from "@/app/addresscontext-provider";
 import { useRouter } from "next/navigation";
-const UpdateAddress = ({ address }) => {
+const UpdateAddress = ({ address, isAdmin }) => {
   const router = useRouter();
   const { handleUpdateAddress, handleDeleteAddress } =
     useContext(AddressContext);
@@ -44,7 +44,7 @@ const UpdateAddress = ({ address }) => {
       <section className="py-10">
         <div className="container max-w-screen-xl mx-auto px-4">
           <div className="flex flex-col md:flex-row -mx-4">
-            <ProfileSideBar />
+            <ProfileSideBar isAdmin={isAdmin} />
             <main className="md:w-2/3 lg:w-3/4 px-4">
               <div
                 style={{ maxWidth: "480px" }}

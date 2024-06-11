@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import dbConnect from "@/lib/config/ConnectDB";
 import { getAccountSessionData } from "@/lib/helpers/getSessionData";
 

@@ -1,9 +1,9 @@
+export const dynamic = "force-dynamic";
+
 import dbConnect from "@/lib/config/ConnectDB";
 import Address from "@/lib/models/Address";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-
-export const dynamic = "force-dynamic";
 
 export const GET = async (req, { params }) => {
   try {
