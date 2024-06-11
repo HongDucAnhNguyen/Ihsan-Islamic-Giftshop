@@ -12,8 +12,8 @@ const ProfileSideBar = ({ isAdmin }) => {
             <li>
               {" "}
               <Link
-                href="/admin/products"
-                className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
+                href="/admin/products/new"
+                className="block px-3 py-2 text-gray-800 hover:bg-green-100 hover:text-green-500 rounded-md"
               >
                 New Product <span className="text-red-500">(Admin)</span>
               </Link>
@@ -23,7 +23,7 @@ const ProfileSideBar = ({ isAdmin }) => {
               {" "}
               <Link
                 href="/admin/products"
-                className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
+                className="block px-3 py-2 text-gray-800 hover:bg-green-100 hover:text-green-500 rounded-md"
               >
                 All Products <span className="text-red-500">(Admin)</span>
               </Link>
@@ -33,7 +33,7 @@ const ProfileSideBar = ({ isAdmin }) => {
               {" "}
               <Link
                 href="/admin/products"
-                className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
+                className="block px-3 py-2 text-gray-800 hover:bg-green-100 hover:text-green-500 rounded-md"
               >
                 All Orders <span className="text-red-500">(Admin)</span>
               </Link>
@@ -43,7 +43,7 @@ const ProfileSideBar = ({ isAdmin }) => {
               {" "}
               <Link
                 href="/admin/products"
-                className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
+                className="block px-3 py-2 text-gray-800 hover:bg-green-100 hover:text-green-500 rounded-md"
               >
                 All Users <span className="text-red-500">(Admin)</span>
               </Link>
@@ -57,7 +57,7 @@ const ProfileSideBar = ({ isAdmin }) => {
           {" "}
           <Link
             href="/profile"
-            className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
+            className="block px-3 py-2 text-gray-800 hover:bg-green-100 hover:text-green-500 rounded-md"
           >
             Your Profile
           </Link>
@@ -66,7 +66,7 @@ const ProfileSideBar = ({ isAdmin }) => {
           {" "}
           <Link
             href="/profile/orders"
-            className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
+            className="block px-3 py-2 text-gray-800 hover:bg-green-100 hover:text-green-500 rounded-md"
           >
             Orders
           </Link>
@@ -75,7 +75,7 @@ const ProfileSideBar = ({ isAdmin }) => {
           {" "}
           <Link
             href="/profile/update"
-            className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
+            className="block px-3 py-2 text-gray-800 hover:bg-green-100 hover:text-green-500 rounded-md"
           >
             Update Profile
           </Link>
@@ -84,7 +84,7 @@ const ProfileSideBar = ({ isAdmin }) => {
           {" "}
           <Link
             href="/profile/update-password"
-            className="block px-3 py-2 text-gray-800 hover:bg-blue-100 hover:text-blue-500 rounded-md"
+            className="block px-3 py-2 text-gray-800 hover:bg-green-100 hover:text-green-500 rounded-md"
           >
             Update Password
           </Link>

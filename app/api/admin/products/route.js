@@ -1,6 +1,5 @@
-export const dynamic = "force-dynamic";
-
 import dbConnect from "@/lib/config/ConnectDB";
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
 
 import { Product } from "@/lib/models/Product";
 import User from "@/lib/models/User";
@@ -14,6 +13,7 @@ export const GET = async (req) => {
     const userId = searchParams.get("userId");
 
     const userFound = await User.findById(userId);
+
     if (!userFound) {
       return Response.json({ error: "Unauthorized request" }, { status: 401 });
     }
@@ -23,6 +23,28 @@ export const GET = async (req) => {
 
     const allProducts = await Product.find();
     return Response.json({ products: allProducts });
+  } catch (error) {
+    return Response.json({ error: error.message });
+  }
+};
+
+export const POST = async (req) => {
+  try {
+    await dbConnect();
+    const { userRole } = await getAccountSessionData();
+    console.log(userRole);
+
+    if (userRole !== process.env.ADMIN_ROLE) {
+      return Response.json({ error: "Unauthorized action" }, { status: 401 });
+    }
+    const newProductData = await req.json();
+
+    const newProduct = await Product.create(newProductData);
+
+    if (!newProduct) {
+      return Response.json({ error: "Failed to create product" });
+    }
+    return Response.json({ createdProduct: null });
   } catch (error) {
     return Response.json({ error: error.message });
   }

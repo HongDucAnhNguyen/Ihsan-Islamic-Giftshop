@@ -35,7 +35,7 @@ const AdminProductsList = ({ data, prevPageLink, nextPageLink }) => {
             <tr key={product._id} className="bg-white">
               <td className="px-6 py-2">
                 <Link
-                  className="text-blue-500 underline"
+                  className="text-lime-500 underline"
                   href={`/product/${product._id}`}
                 >
                   {product?.name}

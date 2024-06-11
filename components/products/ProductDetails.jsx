@@ -22,7 +22,9 @@ const ProductDetails = ({ data }) => {
   };
 
   const [imgPreview, setImgPreview] = useState(
-    data?.images[0].url || "/images/default_product.png"
+    data?.images?.length > 0
+      ? data?.images[0].url
+      : "/images/default_product.png"
   );
   const handleChangeFocusImg = (imgUrl) => {
     setImgPreview(imgUrl);
@@ -55,7 +57,7 @@ const ProductDetails = ({ data }) => {
                 {data?.images?.map((image, index) => (
                   <a
                     key={index}
-                    className="inline-block border border-gray-200 p-1 rounded-md hover:border-blue-500 cursor-pointer"
+                    className="inline-block border border-gray-200 p-1 rounded-md hover:border-green-500 cursor-pointer"
                     onClick={() => {
                       handleChangeFocusImg(image.url);
                     }}
@@ -106,7 +108,7 @@ const ProductDetails = ({ data }) => {
               {ProductInStock && (
                 <div className="flex flex-wrap gap-2 mb-5">
                   <button
-                    className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                    className="px-4 py-2 inline-block text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700"
                     onClick={handleAddToCart}
                   >
                     <i className="fa fa-shopping-cart mr-2"></i>

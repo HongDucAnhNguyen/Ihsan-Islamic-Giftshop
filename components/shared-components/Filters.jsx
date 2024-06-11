@@ -93,7 +93,7 @@ const Filters = () => {
   return (
     <aside className="md:w-1/3 lg:w-1/4 px-4">
       <a
-        className="md:hidden mb-5  w-full text-center px-4 py-2 inline-block text-lg text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:text-blue-600"
+        className="md:hidden mb-5  w-full text-center px-4 py-2 inline-block text-lg text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:text-green-600"
         href="#"
       >
         Filter by
@@ -221,7 +221,7 @@ const Filters = () => {
           </li>
         </ul>
         <hr className="my-4" />
-        <a href="/" className="bg-blue-500 text-white rounded-md p-2">
+        <a href="/" className="bg-lime-700 text-white rounded-md p-2">
           Clear Filters
         </a>
       </div>

@@ -12,29 +12,36 @@ const ProductsList = ({ data, nextPageLink, prevPageLink }) => {
         <div className="flex justify-center flex-col md:flex-row -mx-4">
           {pathname !== "/search" && <Filters></Filters>}
           <main className="md:2-2/3 lg:w-3/4 px-3">
-            {data?.length >= 1 &&
+            {data?.length > 0 ? (
               data.map((product) => (
-                <ProductItem key={product?._id} product={product}></ProductItem>
-              ))}
+                <ProductItem key={product._id} product={product}></ProductItem>
+              ))
+            ) : (
+              <h3 className="text-2xl font-bold">
+                We could not find any products
+              </h3>
+            )}
           </main>
         </div>
-        <div>
-          <div className="flex justify-center gap-5">
-            <Link
-              href={prevPageLink}
-              className="bg-blue-500 text-white rounded-md p-2"
-            >
-              Prev Page
-            </Link>
+        {data?.length > 0 && (
+          <div>
+            <div className="flex justify-center gap-5">
+              <Link
+                href={prevPageLink}
+                className="bg-lime-700 text-white rounded-md p-2"
+              >
+                Prev Page
+              </Link>
 
-            <Link
-              href={nextPageLink}
-              className="bg-blue-500 text-white rounded-md p-2"
-            >
-              Next Page
-            </Link>
+              <Link
+                href={nextPageLink}
+                className="bg-lime-700 text-white rounded-md p-2"
+              >
+                Next Page
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

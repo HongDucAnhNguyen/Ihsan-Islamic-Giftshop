@@ -64,7 +64,7 @@ const Cart = () => {
 
   return (
     <>
-      <section className="py-5 sm:py-7 bg-blue-100">
+      <section className="py-5 sm:py-7 bg-lime-100">
         <div className="container max-w-screen-xl mx-auto px-4">
           <h2 className="text-3xl font-semibold mb-2">
             {cart?.cartItems?.length || 0} Item(s) in Cart
@@ -100,7 +100,7 @@ const Cart = () => {
                               <p>
                                 <a
                                   href={`/product/${cartItem.productId}`}
-                                  className="hover:text-blue-600"
+                                  className="hover:text-lime-600"
                                 >
                                   {cartItem.name}
                                 </a>

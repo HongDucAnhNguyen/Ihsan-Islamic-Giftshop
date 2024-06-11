@@ -46,10 +46,14 @@ export default async function Home({ searchParams }) {
           <h1 className="text-4xl md:text-6xl font-bold mb-8 text-center z-10">
             Welcome to Ihsan
           </h1>
-          <p className="text-lg md:text-xl mb-12 text-center z-10">
-            Experience elegance, find tranquility.
+          <p
+            className="text-lg md:text-xl mb-12 text-center z-10"
+            style={{ maxWidth: 500 }}
+          >
+            We stay true to our name. Discover excellence, experience elegance,
+            find tranquility.
           </p>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold transition duration-300 z-10">
+          <button className="bg-lime-600 hover:bg-lime-700 text-white px-6 py-3 rounded-md text-lg font-semibold transition duration-300 z-10">
             Shop Now
           </button>
         </div>

@@ -37,7 +37,7 @@ const SearchBar = () => {
       />
       <button
         type="submit"
-        className="px-4 py-2 inline-block text-white border border-transparent bg-blue-600 text-white rounded-md hover:bg-blue-700"
+        className="px-4 py-2 inline-block text-white border border-transparent bg-lime-600 text-white rounded-md hover:bg-lime-700"
       >
         Search
       </button>

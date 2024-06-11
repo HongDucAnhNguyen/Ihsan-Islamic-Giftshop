@@ -24,13 +24,12 @@ const getAllProductsForAdmin = async (isAdmin) => {
 
 const page = async () => {
   const isAdmin = verifyAsAdmin();
-
   const { products } = await getAllProductsForAdmin(isAdmin);
   return (
     <div>
-      <section className="py-5 sm:py-7 bg-blue-100">
+      <section className="py-5 sm:py-7 bg-green-100">
         <div className="container max-w-screen-xl mx-auto px-4">
-          <h1 className="text-bold text-2xl">User Dashboard</h1>
+          <h1 className="text-bold text-2xl">Admin Dashboard</h1>
         </div>
       </section>
 

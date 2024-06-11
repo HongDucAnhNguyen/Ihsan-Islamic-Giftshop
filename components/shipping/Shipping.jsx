@@ -61,7 +61,7 @@ const Shipping = ({ addresses, checkoutData }) => {
                   {addresses?.map((address) => (
                     <label
                       key={address._id}
-                      className="flex p-3 border border-gray-200 rounded-md bg-gray-50 hover:border-blue-400 hover:bg-blue-50 cursor-pointer"
+                      className="flex p-3 border border-gray-200 rounded-md bg-gray-50 hover:border-lime-400 hover:bg-lime-50 cursor-pointer"
                       onClick={() => setShippingAddress(address)}
                     >
                       <span>
@@ -88,7 +88,7 @@ const Shipping = ({ addresses, checkoutData }) => {
 
                 <Link
                   href="/address/new"
-                  className="px-4 py-2 inline-block text-blue-600 border border-gray-300 rounded-md hover:bg-gray-100"
+                  className="px-4 py-2 inline-block text-lime-600 border border-gray-300 rounded-md hover:bg-gray-100"
                 >
                   <i className="mr-1 fa fa-plus"></i> Add new address
                 </Link>
@@ -96,12 +96,12 @@ const Shipping = ({ addresses, checkoutData }) => {
                 <div className="flex justify-end space-x-2 mt-10">
                   <a
                     href="/cart"
-                    className="px-5 py-2 inline-block text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:text-blue-600"
+                    className="px-5 py-2 inline-block text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:text-lime-600"
                   >
                     Back to cart
                   </a>
                   <button
-                    className="px-5 py-2 inline-block text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 cursor-pointer"
+                    className="px-5 py-2 inline-block text-white bg-lime-600 border border-transparent rounded-md hover:bg-lime-700 cursor-pointer"
                     onClick={checkoutHandler}
                   >
                     Checkout

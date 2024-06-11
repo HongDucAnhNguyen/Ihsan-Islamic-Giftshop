@@ -99,13 +99,3 @@ export async function GET(req) {
   }
 }
 
-export const POST = async (req) => {
-  try {
-    await dbConnect();
-    const data = await req.json();
-    const newProduct = await Product.create(data);
-    return Response.json(newProduct);
-  } catch (error) {
-    return Response.json(error);
-  }
-};

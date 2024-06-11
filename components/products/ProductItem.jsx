@@ -54,7 +54,7 @@ const ProductItem = ({ product }) => {
           <div className="p-4">
             <Link
               href={`/product/${product._id}`}
-              className="hover:text-blue-600"
+              className="hover:text-lime-600"
             >
               {product.name}
             </Link>
@@ -89,7 +89,7 @@ const ProductItem = ({ product }) => {
             <div className="my-3">
               {productInStock ? (
                 <button
-                  className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 cursor-pointer"
+                  className="px-4 py-2 inline-block text-white bg-lime-600 border border-transparent rounded-md hover:bg-lime-700 cursor-pointer"
                   onClick={handleAddNewItemToCart}
                 >
                   {" "}

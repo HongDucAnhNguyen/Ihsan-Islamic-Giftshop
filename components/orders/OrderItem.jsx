@@ -3,7 +3,7 @@ import React from "react";
 
 const OrderItem = ({ order, customerInfo, shippingInfo }) => {
   return (
-    <article className="p-3 lg:p-5 mb-5 bg-white border border-blue-600 rounded-md">
+    <article className="p-3 lg:p-5 mb-5 bg-white border border-green-600 rounded-md">
       <header className="lg:flex justify-between mb-4">
         <div className="mb-4 lg:mb-0">
           <p className="font-semibold">

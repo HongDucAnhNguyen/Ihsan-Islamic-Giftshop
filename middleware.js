@@ -10,10 +10,11 @@ export const middleware = async (req) => {
   let response = NextResponse.next();
   let requestHeaders = new Headers(req.headers);
   if (
-    !accountSessionData?.username &&
-    !accountSessionData?.userId &&
-    !accountSessionData?.userEmail &&
-    !accountSessionData?.userRole
+    !accountSessionData ||
+    (!accountSessionData?.username &&
+      !accountSessionData?.userId &&
+      !accountSessionData?.userEmail &&
+      !accountSessionData?.userRole)
   ) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
