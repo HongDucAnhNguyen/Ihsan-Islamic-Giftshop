@@ -12,15 +12,7 @@ export const GET = async (req, { params }) => {
     const addressDetails = await Address.findById(addressId);
 
     return Response.json({
-      //   addressDetails: {
-      //     _id: addressDetails._id,
-      //     streetAddress: addressDetails.streetAddress,
-      //     zipCode: addressDetails.zipCode,
-      //     city: addressDetails.city,
-      //     ProvinceState: addressDetails.ProvinceState,
-      //     phoneNumber: addressDetails.phoneNumber,
-      //     country: addressDetails.country,
-      //   },
+      
       addressDetails: addressDetails,
     });
   } catch (error) {

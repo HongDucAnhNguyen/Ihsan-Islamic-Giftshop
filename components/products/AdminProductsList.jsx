@@ -46,7 +46,7 @@ const AdminProductsList = ({ data, prevPageLink, nextPageLink }) => {
               <td className="px-6 py-2">
                 <div>
                   <Link
-                    href={`/admin/products/upload_images`}
+                    href={`/admin/products/upload_images/${product._id}`}
                     className="px-2 py-2 inline-block text-black bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-200
                      cursor-pointer mr-2"
                   >

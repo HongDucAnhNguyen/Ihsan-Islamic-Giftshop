@@ -33,9 +33,10 @@ const getCartLength = async (user) => {
 const Navbar = async () => {
   const user = await getAccountSessionData();
   const cartLength = await getCartLength(user);
+
   return (
     <nav className="py-5 border-b">
-      <div className="container max-w-screen-xl mx-auto px-4">
+      <div className="container max-w-screen-2xl mx-auto px-4">
         <div className="flex flex-wrap items-center">
           <div className="flex-shrink-0 mr-5">
             <a href="/">
@@ -50,6 +51,31 @@ const Navbar = async () => {
           <SearchBar />
 
           <div className="flex items-center space-x-2 ml-auto">
+            <Link
+              href="/quran"
+              className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
+            >
+              Quran
+            </Link>
+
+            <Link
+              href="/mens-clothing"
+              className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
+            >
+              Mens Clothing
+            </Link>
+            <Link
+              href="/womens-clothing"
+              className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
+            >
+              Womens Clothing
+            </Link>
+            <Link
+              href="/accessories"
+              className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
+            >
+              Accessories
+            </Link>
             <Link
               href="/cart"
               className="px-3 py-2 inline-block text-center text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:border-gray-300"
@@ -78,8 +104,6 @@ const Navbar = async () => {
                 </div>
               </Link>
             )}
-
-           
           </div>
 
           <div className="lg:hidden ml-2">

@@ -6,6 +6,7 @@ import AuthContextProvider from "./authcontext-provider";
 import AddressContextProvider from "./addresscontext-provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "@/components/shared-components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
               {" "}
               <Navbar></Navbar>
               {children}
+              <Footer></Footer>
               <ToastContainer></ToastContainer>
             </AddressContextProvider>
           </CartContextProvider>

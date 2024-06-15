@@ -41,9 +41,11 @@ const page = async ({ searchParams }) => {
             ></ProductsList>
           </>
         ) : (
-          <h1 className="mt-5 text-center text-font-large text-pretty">
-            No Results found
-          </h1>
+          <div className="mt-20 mb-20">
+            <h1 className="text-center font-bold text-2xl text-pretty">
+              No Results found
+            </h1>
+          </div>
         )}
       </div>
     </div>

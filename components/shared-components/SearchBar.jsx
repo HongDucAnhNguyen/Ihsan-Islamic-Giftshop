@@ -22,7 +22,8 @@ const SearchBar = () => {
     <form
       // onSubmit={handleSearchByKeyword}
       action="/search"
-      className="flex flex-nowrap items-center w-full order-last md:order-none mt-5 md:mt-0 md:w-2/4 lg:w-2/4"
+      style={{ maxWidth: 400 }}
+      className="flex flex-nowrap items-center order-last md:order-none mt-5 md:mt-0 md:w-2/4 lg:w-2/4"
     >
       <input
         className="flex-grow appearance-none border border-gray-200 bg-gray-100 rounded-md mr-2 py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400"

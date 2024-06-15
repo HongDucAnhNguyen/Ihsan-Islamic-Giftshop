@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  experimental: {
-    esmExternals: "loose",
-    serverComponentsExternalPackages: ["mongoose"],
-  },
-
   images: {
     remotePatterns: [
       {
@@ -13,6 +8,11 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
       },
     ],
+  },
+
+  experimental: {
+    esmExternals: "loose",
+    serverComponentsExternalPackages: ["mongoose"],
   },
 
   webpack: (config) => {

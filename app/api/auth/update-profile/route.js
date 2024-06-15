@@ -1,8 +1,9 @@
 import dbConnect from "@/lib/config/ConnectDB";
-import { handleUploadAvatar } from "@/lib/helpers/cloudinaryUploadImage";
+import { handleUpLoadImage } from "@/lib/helpers/cloudinaryUploadImage";
 import { getAccountSessionData } from "@/lib/helpers/getSessionData";
 import User from "@/lib/models/User";
 import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
 export const POST = async (req) => {
   try {
     await dbConnect();
@@ -36,7 +37,7 @@ export const POST = async (req) => {
     const buffer = Buffer.from(bytes);
     const updateProfileData = { name, email };
 
-    const avatarDataResponse = await handleUploadAvatar(
+    const avatarDataResponse = await handleUpLoadImage(
       buffer,
       "ihsan-ecommerce/user-avatars"
     );

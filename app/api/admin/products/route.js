@@ -5,11 +5,12 @@ import { getAccountSessionData } from "@/lib/helpers/getSessionData";
 
 import { Product } from "@/lib/models/Product";
 import User from "@/lib/models/User";
+import { headers } from "next/headers";
 
 export const GET = async (req) => {
   try {
     await dbConnect();
-
+    console.log(headers().get("x-is-admin"));
     const { searchParams } = new URL(req.url);
 
     const userId = searchParams.get("userId");
@@ -34,7 +35,6 @@ export const POST = async (req) => {
   try {
     await dbConnect();
     const { userRole } = await getAccountSessionData();
-    console.log(userRole);
 
     if (userRole !== process.env.ADMIN_ROLE) {
       return Response.json({ error: "Unauthorized action" }, { status: 401 });
