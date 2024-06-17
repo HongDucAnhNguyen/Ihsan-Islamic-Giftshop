@@ -1,14 +1,29 @@
+export const dynamic = "force-dynamic";
 import dbConnect from "@/lib/config/ConnectDB";
 import { handleDeleteImage } from "@/lib/helpers/cloudinaryDeleteImage";
 import { getAccountSessionData } from "@/lib/helpers/getSessionData";
 import { Product } from "@/lib/models/Product";
 import { revalidatePath } from "next/cache";
-
-export const dynamic = "force-dynamic";
+import User from "@/lib/models/User";
 
 export const PUT = async (req, { params }) => {
   try {
     await dbConnect();
+    const { userId, userRole } = await getAccountSessionData();
+
+    const userFound = await User.findById(userId);
+
+    if (!userFound) {
+      return Response.json({ error: "Unauthorized request" }, { status: 401 });
+    }
+
+    if (
+      userFound?.role !== process.env.ADMIN_ROLE ||
+      userRole !== process.env.ADMIN_ROLE
+    ) {
+      return Response.json({ error: "Unauthorized request" }, { status: 401 });
+    }
+
     const { productId } = params;
     const updateData = await req.json();
     const productFound = await Product.findById(productId);
@@ -77,6 +92,7 @@ export const DELETE = async (req, { params }) => {
 
     await Product.findByIdAndDelete(productId);
     revalidatePath("/admin/products");
+    revalidatePath("/");
     return Response.json({
       productDeleted: true,
       message: "product deleted successfully",

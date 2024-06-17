@@ -82,7 +82,7 @@ const AdminProductsList = ({ data, prevPageLink, nextPageLink }) => {
                     <button>Edit</button>{" "}
                   </Link>
                   <button
-                    onClick={() => handleDeleteProduct(product._id)}
+                    onClick={() => handleDeleteProduct(product?._id)}
                     className="px-2 py-2 inline-block text-red-600 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 cursor-pointer"
                   >
                     Delete

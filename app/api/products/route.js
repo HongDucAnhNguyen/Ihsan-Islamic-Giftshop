@@ -89,6 +89,10 @@ export async function GET(req) {
       .slice(0, -1)
       .join("&")}&page=1`;
     const prevPagePath = nextPagePath;
+
+
+
+    
     return Response.json({
       products: allProducts,
       nextPageLink: nextPagePath || "",

@@ -4,8 +4,6 @@ import { verifyAsAdmin } from "@/lib/helpers/adminRoutesHelper";
 import { getAccountSessionData } from "@/lib/helpers/getSessionData";
 import { redirect } from "next/navigation";
 
-import React from "react";
-
 const getAllProductsForAdmin = async (isAdmin) => {
   try {
     if (isAdmin) {
