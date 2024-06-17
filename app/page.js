@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ProductsList from "../components/products/ProductsList";
 
 const getProducts = async (searchParams) => {
@@ -53,9 +54,12 @@ export default async function Home({ searchParams }) {
             We stay true to our name. Discover excellence, experience elegance,
             find tranquility.
           </p>
-          <button className="bg-lime-600 hover:bg-lime-700 text-white px-6 py-3 rounded-md text-lg font-semibold transition duration-300 z-10">
+          <Link
+            href="/mens-clothing"
+            className="bg-lime-600 hover:bg-lime-700 text-white px-6 py-3 rounded-md text-lg font-semibold transition duration-300 z-10"
+          >
             Shop Now
-          </button>
+          </Link>
         </div>
       </section>
 

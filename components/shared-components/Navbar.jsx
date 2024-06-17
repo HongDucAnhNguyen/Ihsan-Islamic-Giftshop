@@ -49,72 +49,75 @@ const Navbar = async () => {
             </a>
           </div>
           <SearchBar />
-
-          <div className="flex items-center space-x-2 ml-auto">
-            <Link
-              href="/quran"
-              className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
-            >
-              Quran
-            </Link>
-
-            <Link
-              href="/mens-clothing"
-              className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
-            >
-              Mens Clothing
-            </Link>
-            <Link
-              href="/womens-clothing"
-              className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
-            >
-              Womens Clothing
-            </Link>
-            <Link
-              href="/accessories"
-              className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
-            >
-              Accessories
-            </Link>
-            <Link
-              href="/cart"
-              className="px-3 py-2 inline-block text-center text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:border-gray-300"
-            >
-              <i className="text-gray-400 w-5 fa fa-shopping-cart"></i>
-              <span className="hidden lg:inline ml-1">
-                Cart (<b>{cartLength > 0 ? cartLength : 0}</b>)
-              </span>
-            </Link>
-            {!user?.username && (
+          <section>
+            <div className="flex items-center space-x-2 ml-auto">
               <Link
-                href="/login"
+                href="/quran"
+                className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
+              >
+                Quran
+              </Link>
+
+              <Link
+                href="/mens-clothing"
+                className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
+              >
+                Mens Clothing
+              </Link>
+              <Link
+                href="/womens-clothing"
+                className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
+              >
+                Womens Clothing
+              </Link>
+              <Link
+                href="/accessories"
+                className="px-3 py-2 inline-block text-center text-gray-700  hover:text-lime-700 font-semibold "
+              >
+                Accessories
+              </Link>
+              <Link
+                href="/cart"
                 className="px-3 py-2 inline-block text-center text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:border-gray-300"
               >
-                <i className="text-gray-400 w-5 fa fa-user"></i>
-                <span className="hidden lg:inline ml-1">Sign in</span>
+                <i className="text-gray-400 w-5 fa fa-shopping-cart"></i>
+                <span className="hidden lg:inline ml-1">
+                  Cart (<b>{cartLength > 0 ? cartLength : 0}</b>)
+                </span>
               </Link>
-            )}
-            {user?.username && (
-              <Link href="/profile">
-                <div className="cursor-pointer">
-                  <img
-                    className="w-10 h-10 object-cover rounded-full"
-                    src={user?.userAvatar?.url || "/images/default_avatar.png"}
-                  />
-                </div>
-              </Link>
-            )}
-          </div>
+              {!user?.username && (
+                <Link
+                  href="/login"
+                  className="px-3 py-2 inline-block text-center text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:border-gray-300"
+                >
+                  <i className="text-gray-400 w-5 fa fa-user"></i>
+                  <span className="hidden lg:inline ml-1">Sign in</span>
+                </Link>
+              )}
+              {user?.username && (
+                <Link href="/profile">
+                  <div className="cursor-pointer">
+                    <img
+                      className="w-10 h-10 object-cover rounded-full"
+                      src={
+                        user?.userAvatar?.url || "/images/default_avatar.png"
+                      }
+                    />
+                  </div>
+                </Link>
+              )}
+            </div>
 
-          <div className="lg:hidden ml-2">
-            <button
-              type="button"
-              className="bg-white p-3 inline-flex items-center rounded-md text-black hover:bg-gray-200 hover:text-gray-800 border border-transparent"
-            >
-              <span className="sr-only">Open menu</span>
-              <i className="fa fa-bars fa-lg"></i>
-            </button>
-          </div>
+            <div className="lg:hidden ml-2">
+              <button
+                type="button"
+                className="bg-white p-3 inline-flex items-center rounded-md text-black hover:bg-gray-200 hover:text-gray-800 border border-transparent"
+              >
+                <span className="sr-only">Open menu</span>
+                <i className="fa fa-bars fa-lg"></i>
+              </button>
+            </div>
+          </section>
         </div>
       </div>
     </nav>

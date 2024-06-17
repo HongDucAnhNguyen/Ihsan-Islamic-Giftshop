@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useContext } from "react";
-// import { toast } from "react-toastify";
 import { AuthContext } from "@/app/authcontext-provider";
+import { toast } from "react-toastify";
 const UpdateProfile = ({ user }) => {
   const { handleUpdateProfile } = useContext(AuthContext);
 
@@ -13,19 +13,11 @@ const UpdateProfile = ({ user }) => {
     user?.userAvatar?.url || "/images/default_avatar.png"
   );
 
-  // useEffect(() => {
-  //   if (user) {
-  //     setName(user.username);
-  //     setEmail(user.userEmail);
-  //     setAvatar(user.avatar);
-  //   }
-  // }, [user]);
-
   const submitHandler = (e) => {
     e.preventDefault();
 
     if (!avatar) {
-      alert("Please select a file to upload");
+      toast.error("Please select image for your avatar");
       return;
     }
     const formData = new FormData();

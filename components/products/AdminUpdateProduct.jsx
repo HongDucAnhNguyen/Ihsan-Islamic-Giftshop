@@ -1,43 +1,46 @@
 "use client";
-
 import { useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const AdminCreateProduct = () => {
-  //   const { newProduct } = useContext(ProductContext);
+const AdminUpdateProduct = ({ productDetails }) => {
   const router = useRouter();
   const [product, setProduct] = useState({
-    name: "",
-    description: "",
-    price: "",
-    stock: "",
-    category: "",
+    name: productDetails?.name,
+    description: productDetails?.description,
+    price: productDetails?.price,
+    stock: productDetails?.stock,
+    category: productDetails?.category,
   });
-
-  const handleCreateNewProduct = async () => {
-    try {
-      await fetch("/api/admin/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(product),
-      });
-
-      toast.success("Created product successfully");
-      router.push("/admin/products");
-      router.refresh();
-    } catch (error) {
-      toast.error("Error creating product");
-    }
-  };
 
   const { name, description, price, stock, category } = product;
 
   const onChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdateProduct = async () => {
+    try {
+      const response = await fetch(
+        `/api/admin/products/${productDetails._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(product),
+        }
+      );
+      const data = await response.json();
+      if (data.productUpdated === true) {
+        toast.success(data.message);
+        router.push("/admin/products");
+        router.refresh();
+      } else toast.error(data.message);
+    } catch (error) {
+      toast.error("Error updating product");
+    }
   };
 
   const categories = [
@@ -49,13 +52,13 @@ const AdminCreateProduct = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    handleCreateNewProduct();
+    handleUpdateProduct();
   };
 
   return (
     <section className="container max-w-3xl p-6 mx-auto">
       <h1 className="mb-3 text-xl md:text-3xl font-semibold text-black mb-8">
-        Create New Product
+        Update Product
       </h1>
 
       <form onSubmit={submitHandler}>
@@ -156,11 +159,11 @@ const AdminCreateProduct = () => {
           type="submit"
           className="my-2 px-4 py-2 text-center inline-block text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 w-full"
         >
-          Create Product
+          Update Product
         </button>
       </form>
     </section>
   );
 };
 
-export default AdminCreateProduct;
+export default AdminUpdateProduct;

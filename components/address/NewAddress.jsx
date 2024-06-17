@@ -32,7 +32,7 @@ const NewAddress = () => {
 
     handleAddNewAddress(newAddress);
   };
-
+ 
   return (
     <>
       <section className="py-10">

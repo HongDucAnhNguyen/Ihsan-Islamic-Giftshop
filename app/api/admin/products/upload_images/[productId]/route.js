@@ -77,9 +77,15 @@ export const POST = async (req, { params }) => {
       { new: true }
     );
 
+    if (!updatedProduct) {
+      return Response.json({
+        message: "something went wrong while uploading the images",
+      });
+    }
+
     revalidatePath(`/product/${productId}`);
     return Response.json({
-      productImagesUpdated: updatedProduct ? true : false,
+      productImagesUpdated: true,
       message: "product images updated",
     });
   } catch (error) {

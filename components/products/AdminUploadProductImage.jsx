@@ -7,30 +7,34 @@ import { toast } from "react-toastify";
 
 const AdminUploadProductImage = ({ productId }) => {
   const [images, setImages] = useState([]);
-  const loading = false;
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const handleUploadImages = async (formData, productId) => {
-    if (images.length === 0) {
-      alert("Please select files to upload");
-      return;
-    }
-
-    const response = await fetch(
-      `/api/admin/products/upload_images/${productId}`,
-      {
-        method: "POST",
-
-        body: formData,
+    try {
+      if (images.length === 0) {
+        toast.error("Please select image for your product");
+        return;
       }
-    );
-    const data = await response.json();
-    if (data?.productImagesUpdated === true) {
-      toast.success(data.message);
-      router.push(`/product/${productId}`);
-      router.refresh();
-    } else toast.error(data.message);
+
+      const response = await fetch(
+        `/api/admin/products/upload_images/${productId}`,
+        {
+          method: "POST",
+
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      if (data?.productImagesUpdated === true) {
+        toast.success(data.message);
+        router.push(`/product/${productId}`);
+        router.refresh();
+      } else toast.error(data.message);
+    } catch (error) {
+      toast.error("something went wrong with the server while uploading image");
+    }
   };
 
   const onChange = (e) => {
@@ -53,16 +57,19 @@ const AdminUploadProductImage = ({ productId }) => {
     });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
     const formData = new FormData();
 
     images.forEach((image) => {
       formData.append("image", image);
     });
 
-    handleUploadImages(formData, productId);
+    await handleUploadImages(formData, productId);
+
+    setLoading(false);
   };
 
   return (
@@ -106,9 +113,9 @@ const AdminUploadProductImage = ({ productId }) => {
         <button
           type="submit"
           className="my-2 px-4 py-2 text-center w-full inline-block text-white bg-lime-600 border border-transparent rounded-md hover:bg-lime-700"
-          //   disabled={loading ? true : false}
+          disabled={loading ? true : false}
         >
-          Upload
+          {loading ? "Uploading..." : "Upload"}
         </button>
       </form>
     </div>
