@@ -1,11 +1,13 @@
 export const dynamic = "force-dynamic";
+
 import { verifyAsAdmin } from "@/lib/helpers/adminRoutesHelper";
 import ProfileSideBar from "@/components/shared-components/ProfileSideBar";
 import AdminUpdateOrderDetails from "@/components/orders/AdminUpdateOrderDetails";
-const getUserOrderDetails = async (orderId) => {
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
+const getUserOrderDetails = async (orderId, userId) => {
   try {
     const response = await fetch(
-      `${process.env.BASE_URL}/api/admin/user_orders/${orderId}`
+      `${process.env.BASE_URL}/api/admin/user_orders/${orderId}?userId=${userId}`
     );
 
     const data = await response.json();
@@ -16,7 +18,8 @@ const getUserOrderDetails = async (orderId) => {
 };
 const page = async ({ params }) => {
   const { orderId } = params;
-  const order = await getUserOrderDetails(orderId);
+  const { userId } = await getAccountSessionData();
+  const order = await getUserOrderDetails(orderId, userId);
   const isAdmin = verifyAsAdmin();
 
   return (

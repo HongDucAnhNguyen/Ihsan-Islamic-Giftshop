@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect } from "react";
 
 const AdminUpdateOrderDetails = ({ order }) => {
   return (
@@ -9,17 +10,18 @@ const AdminUpdateOrderDetails = ({ order }) => {
         <div className="mb-4 lg:mb-0">
           <p className="font-semibold">
             <span>Order ID: {order?._id} </span>
+
             {order?.orderStatus == "Processing" ? (
               <span className="text-red-500">
-                • {order?.orderStatus.toUpperCase()}
+                {order?.orderStatus.toUpperCase()}
               </span>
             ) : (
               <span className="text-green-500">
-                • {order?.orderStatus.toUpperCase()}
+                {order?.orderStatus.toUpperCase()}
               </span>
             )}
           </p>
-          <p className="text-gray-500">{order?.createAt?.substring(0, 10)} </p>
+          <p className="text-gray-500">{order?.createdAt?.substring(0, 10)} </p>
         </div>
       </header>
       <div className="grid md:grid-cols-3 gap-2">
@@ -58,7 +60,7 @@ const AdminUpdateOrderDetails = ({ order }) => {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
         {order?.orderItems?.map((item) => (
-          <figure className="flex flex-row mb-4">
+          <figure key={item?._id} className="flex flex-row mb-4">
             <div>
               <div className="block w-20 h-20 rounded border border-gray-200 overflow-hidden p-3">
                 <Image

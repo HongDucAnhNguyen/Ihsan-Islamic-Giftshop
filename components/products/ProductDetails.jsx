@@ -3,12 +3,13 @@ import React, { useContext, useState } from "react";
 import StarRatings from "react-star-ratings";
 import BreadCrumbs from "../shared-components/BreadCrumbs";
 import { cartContext } from "@/app/cartcontext-provider";
+import { toast } from "react-toastify";
 
 const ProductDetails = ({ data }) => {
   const { handleAddItemToCart, cart } = useContext(cartContext);
   const handleAddToCart = () => {
     if (cart?.cartItems?.find((item) => item.productId === data._id)) {
-      console.log("you have already added this item to cart");
+      toast.info("you have already added this item to cart");
       return;
     }
     handleAddItemToCart({

@@ -1,9 +1,9 @@
+export const dynamic = "force-dynamic";
 import dbConnect from "@/lib/config/ConnectDB";
 import Address from "@/lib/models/Address";
 import Order from "@/lib/models/Order";
 import User from "@/lib/models/User";
 
-export const dynamic = "force-dynamic";
 export const PUT = async (req) => {};
 
 export const DELETE = async (req) => {};
