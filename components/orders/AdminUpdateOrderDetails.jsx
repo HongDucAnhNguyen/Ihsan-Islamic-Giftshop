@@ -1,9 +1,34 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const AdminUpdateOrderDetails = ({ order }) => {
+  const [orderStatus, setOrderStatus] = useState(order?.orderStatus);
+  const router = useRouter();
+  const handleUpdateOrderStatus = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`/api/admin/user_orders/${order._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(orderStatus),
+      });
+      const data = await response.json();
+      if (data.orderStatusUpdated === true) {
+        toast.success(data.message);
+        router.refresh();
+      } else toast.error(data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <article className="p-3 lg:p-5 mb-5 bg-white border border-lime-600 rounded-md">
       <header className="lg:flex justify-between mb-4">
@@ -11,11 +36,17 @@ const AdminUpdateOrderDetails = ({ order }) => {
           <p className="font-semibold">
             <span>Order ID: {order?._id} </span>
 
-            {order?.orderStatus == "Processing" ? (
+            {order?.orderStatus === "Processing" && (
               <span className="text-red-500">
                 {order?.orderStatus.toUpperCase()}
               </span>
-            ) : (
+            )}
+            {order?.orderStatus === "Shipped" && (
+              <span className="text-orange-400">
+                {order?.orderStatus.toUpperCase()}
+              </span>
+            )}
+            {order?.orderStatus === "Delivered" && (
               <span className="text-green-500">
                 {order?.orderStatus.toUpperCase()}
               </span>
@@ -82,40 +113,45 @@ const AdminUpdateOrderDetails = ({ order }) => {
       </div>
 
       <hr />
-
-      <div className="my-8">
-        <label className="block mb-3"> Update Order Status </label>
-        <div className="relative">
-          <select
-            className="block appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
-            name="category"
-            required
-          >
-            {["Processing", "Shipped", "Delivered"].map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
-          <i className="absolute inset-y-0 right-0 p-2 text-gray-400">
-            <svg
-              width="22"
-              height="22"
-              className="fill-current"
-              viewBox="0 0 20 20"
+      <form onSubmit={handleUpdateOrderStatus}>
+        <div className="my-8">
+          <label className="block mb-3"> Update Order Status </label>
+          <div className="relative">
+            <select
+              className="block appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
+              name="category"
+              required
+              onChange={(e) => setOrderStatus(e.target.value)}
             >
-              <path d="M7 10l5 5 5-5H7z"></path>
-            </svg>
-          </i>
+              <option value="" selected disabled hidden>
+                Select Status
+              </option>
+              {["Processing", "Shipped", "Delivered"].map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+            <i className="absolute inset-y-0 right-0 p-2 text-gray-400">
+              <svg
+                width="22"
+                height="22"
+                className="fill-current"
+                viewBox="0 0 20 20"
+              >
+                <path d="M7 10l5 5 5-5H7z"></path>
+              </svg>
+            </i>
+          </div>
         </div>
-      </div>
 
-      <button
-        type="submit"
-        className="mb-2 px-4 py-2 text-center w-full inline-block text-white bg-lime-600 border border-transparent rounded-md hover:bg-lime-700"
-      >
-        Update
-      </button>
+        <button
+          type="submit"
+          className="mb-2 px-4 py-2 text-center w-full inline-block text-white bg-lime-600 border border-transparent rounded-md hover:bg-lime-700"
+        >
+          Update
+        </button>
+      </form>
     </article>
   );
 };

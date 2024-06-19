@@ -39,6 +39,7 @@ export const PUT = async (req, { params }) => {
       productId,
       updateData
     );
+    
     if (!updatedProduct) {
       return Response.json({
         productUpdated: false,
