@@ -41,9 +41,11 @@ const page = async ({ searchParams }) => {
             ></ProductsList>
           </>
         ) : (
-          <div className="mt-20 mb-20">
-            <h1 className="text-center font-bold text-2xl text-pretty">
-              No Results found
+          <div className="flex justify-center items-center h-screen">
+            <h1 className="font-bold text-2xl text-pretty">
+              Hm...No matching search results
+              <br></br>
+              try entering a different key word.
             </h1>
           </div>
         )}

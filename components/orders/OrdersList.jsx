@@ -9,7 +9,7 @@ const OrdersList = ({ orders }) => {
       {orders?.userOrders?.length > 0 ? (
         orders?.userOrders?.map((order) => (
           <OrderItem
-            key={order._id}
+            key={order?._id}
             order={order}
             customerInfo={orders.ordersOwnerData}
             shippingInfo={order.shippingInfo}

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 const Footer = () => {
   return (
@@ -29,35 +28,39 @@ const Footer = () => {
                 </h2>
                 <ul className="font-medium">
                   <li className="mb-4">
-                    <Link href="/" className="hover:underline">
+                    <Link href="/?category=Quran" className="hover:underline">
                       Quran
                     </Link>
                   </li>
                   <li className="mb-4">
-                    <Link href="/" className="hover:underline">
+                    <Link
+                      href="/?category=Mens+Clothing"
+                      className="hover:underline"
+                    >
                       Mens Clothing
                     </Link>
                   </li>
                   <li className="mb-4">
-                    <Link href="/" className="hover:underline">
+                    <Link
+                      href="/?category=Womens+Clothing"
+                      className="hover:underline"
+                    >
                       Womens Clothing
                     </Link>
                   </li>
                   <li className="mb-4">
-                    <Link href="/" className="hover:underline">
+                    <Link
+                      href="/?category=Accessories"
+                      className="hover:underline"
+                    >
                       Accessories
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/about" className="hover:underline">
-                      About Us
                     </Link>
                   </li>
                 </ul>
               </div>
               <div>
                 <h2 className="mb-6 text-lime-600 text-sm font-semibold uppercase ">
-                  Follow us
+                  About Ihsan
                 </h2>
                 <ul className="  font-medium">
                   <li className="mb-4">
@@ -67,6 +70,18 @@ const Footer = () => {
                     >
                       Instagram
                     </a>
+                  </li>
+
+                  <li className="mb-4">
+                    <Link href="/about" className="hover:underline">
+                      About Us
+                    </Link>
+                  </li>
+
+                  <li className="mb-4">
+                    <Link href="/contact" className="hover:underline">
+                      Contact Us
+                    </Link>
                   </li>
                 </ul>
               </div>

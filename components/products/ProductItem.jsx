@@ -21,7 +21,6 @@ const ProductItem = ({ product }) => {
       quantity: 1,
     });
   };
-  const productInStock = product?.stock >= 1;
 
   return (
     <article
@@ -87,7 +86,7 @@ const ProductItem = ({ product }) => {
 
             <p className="text-green-500">Free Shipping</p>
             <div className="my-3">
-              {productInStock ? (
+              {product?.stock > 0 ? (
                 <button
                   className="px-4 py-2 inline-block text-white bg-lime-600 border border-transparent rounded-md hover:bg-lime-700 cursor-pointer"
                   onClick={handleAddNewItemToCart}

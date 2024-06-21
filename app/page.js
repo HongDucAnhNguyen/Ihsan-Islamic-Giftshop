@@ -3,7 +3,6 @@ import ProductsList from "../components/products/ProductsList";
 
 const getProducts = async (searchParams) => {
   try {
-    // let fetchURL = `${process.env.BASE_URL}/api/products`;
     const currentPage = Number(searchParams?.page) || 1;
     const categoryFilter = searchParams?.category || "none";
     const ratingsFilter = searchParams?.ratings || "none";
@@ -55,7 +54,7 @@ export default async function Home({ searchParams }) {
             find tranquility.
           </p>
           <Link
-            href="/mens-clothing"
+            href="/?category=Mens+Clothing"
             className="bg-lime-600 hover:bg-lime-700 text-white px-6 py-3 rounded-md text-lg font-semibold transition duration-300 z-10"
           >
             Shop Now

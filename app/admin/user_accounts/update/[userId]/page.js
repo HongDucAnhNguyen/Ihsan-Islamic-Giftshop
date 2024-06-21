@@ -1,28 +1,34 @@
-import { verifyAsAdmin } from "@/lib/helpers/adminRoutesHelper";
-import React from "react";
+export const dynamic = "force-dynamic";
 import ProfileSideBar from "@/components/shared-components/ProfileSideBar";
-import AdminUserAccountsList from "@/components/user-accounts/AdminUserAccountsList";
+import AdminUpdateUser from "@/components/user-accounts/AdminUpdateUser";
+import { verifyAsAdmin } from "@/lib/helpers/adminRoutesHelper";
 import { getAccountSessionData } from "@/lib/helpers/getSessionData";
-
-const getUserAccounts = async (isAdmin) => {
+import React from "react";
+const getUserAccountDetails = async (userAccountId, isAdmin) => {
   try {
     if (isAdmin) {
-      const { userId } = await getAccountSessionData();
+      const accountSessionData = await getAccountSessionData();
       const response = await fetch(
-        `${process.env.BASE_URL}/api/admin/user_accounts?userId=${userId}`
+        `${process.env.BASE_URL}/api/admin/user_accounts/${userAccountId}?userId=${accountSessionData.userId}`
       );
+
       const data = await response.json();
+
       return data;
-    } else redirect("/profile");
+    }
   } catch (error) {
-    console.log("Error fetching user accounts:", error.message);
-    return [];
+    console.log(error);
   }
 };
+const page = async ({ params }) => {
+  const { userId } = params;
 
-const page = async () => {
   const isAdmin = verifyAsAdmin();
-  const userAccounts = await getUserAccounts(isAdmin);
+  const userAccountDetails = await getUserAccountDetails(
+    userId,
+
+    isAdmin
+  );
   return (
     <div>
       <section className="py-5 sm:py-7 bg-green-100">
@@ -37,9 +43,7 @@ const page = async () => {
             <ProfileSideBar isAdmin={isAdmin}></ProfileSideBar>
             <main className="md:w-2/3 lg:w-3/4 px-4">
               <article className="border border-gray-200 bg-white shadow-sm rounded mb-5 p-3 lg:p-5">
-                <AdminUserAccountsList
-                  userAccounts={userAccounts}
-                ></AdminUserAccountsList>
+                <AdminUpdateUser user={userAccountDetails}></AdminUpdateUser>
               </article>
             </main>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import BreadCrumbs from "../shared-components/BreadCrumbs";
 import { cartContext } from "@/app/cartcontext-provider";
 import { useRouter } from "next/navigation";
