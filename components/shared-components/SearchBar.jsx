@@ -1,23 +1,7 @@
-// import { useRouter, useSearchParams } from "next/navigation";
-// import { useState } from "react";
+
 
 const SearchBar = () => {
-  // const [searchKeyword, setSearchKeyword] = useState("");
-  // const searchParams = useSearchParams();
-  // const router = useRouter();
-  // const handleSearchByKeyword = (e) => {
-  //   e.preventDefault();
 
-  //   const params = new URLSearchParams(searchParams);
-
-  //   if (searchKeyword.trim() != undefined && searchKeyword.trim() != "") {
-  //     params.set("query", searchKeyword);
-  //     setSearchKeyword("");
-  //   } else {
-  //     params.delete("query");
-  //   }
-  //   router.replace(`/search?${params.toString()}`);
-  // };
   return (
     <form
       // onSubmit={handleSearchByKeyword}
@@ -29,10 +13,7 @@ const SearchBar = () => {
         className="flex-grow appearance-none border border-gray-200 bg-gray-100 rounded-md mr-2 py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400"
         type="text"
         placeholder="Search by keyword"
-        // value={searchKeyword}
-        // onChange={(e) => {
-        //   setSearchKeyword(e.target.value);
-        // }}
+       
         name="query"
         required
       />

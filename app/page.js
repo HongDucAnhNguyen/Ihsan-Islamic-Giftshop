@@ -53,12 +53,12 @@ export default async function Home({ searchParams }) {
             We stay true to our name. Discover excellence, experience elegance,
             find tranquility.
           </p>
-          <Link
+          <a
             href="/?category=Mens+Clothing"
             className="bg-lime-600 hover:bg-lime-700 text-white px-6 py-3 rounded-md text-lg font-semibold transition duration-300 z-10"
           >
             Shop Now
-          </Link>
+          </a>
         </div>
       </section>
 
