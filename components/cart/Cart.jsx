@@ -19,7 +19,8 @@ const Cart = () => {
   const [amountWithoutTax, setAmountWithoutTax] = useState(0);
   const calculateTotalAmount = () => {
     //calculate the total price for all items without tax
-    const calculatedAmountWithoutTax = cart?.cartItems?.reduce(
+    const calculatedAmountWithoutTax = 
+    cart?.cartItems?.reduce(
       (acc, item) => acc + parseFloat((item.quantity * item.price).toFixed(2)),
       0
     );
