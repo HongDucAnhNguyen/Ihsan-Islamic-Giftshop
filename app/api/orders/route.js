@@ -28,19 +28,10 @@ export const GET = async (req) => {
       const orderShippingAddress = await Address.findById(order.shippingInfo);
 
       const shippingInfoDetails = {
-        phoneNumber: orderShippingAddress.phoneNumber,
-        streetAddress: orderShippingAddress.streetAddress,
-        zipCode: orderShippingAddress.zipCode,
-        city: orderShippingAddress.city,
-        ProvinceState: orderShippingAddress.ProvinceState,
-        country: orderShippingAddress.country,
+        ...orderShippingAddress.toObject(),
       };
       const orderData = {
-        _id: order._id,
-        paymentInfo: order.paymentInfo,
-        orderItems: order.orderItems,
-        orderStatus: order.orderStatus,
-        createdAt: order.createdAt,
+        ...order.toObject(),
         shippingInfo: shippingInfoDetails,
       };
       customerOrdersData.push(orderData);

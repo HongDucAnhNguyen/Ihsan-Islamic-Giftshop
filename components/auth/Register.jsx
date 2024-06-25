@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useState, useContext, useEffect } from "react";
-import { AuthContext } from "@/app/authcontext-provider";
+import { AuthContext } from "@/lib/context/authcontext-provider";
 //import { toast } from "react-toastify";
 
 const Register = () => {
@@ -12,7 +12,6 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   useEffect(() => {}, []);
-
 
   const submitHandler = (e) => {
     e.preventDefault();

@@ -6,7 +6,7 @@ import AccountAddress from "../address/AccountAddress";
 
 const Profile = ({ user, addresses }) => {
   return (
-    <>
+    <main>
       <figure className="flex items-start sm:items-center">
         <div className="relative">
           <img
@@ -32,7 +32,7 @@ const Profile = ({ user, addresses }) => {
         </button>
       </Link>
       <hr className="my-4" />
-    </>
+    </main>
   );
 };
 

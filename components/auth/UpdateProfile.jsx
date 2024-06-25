@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useContext } from "react";
-import { AuthContext } from "@/app/authcontext-provider";
+import { AuthContext } from "@/lib/context/authcontext-provider";
 import { toast } from "react-toastify";
 const UpdateProfile = ({ user }) => {
   const { handleUpdateProfile } = useContext(AuthContext);

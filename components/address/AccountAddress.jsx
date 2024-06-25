@@ -1,3 +1,4 @@
+"use client";
 const AccountAddress = ({ addresses }) => {
   return addresses?.map((address) => (
     <a href={`/address/update/${address._id}`} key={address._id}>

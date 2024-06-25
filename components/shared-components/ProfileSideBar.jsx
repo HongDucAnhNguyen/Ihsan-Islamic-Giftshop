@@ -39,7 +39,7 @@ const ProfileSideBar = ({ isAdmin }) => {
             </li>
 
             <li>
-              {" "}
+            
               <Link
                 href="/admin/user_accounts"
                 className="block px-3 py-2 text-gray-800 hover:bg-green-100 hover:text-green-500 rounded-md"

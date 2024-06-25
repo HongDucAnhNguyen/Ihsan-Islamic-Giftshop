@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 
 import ProfileSideBar from "../shared-components/ProfileSideBar";
 
-import { AddressContext } from "@/app/addresscontext-provider";
+import { AddressContext } from "@/lib/context/addresscontext-provider";
 
 import { countries } from "countries-list";
 const NewAddress = () => {
@@ -32,7 +32,7 @@ const NewAddress = () => {
 
     handleAddNewAddress(newAddress);
   };
- 
+
   return (
     <>
       <section className="py-10">

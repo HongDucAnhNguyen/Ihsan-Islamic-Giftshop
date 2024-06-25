@@ -2,7 +2,7 @@
 
 import React, { useContext, useState, useEffect } from "react";
 
-import { AuthContext } from "@/app/authcontext-provider";
+import { AuthContext } from "@/lib/context/authcontext-provider";
 
 const UpdatePassword = () => {
   const { handleUpdatePassword } = useContext(AuthContext);

@@ -21,7 +21,7 @@ export const GET = async (req) => {
       return Response.json({ error: "Unauthorized request" }, { status: 401 });
     }
 
-    const allUsers = await User.find();
+    const allUsers = await User.find({ role: { $ne: process.env.ADMIN_ROLE } });
     revalidatePath("/admin/user_accounts");
     return Response.json(allUsers);
   } catch (error) {

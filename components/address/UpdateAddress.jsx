@@ -4,10 +4,9 @@ import React, { useState, useContext, useEffect } from "react";
 
 import ProfileSideBar from "../shared-components/ProfileSideBar";
 import { countries } from "countries-list";
-import { AddressContext } from "@/app/addresscontext-provider";
+import { AddressContext } from "@/lib/context/addresscontext-provider";
 import { useRouter } from "next/navigation";
 const UpdateAddress = ({ address, isAdmin }) => {
-  const router = useRouter();
   const { handleUpdateAddress, handleDeleteAddress } =
     useContext(AddressContext);
 

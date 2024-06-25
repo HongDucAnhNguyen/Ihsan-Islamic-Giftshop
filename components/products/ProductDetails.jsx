@@ -2,8 +2,10 @@
 import React, { useContext, useState } from "react";
 import StarRatings from "react-star-ratings";
 import BreadCrumbs from "../shared-components/BreadCrumbs";
-import { cartContext } from "@/app/cartcontext-provider";
+import { cartContext } from "@/lib/context/cartcontext-provider";
 import { toast } from "react-toastify";
+import Reviews from "../reviews/Reviews";
+import Link from "next/link";
 
 const ProductDetails = ({ data }) => {
   const { handleAddItemToCart, cart } = useContext(cartContext);
@@ -145,6 +147,18 @@ const ProductDetails = ({ data }) => {
             <h1 className="text-gray-500 review-title mb-6 mt-10 text-2xl">
               Other Customers Reviews
             </h1>
+            <div>
+              <div className="flex flex-wrap gap-2 mb-5">
+                <Link
+                  className="px-4 py-2 inline-block text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700"
+                  href={`/reviews/new/${data._id}`}
+                >
+                  {/* <i className="fa fa-shopping-cart mr-2"></i> */}
+                  Write a review
+                </Link>
+              </div>
+            </div>
+            <Reviews reviews={data?.reviews} />
           </div>
         </div>
       </section>

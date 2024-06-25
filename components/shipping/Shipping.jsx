@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import  { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import BreadCrumbs from "../shared-components/BreadCrumbs";
-import { cartContext } from "@/app/cartcontext-provider";
+import { cartContext } from "@/lib/context/cartcontext-provider";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 const Shipping = ({ addresses, checkoutData }) => {

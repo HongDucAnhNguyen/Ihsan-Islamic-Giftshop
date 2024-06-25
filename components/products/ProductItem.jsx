@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useContext } from "react";
 import Link from "next/link";
 import StarRatings from "react-star-ratings";
-import { cartContext } from "@/app/cartcontext-provider";
+import { cartContext } from "@/lib/context/cartcontext-provider";
 // import StarRatings from "react-star-ratings";
 const ProductItem = ({ product }) => {
   const { handleAddItemToCart, cart } = useContext(cartContext);

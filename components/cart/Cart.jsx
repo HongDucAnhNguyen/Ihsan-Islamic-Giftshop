@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import Link from "next/link";
-import { cartContext } from "@/app/cartcontext-provider";
+import { cartContext } from "@/lib/context/cartcontext-provider";
 import { useRouter } from "next/navigation";
 const Cart = () => {
   const router = useRouter();
