@@ -4,7 +4,7 @@ import StarRatings from "react-star-ratings";
 import BreadCrumbs from "../shared-components/BreadCrumbs";
 import { cartContext } from "@/lib/context/cartcontext-provider";
 import { toast } from "react-toastify";
-import Reviews from "../reviews/Reviews";
+import Reviews from "../product-reviews/Reviews";
 import Link from "next/link";
 
 const ProductDetails = ({ data }) => {
@@ -82,7 +82,7 @@ const ProductDetails = ({ data }) => {
               <div className="flex flex-wrap items-center space-x-2 mb-2">
                 <div className="ratings">
                   <StarRatings
-                    rating={5}
+                    rating={data.ratings}
                     starRatedColor="#ffb829"
                     numberOfStars={5}
                     starDimension="20px"
@@ -90,7 +90,7 @@ const ProductDetails = ({ data }) => {
                     name="rating"
                   />
                 </div>
-                <span className="text-yellow-500">5</span>
+                <span className="text-yellow-500">{data.ratings}</span>
 
                 <svg
                   width="6px"
@@ -158,7 +158,7 @@ const ProductDetails = ({ data }) => {
                 </Link>
               </div>
             </div>
-            <Reviews reviews={data?.reviews} />
+            <Reviews productId={data?._id} reviews={data?.reviews} />
           </div>
         </div>
       </section>
