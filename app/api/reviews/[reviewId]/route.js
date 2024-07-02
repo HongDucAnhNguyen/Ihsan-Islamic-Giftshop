@@ -1,3 +1,4 @@
+import { getAccountSessionData } from "@/lib/helpers/getSessionData";
 import { Product } from "@/lib/models/Product";
 import { revalidatePath } from "next/cache";
 
@@ -8,8 +9,29 @@ export const PUT = async (req, { params }) => {
     const updateData = await req.json();
     const { reviewId } = params;
     const { searchParams } = new URL(req.url);
+    const { userId } = await getAccountSessionData();
 
     const productId = searchParams.get("productId");
+
+    const productFound = await Product.findById(productId);
+
+    if (!productFound) {
+      throw new Error("Product not found");
+    }
+
+    const reviewFound = productFound?.reviews.find(
+      (review) => review._id.toString() == reviewId
+    );
+
+    if (!reviewFound) {
+      throw new Error("Review not found");
+    }
+
+    const isUserReviewAuthor = userId === reviewFound.author.toString();
+
+    if (!isUserReviewAuthor) {
+      throw new Error("Unauthorized action");
+    }
 
     const updatedProduct = await Product.findOneAndUpdate(
       { _id: productId, "reviews._id": reviewId },
@@ -55,9 +77,10 @@ export const DELETE = async (req, { params }) => {
   try {
     const { reviewId } = params;
     const { searchParams } = new URL(req.url);
+    const { userId } = await getAccountSessionData();
 
     const productId = searchParams.get("productId");
-    // Find the product and the specific review
+    // Find the product and the specific review, a different way to find a review without using find()
     const productFound = await Product.findOne({
       _id: productId,
       "reviews._id": reviewId,
@@ -71,6 +94,12 @@ export const DELETE = async (req, { params }) => {
     const review = productFound.reviews.id(reviewId);
     if (!review) {
       throw new Error("Review not found");
+    }
+
+    const isUserReviewAuthor = userId === review.author.toString();
+
+    if (!isUserReviewAuthor) {
+      throw new Error("Unauthorized action");
     }
 
     await Product.findByIdAndUpdate(

@@ -1,7 +1,6 @@
+export const dynamic = "force-dynamic";
 import UpdateReview from "@/components/product-reviews/UpdateReview";
 import BreadCrumbs from "@/components/shared-components/BreadCrumbs";
-
-export const dynamic = "force-dynamic";
 
 const getReview = async (reviewId, productId) => {
   try {
