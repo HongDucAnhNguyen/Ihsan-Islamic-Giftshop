@@ -82,7 +82,7 @@ const ProductDetails = ({ data }) => {
               <div className="flex flex-wrap items-center space-x-2 mb-2">
                 <div className="ratings">
                   <StarRatings
-                    rating={data.ratings}
+                    rating={data.ratings || 0}
                     starRatedColor="#ffb829"
                     numberOfStars={5}
                     starDimension="20px"

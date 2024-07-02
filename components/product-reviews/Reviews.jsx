@@ -39,7 +39,7 @@ const Reviews = ({ reviews, productId }) => {
           <div className="flex flex-wrap items-center space-x-2 mb-2">
             <div className="ratings">
               <StarRatings
-                rating={review?.rating}
+                rating={review?.rating || 0}
                 starRatedColor="#ffb829"
                 numberOfStars={5}
                 starDimension="18px"

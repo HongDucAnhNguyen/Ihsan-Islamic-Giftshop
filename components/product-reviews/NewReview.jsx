@@ -23,7 +23,7 @@ const NewReview = ({ productId }) => {
       <div className="mb-4 mt-3">
         <div className="ratings">
           <StarRatings
-            rating={rating}
+            rating={rating || 0}
             starRatedColor="#ffb829"
             numberOfStars={5}
             name="rating"
